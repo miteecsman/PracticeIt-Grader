@@ -1,0 +1,2984 @@
+1 	KUTCB 	HBHUE 	JOCD 	BJP4 Exercise 1.10: Egg2 	Yes 	2018-10-02 13:34:28 	5 	
+
+public class Egg2 {
+
+	public static void main(String[] args) {
+        topHalf();
+        bottomHalf();
+        line();
+        topHalf();
+        bottomHalf();
+        line();
+        bottomHalf();
+        topHalf();
+        line();
+        bottomHalf();
+
+	}
+    public static void topHalf(){
+        System.out.println("  _______");
+        System.out.println(" /       \\");
+        System.out.println("/         \\");
+    
+    
+    }
+    public static void bottomHalf(){
+        System.out.println("\\         /");
+		System.out.println(" \\_______/");
+    
+    
+    }
+    public static void line(){
+        System.out.println("-\"-'-\"-'-\"-");
+    
+    
+    }
+
+}
+
+2 	KUTCB 	HBHUE 	JOCD 	BJP4 Exercise 1.09: Egg 	Yes 	2018-10-02 13:23:48 	7 	
+
+public class Egg {
+
+	public static void main(String[] args) {
+        System.out.println("  _______");
+        System.out.println(" /       \\");
+        System.out.println("/         \\");
+        System.out.println("-\"-'-\"-'-\"-");
+        System.out.println("\\         /");
+		System.out.println(" \\_______/");
+
+	}
+
+}
+
+3 	KUTCB 	HBHUE 	JOCD 	BJP4 Self-Check 1.12: DoubleSlash 	Yes 	2018-09-26 09:14:38 	19 	
+4 	KUTCB 	HBHUE 	JOCD 	BJP4 Self-Check 1.13: Sally 	Yes 	2018-10-02 12:57:14 	2 	
+
+System.out.println("\"Several slashes are sometimes seen,\"");
+System.out.println("said Sally. \"I've said so.\" See?");
+System.out.println("\\ / \\\\ // \\\\\\ ///");
+
+5 	KUTCB 	HBHUE 	JOCD 	BJP4 Self-Check 1.19: SecretMessage-errors 	Yes 	2018-10-02 13:05:14 	9 	
+
+public class SecretMessage {
+    public static void main(String[] args) {
+        System.out.println("Speak friend");
+        System.out.println("and enter");
+    }
+}
+
+6 	KUTCB 	HBHUE 	JOCD 	BJP4 Self-Check 1.21: methodHeaderSyntax 	Yes 	2018-10-02 13:06:18 	1 	
+7 	KUTCB 	HBHUE 	JOCD 	BJP4 Self-Check 1.22: Tricky 	Yes 	2018-10-02 13:08:25 	1 	
+8 	KUTCB 	HBHUE 	JOCD 	BJP4 Self-Check 1.29: LotsOfErrors-errors 	Yes 	2018-10-02 13:16:16 	3 	
+
+public class LotsOfErrors {
+    public static void main(String[] args) {
+        System.out.println("Hello, world!");
+        message();
+    }
+
+    public static void message() {
+        System.out.println("This program surely cannot ");
+        System.out.println("have any \"errors\" in it");
+    }   
+}
+
+9 	KUTCB 	HBHUE 	JOCD 	BJP4 Self-Check 1.03: binary2 	Yes 	2018-10-02 12:50:17 	1 	
+10 	KUTCB 	HBHUE 	JOCD 	BJP4 Self-Check 1.06: legalIdentifiers 	Yes 	2018-10-02 12:51:51 	6 	
+11 	KUTCB 	HBHUE 	JOCD 	BJP4 Self-Check 1.07: outputSyntax 	Yes 	2018-10-02 12:52:41 	1 	
+12 	UOUVA 	ZIUSV 	SYCLE 	BJP4 Exercise 1.10: Egg2 	Yes 	2018-10-02 22:43:31 	1 	
+
+public class Egg2{
+    public static void main(String[] args){
+        top();
+        bottom();
+        line();
+        top();
+        bottom();
+        line();
+        bottom();
+        top();
+        line();
+        bottom();
+    }
+}
+
+public static void top(){
+        System.out.println("  _______");
+        System.out.println(" /       \\");
+        System.out.println("/         \\");
+}
+
+public static void bottom(){
+        System.out.println("\\         /");
+        System.out.println(" \\_______/");
+}
+
+public static void line(){
+        System.out.println("-\"-'-\"-'-\"-");
+}
+
+13 	UOUVA 	ZIUSV 	SYCLE 	BJP4 Exercise 1.09: Egg 	Yes 	2018-10-02 22:42:28 	1 	
+
+public class Egg {
+    public static void main(String[] args) {
+        System.out.println("  _______");
+        System.out.println(" /       \\");
+        System.out.println("/         \\");
+        System.out.println("-\"-'-\"-'-\"-");
+        System.out.println("\\         /");
+        System.out.println(" \\_______/");
+    }
+}
+
+14 	UOUVA 	ZIUSV 	SYCLE 	BJP4 Self-Check 1.12: DoubleSlash 	Yes 	2018-09-26 09:46:20 	24 	
+15 	UOUVA 	ZIUSV 	SYCLE 	BJP4 Self-Check 1.13: Sally 	Yes 	2018-10-02 21:40:10 	3 	
+
+System.out.println("\"Several slashes are sometimes seen,\"");
+System.out.println("said Sally. \"I've said so.\" See?");
+System.out.println("\\ / \\\\ // \\\\\\ ///");
+
+16 	UOUVA 	ZIUSV 	SYCLE 	BJP4 Self-Check 1.19: SecretMessage-errors 	Yes 	2018-10-02 23:35:26 	17 	
+
+public class SecretMessage {
+    public static void main(String[] args) {
+        System.out.println("Speak friend");
+        System.out.println("and enter");
+        
+    }   
+}
+
+17 	UOUVA 	ZIUSV 	SYCLE 	BJP4 Self-Check 1.02: binary1 	Yes 	2018-12-05 06:02:00 	10 	
+18 	UOUVA 	ZIUSV 	SYCLE 	BJP4 Self-Check 1.20: FamousSpeech-errors 	No 	2018-10-02 22:11:39 	1 	
+
+public class FamousSpeech
+    public static void main(String[]) {
+        System.out.println("Four score and seven years ago,");
+        System.out.println("our fathers brought forth on");
+        System.out.println("this continent a new nation");
+        System.out.println("conceived in liberty,");
+        System.out.println("and dedicated to the proposition");
+        System.out.println("that");    /* this part should
+        System.out.println("all");        really say,
+        System.out.println("men");        "all PEOPLE!" */
+        System.out.println("are";
+        System.out.println("created");
+        System.out.println("equal");
+    }
+}
+
+19 	UOUVA 	ZIUSV 	SYCLE 	BJP4 Self-Check 1.21: methodHeaderSyntax 	Yes 	2018-10-02 22:17:34 	6 	
+20 	UOUVA 	ZIUSV 	SYCLE 	BJP4 Self-Check 1.22: Tricky 	Yes 	2018-10-02 22:20:23 	1 	
+21 	UOUVA 	ZIUSV 	SYCLE 	BJP4 Self-Check 1.29: LotsOfErrors-errors 	Yes 	2018-10-02 22:56:39 	6 	
+
+public class LotsOfErrors {
+    public static void main (String[] args){
+        System.out.println("Hello, world!");
+        message();
+    }
+
+    public static void message () {
+        System.out.println("This program surely cannot");
+        System.out.println("have any \"errors\" in it");
+    } 
+
+}
+
+22 	UOUVA 	ZIUSV 	SYCLE 	BJP4 Self-Check 1.03: binary2 	Yes 	2018-09-30 19:41:49 	8 	
+23 	UOUVA 	ZIUSV 	SYCLE 	BJP4 Self-Check 1.06: legalIdentifiers 	Yes 	2018-10-02 21:38:03 	23 	
+24 	UOUVA 	ZIUSV 	SYCLE 	BJP4 Self-Check 1.07: outputSyntax 	Yes 	2018-09-29 21:30:33 	1 	
+25 	UOUVA 	ZIUSV 	SYCLE 	BJP4 Self-Check 1.08: confounding 	No 	2018-10-02 23:36:58 	1 	
+26 	DXLVE 	GQGB 	VNNL 	BJP4 Exercise 1.10: Egg2 	No 	2018-10-03 15:43:09 	2 	
+
+public class Egg2 {
+	public static void main (String[] args){ 
+		System.out.println("  _______ ");
+		System.out.println(" /       \\");
+		System.out.println("/         \\");
+		System.out.println("\\         /");
+		System.out.println(" \\_______/");
+		System.out.println("-\"-'-\"-'-\"-");
+		System.out.println("  _______ ");
+		System.out.println(" /       \\");
+		System.out.println("/         \\");
+		System.out.println("\\         /");
+		System.out.println(" \\_______/");
+		System.out.println("-\"-'-\"-'-\"-");
+		System.out.println("\\         /");
+		System.out.println(" \\_______/");
+		System.out.println("  _______ ");
+	    System.out.println(" /       \\");
+	    System.out.println("/         \\");
+	    System.out.println("-\"-'-\"-'-\"-");
+     	System.out.println("\\         /");
+    	System.out.println(" \\_______/");
+        
+    }
+}
+
+27 	DXLVE 	GQGB 	VNNL 	BJP4 Exercise 1.15: EggStop 	No 	2018-09-30 16:02:37 	1 	
+
+public class Egg2 {
+
+    public static void main(String[] args) {
+
+        printTop();
+
+        printBottom();
+
+        printMiddle();
+
+        printTop();
+
+        printBottom();
+
+        printMiddle();
+
+        printBottom();
+
+        printTop();
+
+        printMiddle();
+
+        printBottom();
+
+    }
+
+    
+
+    public static void printTop() {
+
+        System.out.println("  _______");
+
+        System.out.println(" /       \\");
+
+        System.out.println("/         \\");
+
+    }
+
+
+
+    public static void printMiddle() {
+
+        System.out.println("-\"-'-\"-'-\"-");
+
+    }
+
+
+
+    public static void printBottom() {
+
+        System.out.println("\\         /");
+
+        System.out.println(" \\_______/");
+
+    }
+
+}
+
+28 	DXLVE 	GQGB 	VNNL 	BJP4 Exercise 1.16: Shining 	No 	2018-09-30 15:57:22 	20 	
+
+public class Shining {
+    public static void main(String[] args){
+        for ( int i=0; i > 1000; i++){
+            System.out.println("All work and no play makes Jack  a dull boy.")
+    }
+       }
+
+29 	DXLVE 	GQGB 	VNNL 	BJP4 Exercise 1.09: Egg 	Yes 	2018-10-03 15:36:05 	8 	
+
+public class Egg {
+	public static void main (String[] args){ 
+	System.out.println("  _______ ");
+	System.out.println(" /       \\");
+	System.out.println("/         \\");
+	System.out.println("-\"-'-\"-'-\"-");
+	System.out.println("\\         /");
+	System.out.println(" \\_______/");
+
+}
+}
+
+30 	DXLVE 	GQGB 	VNNL 	BJP4 Self-Check 1.01: binaryNumbers 	Yes 	2018-09-28 20:10:47 	1 	
+31 	DXLVE 	GQGB 	VNNL 	BJP4 Self-Check 1.10: Shaq 	Yes 	2018-09-30 01:53:07 	2 	
+32 	DXLVE 	GQGB 	VNNL 	BJP4 Self-Check 1.11: downwardSpiral 	Yes 	2018-09-30 11:53:55 	5 	
+33 	DXLVE 	GQGB 	VNNL 	BJP4 Self-Check 1.12: DoubleSlash 	Yes 	2018-09-26 09:10:06 	2 	
+34 	DXLVE 	GQGB 	VNNL 	BJP4 Self-Check 1.13: Sally 	Yes 	2018-10-01 09:11:05 	2 	
+
+System.out.println("\"Several slashes are sometimes seen,\" ");
+System.out.println("said Sally. \"I've said so.\" See?  ");
+System.out.println("\\ / \\\\ // \\\\\\ ///");
+
+35 	DXLVE 	GQGB 	VNNL 	BJP4 Self-Check 1.14: TestOfKnowledge 	Yes 	2018-09-30 13:31:53 	4 	
+
+System.out.println("This is a test of your");
+System.out.println("knowledge of \"quotes\" used" );
+System.out.println("in 'string literals.'");
+System.out.println("\t");
+System.out.println("You're bound to \"get it right\"");
+System.out.println("if you read the section on " );
+System.out.println("''quotes.''");
+
+36 	DXLVE 	GQGB 	VNNL 	BJP4 Self-Check 1.15: printlnSlashes 	Yes 	2018-09-30 02:03:38 	3 	
+
+System.out.println ("/ \\ // \\\\ /// \\\\\\");
+
+37 	DXLVE 	GQGB 	VNNL 	BJP4 Self-Check 1.16: withoutPrintStatements 	Yes 	2018-10-01 09:16:27 	5 	
+
+System.out.println("Twas brillig and the ");
+System.out.println("  slithy toves did gyre and ");
+System.out.println("gimble ");
+System.out.println(" " );
+ System.out.println("in the wabe.");
+
+38 	DXLVE 	GQGB 	VNNL 	BJP4 Self-Check 1.17: Commentary 	Yes 	2018-09-30 13:48:58 	4 	
+39 	DXLVE 	GQGB 	VNNL 	BJP4 Self-Check 1.18: MyProgram-errors 	No 	2018-10-01 09:33:49 	7 	
+
+public  MyProgram01 {
+    public static void main(String[] args) {
+        System.out.println("This is a test of the ");
+        System.out.println("emergency broadcast system.");
+    }
+
+40 	DXLVE 	GQGB 	VNNL 	BJP4 Self-Check 1.19: SecretMessage-errors 	Yes 	2018-10-01 10:06:44 	10 	
+
+public class SecretMessage {
+    public static void main(String[] args) {
+    System.out.println("Speak friend");
+    System.out.println("and enter");
+    }
+}
+
+41 	DXLVE 	GQGB 	VNNL 	BJP4 Self-Check 1.02: binary1 	Yes 	2018-09-28 20:13:04 	1 	
+42 	DXLVE 	GQGB 	VNNL 	BJP4 Self-Check 1.21: methodHeaderSyntax 	Yes 	2018-09-30 02:15:15 	1 	
+43 	DXLVE 	GQGB 	VNNL 	BJP4 Self-Check 1.22: Tricky 	Yes 	2018-10-01 10:16:23 	2 	
+44 	DXLVE 	GQGB 	VNNL 	BJP4 Self-Check 1.23: Strange 	Yes 	2018-10-01 23:37:46 	5 	
+45 	DXLVE 	GQGB 	VNNL 	BJP4 Self-Check 1.24: Strange2 	Yes 	2018-10-01 23:48:34 	1 	
+46 	DXLVE 	GQGB 	VNNL 	BJP4 Self-Check 1.25: Strange3 	Yes 	2018-10-01 23:54:37 	2 	
+47 	DXLVE 	GQGB 	VNNL 	BJP4 Self-Check 1.29: LotsOfErrors-errors 	Yes 	2018-10-01 10:19:38 	3 	
+
+public class LotsOfErrors {
+    public static void main(String[] args) {
+        System. out.println("Hello, world!");
+        message();
+    }
+
+    public static void message() {
+        System.out.println("This program surely cannot ");
+        System.out.println("have any \"errors\" in it");
+    }
+}
+
+48 	DXLVE 	GQGB 	VNNL 	BJP4 Self-Check 1.03: binary2 	Yes 	2018-09-28 20:14:06 	1 	
+49 	DXLVE 	GQGB 	VNNL 	BJP4 Self-Check 1.31: GiveAdvice 	Yes 	2018-09-30 15:06:00 	4 	
+
+public
+class GiveAdvice{ public static
+void main (String[ ]args){
+    System.out.println ("Programs can be easy or"); //make it easy
+    System.out.println("difficult to read, depending");
+    System.out.println("upon their format.");
+    System.out.println(); //comments
+    System.out.println("Everyone, including yourself,");
+    System.out.println("will be happier if you choose");
+    System.out.println("to format your programs.");  
+}
+   }
+
+50 	DXLVE 	GQGB 	VNNL 	BJP4 Self-Check 1.32: Messy 	No 	2018-09-30 15:16:50 	4 	
+
+public
+class Messy{public
+static void main(String[]args){
+    message (); //message 1
+    message ( );// message 2
+    System.out.println() ;
+   }
+            public static void message() { 
+                System.out.println("I really wish that");
+                System.out.println("I had formatted my source");
+                System.out.println("code correctly!");
+            }
+            
+            public static void message( );
+            System.out.println("I really wish that");
+            System.out.println("I had formatted my source");
+            System.out.println("code correctly!");
+           }
+
+51 	DXLVE 	GQGB 	VNNL 	BJP4 Self-Check 1.05: javaVsClass 	Yes 	2018-09-28 20:20:30 	2 	
+52 	DXLVE 	GQGB 	VNNL 	BJP4 Self-Check 1.06: legalIdentifiers 	Yes 	2018-09-30 16:07:08 	12 	
+53 	DXLVE 	GQGB 	VNNL 	BJP4 Self-Check 1.07: outputSyntax 	Yes 	2018-09-30 01:29:47 	1 	
+54 	DXLVE 	GQGB 	VNNL 	BJP4 Self-Check 1.08: confounding 	Yes 	2018-09-30 01:48:58 	2 	
+55 	DXLVE 	GQGB 	VNNL 	BJP4 Self-Check 1.09: Archie 	Yes 	2018-09-30 11:51:27 	6 	
+56 	GIGDE 	GOYUU 	SFBCF 	BJP4 Exercise 1.10: Egg2 	Yes 	2018-09-30 21:18:51 	1 	
+
+public class Egg2 {
+
+	public static void main(String[] args) {
+		method1(); // first egg
+    
+        method2(); // second egg
+		
+		method3();
+
+	}
+	
+	public static void method1() {
+		System.out.println("  _______");
+        System.out.println(" /       \\");
+        System.out.println("/         \\");
+        System.out.println("\\         /");
+        System.out.println(" \\_______/");
+        System.out.println("-\"-'-\"-'-\"-");
+	}	
+	public static void method2() {
+		System.out.println("  _______");
+        System.out.println(" /       \\");
+        System.out.println("/         \\");
+        System.out.println("\\         /");
+        System.out.println(" \\_______/");
+        System.out.println("-\"-'-\"-'-\"-");
+        System.out.println("\\         /");
+        System.out.println(" \\_______/");
+	}	
+	public static void method3() {
+		System.out.println("  _______");
+        System.out.println(" /       \\");
+        System.out.println("/         \\");
+        System.out.println("-\"-'-\"-'-\"-");
+        System.out.println("\\         /");
+        System.out.println(" \\_______/");
+
+	}
+
+}
+
+57 	GIGDE 	GOYUU 	SFBCF 	BJP4 Exercise 1.14: Lanterns 	Yes 	2018-10-10 19:50:42 	3 	
+
+public class Lanterns {
+
+	public static void main(String[] args) {
+		twoPyramids();
+		lights();
+		stars();
+		twoPyramids();
+		shortStars();
+		lights();
+		lights();
+		shortStars();
+		shortStars();
+		
+
+	}	
+	
+	public static void twoPyramids() {
+        // two pyramids
+		System.out.println("    *****");
+		System.out.println("  *********");
+		System.out.println("*************");
+		System.out.println();
+		System.out.println("    *****");
+		System.out.println("  *********");
+		System.out.println("*************");
+	}
+	
+	public static void pyramid() {
+        // one pyramid
+		System.out.println("    *****");
+		System.out.println("  *********");
+		System.out.println("*************");
+	}
+	
+	public static void lights() {
+        // one row of lights
+		System.out.println("* | | | | | *");
+	}
+	
+	public static void stars() {
+        // one row of stars
+		System.out.println("*************");
+	}
+	
+	public static void shortStars() {
+        // one row of short stars
+		System.out.println("    *****");
+	}
+
+}
+
+58 	GIGDE 	GOYUU 	SFBCF 	BJP4 Exercise 1.09: Egg 	Yes 	2018-09-30 21:09:34 	1 	
+
+public class Egg {
+
+	public static void main(String[] args) {
+		System.out.println("  _______");
+		System.out.println(" /       \\");
+		System.out.println("/         \\");
+		System.out.println("-\"-'-\"-'-\"-");
+		System.out.println("\\         /");
+		System.out.println(" \\_______/");
+		
+	}
+
+}
+
+59 	GIGDE 	GOYUU 	SFBCF 	BJP4 Self-Check 1.01: binaryNumbers 	Yes 	2018-10-02 23:21:58 	3 	
+60 	GIGDE 	GOYUU 	SFBCF 	BJP4 Self-Check 1.10: Shaq 	Yes 	2018-10-02 23:32:57 	1 	
+61 	GIGDE 	GOYUU 	SFBCF 	BJP4 Self-Check 1.11: downwardSpiral 	No 	2018-10-02 23:33:11 	1 	
+62 	GIGDE 	GOYUU 	SFBCF 	BJP4 Self-Check 1.12: DoubleSlash 	Yes 	2018-09-26 09:02:28 	4 	
+63 	GIGDE 	GOYUU 	SFBCF 	BJP4 Self-Check 1.13: Sally 	Yes 	2018-09-30 20:59:47 	1 	
+
+		System.out.println("\"Several slashes are sometimes seen,\"");
+		System.out.println("said Sally. \"I've said so.\" See?");
+		System.out.println("\\ / \\\\ // \\\\\\ ///");
+
+64 	GIGDE 	GOYUU 	SFBCF 	BJP4 Self-Check 1.14: TestOfKnowledge 	Yes 	2018-10-02 23:35:02 	3 	
+
+System.out.println("This is a test of your");
+System.out.println("knowledge of \"quotes\" used");
+System.out.println("in 'string literals.'");
+System.out.println();
+System.out.println("You're bound to \"get it right\"");
+System.out.println("if you read the section on");
+System.out.println("''quotes.''");
+
+65 	GIGDE 	GOYUU 	SFBCF 	BJP4 Self-Check 1.15: printlnSlashes 	Yes 	2018-10-02 23:35:19 	1 	
+
+System.out.println("/ \\ // \\\\ /// \\\\\\");
+
+66 	GIGDE 	GOYUU 	SFBCF 	BJP4 Self-Check 1.16: withoutPrintStatements 	Yes 	2018-10-02 23:39:06 	5 	
+
+System.out.println("Twas brillig and the ");
+System.out.println("  slithy toves did gyre and");
+System.out.println("gimble");
+System.out.println();
+System.out.println("in the wabe.");
+
+67 	GIGDE 	GOYUU 	SFBCF 	BJP4 Self-Check 1.19: SecretMessage-errors 	Yes 	2018-09-30 21:02:56 	3 	
+
+public class SecretMessage {
+	public static void main(String[] args) {
+		System.out.println("Speak friend");
+		System.out.println("and enter");
+	}
+}
+
+68 	GIGDE 	GOYUU 	SFBCF 	BJP4 Self-Check 1.02: binary1 	Yes 	2018-10-02 23:23:08 	1 	
+69 	GIGDE 	GOYUU 	SFBCF 	BJP4 Self-Check 1.21: methodHeaderSyntax 	Yes 	2018-09-30 21:03:18 	1 	
+70 	GIGDE 	GOYUU 	SFBCF 	BJP4 Self-Check 1.22: Tricky 	Yes 	2018-09-30 21:05:52 	1 	
+71 	GIGDE 	GOYUU 	SFBCF 	BJP4 Self-Check 1.29: LotsOfErrors-errors 	Yes 	2018-09-30 21:07:25 	3 	
+
+public class LotsOfErrors {
+    public static void main(String[] args) {
+        System.out.println("Hello, world!");
+        message();
+    }
+
+    public static void message() {
+        System.out.println("This program surely cannot ");
+        System.out.println("have any \"errors\" in it");
+    }
+}
+
+72 	GIGDE 	GOYUU 	SFBCF 	BJP4 Self-Check 1.03: binary2 	Yes 	2018-09-30 20:32:14 	1 	
+73 	GIGDE 	GOYUU 	SFBCF 	BJP4 Self-Check 1.04: cookieRecipe 	Yes 	2018-10-02 23:23:23 	1 	
+74 	GIGDE 	GOYUU 	SFBCF 	BJP4 Self-Check 1.05: javaVsClass 	Yes 	2018-10-02 23:23:49 	4 	
+75 	GIGDE 	GOYUU 	SFBCF 	BJP4 Self-Check 1.06: legalIdentifiers 	Yes 	2018-09-30 20:40:22 	13 	
+76 	GIGDE 	GOYUU 	SFBCF 	BJP4 Self-Check 1.07: outputSyntax 	Yes 	2018-09-30 20:40:41 	1 	
+77 	GIGDE 	GOYUU 	SFBCF 	BJP4 Self-Check 1.08: confounding 	Yes 	2018-10-02 23:31:35 	3 	
+78 	GIGDE 	GOYUU 	SFBCF 	BJP4 Self-Check 1.09: Archie 	No 	2018-10-02 23:32:33 	2 	
+79 	FURE 	GSRM 	AFJ 	BJP4 Exercise 1.10: Egg2 	Yes 	2018-09-30 13:18:43 	1 	
+
+public class Egg2{
+
+    public static void main(String[] args){
+
+        top();
+
+        bottom();
+
+        line();
+
+        top();
+
+        bottom();
+
+        line();
+
+        bottom();
+
+        top();
+
+        line();
+
+        bottom();
+
+    }
+
+}
+
+
+
+public static void top(){
+
+        System.out.println("  _______");
+
+        System.out.println(" /       \\");
+
+        System.out.println("/         \\");
+
+}
+
+
+
+public static void bottom(){
+
+        System.out.println("\\         /");
+
+        System.out.println(" \\_______/");
+
+}
+
+
+
+public static void line(){
+
+        System.out.println("-\"-'-\"-'-\"-");
+
+}
+
+80 	FURE 	GSRM 	AFJ 	BJP4 Exercise 1.09: Egg 	Yes 	2018-09-30 13:16:04 	1 	
+
+public class Egg {
+
+    public static void main(String[] args) {
+
+        System.out.println("  _______");
+
+        System.out.println(" /       \\");
+
+        System.out.println("/         \\");
+
+        System.out.println("-\"-'-\"-'-\"-");
+
+        System.out.println("\\         /");
+
+        System.out.println(" \\_______/");
+
+    }
+
+}
+
+81 	FURE 	GSRM 	AFJ 	BJP4 Self-Check 1.12: DoubleSlash 	Yes 	2018-09-26 09:13:42 	2 	
+82 	FURE 	GSRM 	AFJ 	BJP4 Self-Check 1.13: Sally 	Yes 	2018-09-30 12:51:00 	1 	
+
+System.out.println("\"Several slashes are sometimes seen,\"");
+System.out.println("said Sally. \"I've said so.\" See?");
+System.out.println("\\ / \\\\ // \\\\\\ ///");
+
+83 	FURE 	GSRM 	AFJ 	BJP4 Self-Check 1.19: SecretMessage-errors 	Yes 	2018-09-30 12:55:06 	2 	
+
+public class SecretMessage {
+public static void main(String[] args) {
+System.out.println("Speak friend");
+System.out.println("and enter");
+}
+}
+
+84 	FURE 	GSRM 	AFJ 	BJP4 Self-Check 1.21: methodHeaderSyntax 	Yes 	2018-09-30 12:58:56 	1 	
+85 	FURE 	GSRM 	AFJ 	BJP4 Self-Check 1.22: Tricky 	Yes 	2018-09-30 13:02:57 	2 	
+86 	FURE 	GSRM 	AFJ 	BJP4 Self-Check 1.29: LotsOfErrors-errors 	Yes 	2018-09-30 13:06:02 	4 	
+
+public class LotsOfErrors {
+    public static void main(String[] args) {
+        System.out.println("Hello, world!");
+        message();
+    }
+
+    public static void message() {
+        System.out.println("This program surely cannot");
+        System.out.println("have any \"errors\" in it");
+    }
+}
+
+87 	FURE 	GSRM 	AFJ 	BJP4 Self-Check 1.03: binary2 	Yes 	2018-09-30 12:44:18 	1 	
+88 	FURE 	GSRM 	AFJ 	BJP4 Self-Check 1.06: legalIdentifiers 	Yes 	2018-09-30 12:49:12 	5 	
+89 	FURE 	GSRM 	AFJ 	BJP4 Self-Check 1.07: outputSyntax 	Yes 	2018-09-30 12:46:40 	1 	
+90 	PKMQD 	ZII 	JAIC 	BJP4 Exercise 1.10: Egg2 	Yes 	2018-09-28 14:04:00 	3 	
+
+public class Egg2 {
+
+	public static void main(String[] args) {
+		//System.out.println("  _______");
+		//System.out.println(" /       \\");
+		//System.out.println("/         \\");
+		//System.out.println("-\"-'-\"-'-\"-");
+		//System.out.println("\\         /");
+		//System.out.println(" \\_______/");
+		head();
+		bottom();
+		middle();
+		//System.out.println();
+		head();
+		bottom();
+		middle();
+		bottom();
+		//System.out.println();
+		head();
+		middle();
+		bottom();
+	}
+	public static void middle() {
+		System.out.println("-\"-'-\"-'-\"-");	
+	}
+	public static void head() {
+		System.out.println("  _______");
+		System.out.println(" /       \\");
+		System.out.println("/         \\");
+	}
+	public static void bottom() {
+		System.out.println("\\         /");
+		System.out.println(" \\_______/");
+	}
+}
+
+91 	PKMQD 	ZII 	JAIC 	BJP4 Exercise 1.14: Lanterns 	Yes 	2018-10-09 17:02:57 	1 	
+
+public class Lanterns {
+
+	public static void main(String[] args) {
+		part1();
+		System.out.println();
+		part1();
+		part2();
+		System.out.println("*************");
+		part1();
+		System.out.println();
+		part1();
+		part3();
+		part2();
+		part2();
+		part3();
+		part3();
+	}
+	
+	public static void part1() {
+		final int Anumber=13;
+		for(int row=0;row<3;row++) {
+			for(int space=1;space<=-2*row+4;space++) {
+				System.out.print(" ");
+			}
+			for(int star=1;star<=5+4*row;star=star+1) {
+				System.out.print("*");
+		}
+			System.out.println();
+		}
+
+}
+	public static void part2(){
+		System.out.println("* | | | | | *");
+	}
+	public static void part3() {
+		System.out.println("    *****");
+	}
+}
+
+92 	PKMQD 	ZII 	JAIC 	BJP4 Exercise 1.09: Egg 	Yes 	2018-09-28 13:51:02 	4 	
+
+public class Egg{
+    public static void main(String[] args){
+
+System.out.println("  _______");
+System.out.println(" /       \\");
+System.out.println("/         \\");
+System.out.println("-\"-'-\"-'-\"-");
+System.out.println("\\         /");
+System.out.println(" \\_______/");
+    }
+}
+
+93 	PKMQD 	ZII 	JAIC 	BJP4 Self-Check 1.01: binaryNumbers 	Yes 	2018-10-16 16:34:12 	3 	
+94 	PKMQD 	ZII 	JAIC 	BJP4 Self-Check 1.12: DoubleSlash 	Yes 	2018-09-26 09:21:51 	28 	
+95 	PKMQD 	ZII 	JAIC 	BJP4 Self-Check 1.13: Sally 	Yes 	2018-09-28 04:01:23 	3 	
+
+System.out.println("\"Several slashes are sometimes seen,\"");
+System.out.println("said Sally. \"I've said so.\" See?");          
+System.out.println("\\ / \\\\ // \\\\\\ ///");
+
+96 	PKMQD 	ZII 	JAIC 	BJP4 Self-Check 1.19: SecretMessage-errors 	Yes 	2018-09-28 13:19:38 	1 	
+
+public class SecretMessage {
+    public static void main(String[] args) {
+        System.out.println("Speak friend");
+        System.out.println("and enter");
+}
+                           }
+
+97 	PKMQD 	ZII 	JAIC 	BJP4 Self-Check 1.02: binary1 	Yes 	2018-10-16 16:32:19 	1 	
+98 	PKMQD 	ZII 	JAIC 	BJP4 Self-Check 1.21: methodHeaderSyntax 	Yes 	2018-09-28 13:22:13 	1 	
+99 	PKMQD 	ZII 	JAIC 	BJP4 Self-Check 1.22: Tricky 	Yes 	2018-09-28 13:27:53 	1 	
+100 	PKMQD 	ZII 	JAIC 	BJP4 Self-Check 1.29: LotsOfErrors-errors 	Yes 	2018-09-28 13:36:07 	4 	
+
+public class LotsOfErrors {
+    public static void main(String[] args) {
+        System.out.println("Hello, world!");
+        message();
+    }
+}
+    public static void message() {
+        System.out.println("This program surely cannot ");
+        System.out.println("have any \"errors\" in it");
+}
+
+101 	PKMQD 	ZII 	JAIC 	BJP4 Self-Check 1.03: binary2 	Yes 	2018-09-28 00:31:20 	1 	
+102 	PKMQD 	ZII 	JAIC 	BJP4 Self-Check 1.06: legalIdentifiers 	Yes 	2018-09-28 00:48:33 	5 	
+103 	PKMQD 	ZII 	JAIC 	BJP4 Self-Check 1.07: outputSyntax 	Yes 	2018-09-28 01:05:23 	1 	
+104 	TIHQN 	XHTR 	WYIUA 	BJP4 Exercise 1.10: Egg2 	Yes 	2018-10-02 10:49:52 	1 	
+
+public class Egg2 {
+    public static void main(String[] args) {
+        top();
+        mid();
+        but();
+    }
+    public static void top() {
+        drawEggTop();
+        drawEggBut();
+        drawEggMid();
+    }
+    public static void mid() {
+        drawEggTop();
+        drawEggBut();
+        drawEggMid();
+        drawEggBut();
+    }
+    public static void but() {
+        drawEggTop();
+        drawEggMid();
+        drawEggBut();
+    }
+    public static void drawEggTop() {
+        System.out.println ("  _______ ");
+        System.out.println (" /       \\");
+        System.out.println ("/         \\");
+    }
+    public static void drawEggMid() {
+        System.out.println ("-\"-\'-\"-\'-\"-");
+    }
+    public static void drawEggBut() {
+        System.out.println ("\\         /");
+        System.out.println (" \\_______/");
+    }
+}
+
+105 	TIHQN 	XHTR 	WYIUA 	BJP4 Exercise 1.09: Egg 	Yes 	2018-10-02 10:36:25 	5 	
+
+public class Egg {
+    public static void main(String[] args) {
+        System.out.println ("  _______ ");
+        System.out.println (" /       \\");
+        System.out.println ("/         \\");
+        System.out.println ("-\"-\'-\"-\'-\"-"); 
+        System.out.println ("\\         /");
+        System.out.println (" \\_______/");
+    }
+}
+
+106 	TIHQN 	XHTR 	WYIUA 	BJP4 Self-Check 1.12: DoubleSlash 	Yes 	2018-09-26 09:22:12 	5 	
+107 	TIHQN 	XHTR 	WYIUA 	BJP4 Self-Check 1.13: Sally 	Yes 	2018-10-02 10:00:52 	3 	
+
+System.out.println("\"Several slashes are sometimes seen,\"");
+System.out.println("said Sally. \"I\'ve said so.\" See?");
+System.out.println("\\ / \\\\ // \\\\\\ ///");
+
+108 	TIHQN 	XHTR 	WYIUA 	BJP4 Self-Check 1.19: SecretMessage-errors 	Yes 	2018-10-02 10:08:08 	6 	
+
+public class SecretMessage {
+    public static void main(String[] args) {
+        System.out.println("Speak friend");
+        System.out.println("and enter");
+    }
+}
+
+109 	TIHQN 	XHTR 	WYIUA 	BJP4 Self-Check 1.21: methodHeaderSyntax 	Yes 	2018-10-02 10:11:57 	1 	
+110 	TIHQN 	XHTR 	WYIUA 	BJP4 Self-Check 1.22: Tricky 	Yes 	2018-10-02 10:14:14 	1 	
+111 	TIHQN 	XHTR 	WYIUA 	BJP4 Self-Check 1.29: LotsOfErrors-errors 	Yes 	2018-10-02 10:20:20 	2 	
+
+public class LotsOfErrors {
+    public static void main(String[] args) {
+        System.out.println("Hello, world!");
+        message();
+    }
+
+    public static void message() {
+        System.out.println("This program surely cannot ");
+        System.out.println("have any \"errors\" in it");
+    }
+}
+
+112 	TIHQN 	XHTR 	WYIUA 	BJP4 Self-Check 1.03: binary2 	Yes 	2018-10-02 09:14:13 	2 	
+113 	TIHQN 	XHTR 	WYIUA 	BJP4 Self-Check 1.06: legalIdentifiers 	Yes 	2018-10-02 09:49:21 	6 	
+114 	TIHQN 	XHTR 	WYIUA 	BJP4 Self-Check 1.07: outputSyntax 	Yes 	2018-10-02 09:52:00 	1 	
+115 	WGWEV 	WYEVM 	GYBSD 	BJP4 Exercise 1.10: Egg2 	Yes 	2018-09-28 14:35:21 	1 	
+
+public class Egg2 {
+
+	public static void main(String[] args) {
+		drawTop();
+		drawBottom();
+		drawMiddle();
+		drawTop();
+		drawBottom();
+		drawMiddle();
+		drawBottom();
+		drawTop();
+		drawMiddle();
+		drawBottom();
+		
+	}
+	
+	public static void drawTop() {
+		System.out.println("  _______  ");
+		System.out.println(" /       \\ ");
+		System.out.println("/         \\");
+	}
+	
+	public static void drawMiddle() {
+		System.out.println("-\"-'-\"-'-\"-");
+	}
+	
+	public static void drawBottom() {
+		System.out.println("\\         /");
+		System.out.println(" \\_______/");
+	}
+
+}
+
+116 	WGWEV 	WYEVM 	GYBSD 	BJP4 Exercise 1.09: Egg 	Yes 	2018-09-28 14:26:00 	2 	
+
+public class Egg {
+
+	public static void main(String[] args) {
+		System.out.println("  _______  ");
+		System.out.println(" /       \\ ");
+		System.out.println("/         \\");
+		System.out.println("-\"-'-\"-'-\"-");
+		System.out.println("\\         /");
+		System.out.println(" \\_______/");
+		
+
+	}
+
+}
+
+117 	WGWEV 	WYEVM 	GYBSD 	BJP4 Self-Check 1.12: DoubleSlash 	Yes 	2018-09-26 09:09:26 	9 	
+118 	WGWEV 	WYEVM 	GYBSD 	BJP4 Self-Check 1.13: Sally 	Yes 	2018-09-26 09:19:40 	1 	
+
+System.out.println("\"Several slashes are sometimes seen,\"");
+System.out.println("said Sally. \"I've said so.\" See?");
+System.out.println("\\ / \\\\ // \\\\\\ ///");
+
+119 	WGWEV 	WYEVM 	GYBSD 	BJP4 Self-Check 1.19: SecretMessage-errors 	Yes 	2018-09-28 13:59:00 	1 	
+
+public class SecretMessage {
+    public static void main(String[] args) {
+        System.out.println("Speak friend");
+        System.out.println("and enter");
+    }
+}
+
+120 	WGWEV 	WYEVM 	GYBSD 	BJP4 Self-Check 1.21: methodHeaderSyntax 	Yes 	2018-09-28 13:59:37 	1 	
+121 	WGWEV 	WYEVM 	GYBSD 	BJP4 Self-Check 1.22: Tricky 	Yes 	2018-09-28 14:01:40 	1 	
+122 	WGWEV 	WYEVM 	GYBSD 	BJP4 Self-Check 1.29: LotsOfErrors-errors 	Yes 	2018-09-28 14:06:40 	2 	
+
+public class LotsOfErrors {
+    public static void main(String[] args) {
+        System.out.println("Hello, world!");
+        message();
+    }
+
+    public static void message() {
+        System.out.println("This program surely cannot ");
+        System.out.println("have any \"errors\" in it");
+    }
+}
+
+123 	WGWEV 	WYEVM 	GYBSD 	BJP4 Self-Check 1.03: binary2 	Yes 	2018-09-28 13:52:10 	1 	
+124 	WGWEV 	WYEVM 	GYBSD 	BJP4 Self-Check 1.06: legalIdentifiers 	No 	2018-09-28 13:57:36 	8 	
+125 	WGWEV 	WYEVM 	GYBSD 	BJP4 Self-Check 1.07: outputSyntax 	Yes 	2018-09-28 13:56:42 	1 	
+126 	UUZIE 	HWGH 	ZXUT 	BJP4 Exercise 1.10: Egg2 	Yes 	2018-10-02 18:39:37 	1 	
+
+public class Egg2{
+    public static void main(String[] args){
+        top();
+        bottom();
+        line();
+        top();
+        bottom();
+        line();
+        bottom();
+        top();
+        line();
+        bottom();
+    }
+    public static void top(){
+        System.out.println("  _______");
+        System.out.println(" /       \\");
+        System.out.println("/         \\");
+    }
+    public static void bottom(){
+        System.out.println("\\         /");
+        System.out.println(" \\_______/");
+    }
+    public static void line(){
+    System.out.println("-\"-'-\"-'-\"-");
+    }
+}
+
+127 	UUZIE 	HWGH 	ZXUT 	BJP4 Exercise 1.09: Egg 	Yes 	2018-10-02 18:38:13 	1 	
+
+public class Egg {
+    public static void main(String[] args) {
+        System.out.println("  _______");
+        System.out.println(" /       \\");
+        System.out.println("/         \\");
+        System.out.println("-\"-'-\"-'-\"-");
+        System.out.println("\\         /");
+        System.out.println(" \\_______/");
+    }
+}
+
+128 	UUZIE 	HWGH 	ZXUT 	BJP4 Self-Check 1.12: DoubleSlash 	Yes 	2018-09-26 09:05:10 	2 	
+129 	UUZIE 	HWGH 	ZXUT 	BJP4 Self-Check 1.13: Sally 	Yes 	2018-10-02 18:43:49 	1 	
+
+System.out.println("\"Several slashes are sometimes seen,\"");
+System.out.println("said Sally. \"I've said so.\" See?");
+System.out.println("\\ / \\\\ // \\\\\\ ///");
+
+130 	UUZIE 	HWGH 	ZXUT 	BJP4 Self-Check 1.19: SecretMessage-errors 	Yes 	2018-10-01 11:49:43 	2 	
+
+public class SecretMessage {
+    public static void main(String[] args) {
+        System.out.println("Speak friend");
+        System.out.println("and enter");
+}
+}
+
+131 	UUZIE 	HWGH 	ZXUT 	BJP4 Self-Check 1.21: methodHeaderSyntax 	Yes 	2018-10-01 11:50:02 	1 	
+132 	UUZIE 	HWGH 	ZXUT 	BJP4 Self-Check 1.22: Tricky 	Yes 	2018-10-01 11:51:11 	1 	
+133 	UUZIE 	HWGH 	ZXUT 	BJP4 Self-Check 1.29: LotsOfErrors-errors 	Yes 	2018-10-01 11:54:56 	12 	
+
+public class LotsOfErrors {
+    public static void main(String[] args) {
+        System.out.println("Hello, world!");
+        message();
+    }
+    public static void message() {
+        System.out.println("This program surely cannot ");
+        System.out.println("have any \"errors\" in it");
+    }
+}
+
+134 	UUZIE 	HWGH 	ZXUT 	BJP4 Self-Check 1.03: binary2 	Yes 	2018-09-26 10:11:13 	2 	
+135 	UUZIE 	HWGH 	ZXUT 	BJP4 Self-Check 1.06: legalIdentifiers 	Yes 	2018-10-02 18:42:50 	5 	
+136 	UUZIE 	HWGH 	ZXUT 	BJP4 Self-Check 1.07: outputSyntax 	Yes 	2018-10-01 11:47:33 	1 	
+137 	UINUN 	HHSE 	KNPJ 	BJP4 Exercise 1.10: Egg2 	Yes 	2018-10-24 08:51:47 	4 	
+
+public class Egg2{
+    public static void main(String[] args){
+        //t p m \n t b m b \n t m b
+        tops();
+        bottom();
+        mid();
+        tops();
+        bottom();
+        mid();
+        bottom();
+        tops();
+        mid();
+        bottom();
+        
+    }
+    public static void tops(){
+         System.out.println("  _______");
+        System.out.println(" /       \\");
+        System.out.println("/         \\");
+    }
+    public static void mid(){
+        System.out.println("-\"-'-\"-'-\"-");
+    }
+    public static void bottom(){
+        System.out.println("\\         /");
+        System.out.println(" \\_______/");
+    }
+}
+
+138 	UINUN 	HHSE 	KNPJ 	BJP4 Exercise 1.09: Egg 	Yes 	2018-10-09 09:48:41 	11 	
+
+public class Egg{
+    public static void main(String[] args){
+        System.out.println("  _______");
+        System.out.println(" /       \\");
+        System.out.println("/         \\");
+        System.out.println("-\"-'-\"-'-\"-");
+        System.out.println("\\         /");
+        System.out.println(" \\_______/");
+
+}
+}
+
+139 	UINUN 	HHSE 	KNPJ 	BJP4 Self-Check 1.01: binaryNumbers 	Yes 	2018-09-26 09:17:38 	1 	
+140 	UINUN 	HHSE 	KNPJ 	BJP4 Self-Check 1.12: DoubleSlash 	Yes 	2018-09-26 09:08:31 	8 	
+141 	UINUN 	HHSE 	KNPJ 	BJP4 Self-Check 1.13: Sally 	Yes 	2018-10-09 09:11:01 	2 	
+
+System.out.println("\"Several slashes are sometimes seen,\"");
+System.out.println("said Sally. \"I've said so.\" See?");
+System.out.println("\\ / \\\\ // \\\\\\ ///");
+
+142 	UINUN 	HHSE 	KNPJ 	BJP4 Self-Check 1.19: SecretMessage-errors 	Yes 	2018-10-09 09:17:27 	4 	
+
+public class SecretMessage {
+    public static void main(String[] args) {
+        System.out.println("Speak friend");
+        System.out.println("and enter");
+    }
+}
+
+143 	UINUN 	HHSE 	KNPJ 	BJP4 Self-Check 1.02: binary1 	Yes 	2018-09-26 09:20:11 	2 	
+144 	UINUN 	HHSE 	KNPJ 	BJP4 Self-Check 1.21: methodHeaderSyntax 	Yes 	2018-10-09 09:19:40 	1 	
+145 	UINUN 	HHSE 	KNPJ 	BJP4 Self-Check 1.22: Tricky 	Yes 	2018-10-09 09:21:36 	1 	
+146 	UINUN 	HHSE 	KNPJ 	BJP4 Self-Check 1.29: LotsOfErrors-errors 	Yes 	2018-10-09 09:27:23 	4 	
+
+public class LotsOfErrors {
+    public static void main(String[] args) {
+        System.out.println("Hello, world!");
+        message();
+    }
+
+    public static void message(){
+        System.out.println("This program surely cannot ");
+        System.out.println("have any \"errors\" in it");
+    }
+                           }
+
+147 	UINUN 	HHSE 	KNPJ 	BJP4 Self-Check 1.03: binary2 	Yes 	2018-09-26 09:21:03 	1 	
+148 	UINUN 	HHSE 	KNPJ 	BJP4 Self-Check 1.06: legalIdentifiers 	Yes 	2018-10-09 08:46:08 	8 	
+149 	UINUN 	HHSE 	KNPJ 	BJP4 Self-Check 1.07: outputSyntax 	Yes 	2018-10-09 08:46:27 	1 	
+150 	UINUN 	HHSE 	KNPJ 	BJP4 Self-Check 1.08: confounding 	Yes 	2018-10-09 08:50:02 	6 	
+151 	UINUN 	HHSE 	KNPJ 	BJP4 Self-Check 1.09: Archie 	Yes 	2018-10-09 08:57:09 	4 	
+152 	XCCMG 	BHIP 	MYQF 	BJP4 Exercise 1.10: Egg2 	Yes 	2018-09-29 11:37:56 	2 	
+
+public class Egg2 {
+
+	public static void main(String[] args) {
+		part1();
+		
+		part2();
+		
+		part3();
+		
+	}
+
+	public static void part1() {
+		System.out.println("  _______");
+		System.out.println(" /       \\");
+		System.out.println("/         \\");
+		System.out.println("\\         /");
+		System.out.println(" \\_______/");
+		System.out.println("-\"-\'-\"-\'-\"-");
+		
+	
+	}
+	public static void part2() {
+		System.out.println("  _______");
+		System.out.println(" /       \\");
+		System.out.println("/         \\");
+		System.out.println("\\         /");
+		System.out.println(" \\_______/");
+		System.out.println("-\"-\'-\"-\'-\"-");
+		System.out.println("\\         /");
+		System.out.println(" \\_______/");
+	
+	}
+	public static void part3() {
+		System.out.println("  _______");
+		System.out.println(" /       \\");
+		System.out.println("/         \\");
+		System.out.println("-\"-\'-\"-\'-\"-");
+		System.out.println("\\         /");
+		System.out.println(" \\_______/");
+		
+
+}
+}
+
+153 	XCCMG 	BHIP 	MYQF 	BJP4 Exercise 1.09: Egg 	Yes 	2018-09-29 11:27:35 	1 	
+
+public class Egg {
+    public static void main(String[] args) {
+		System.out.println("  _______");
+		System.out.println(" /       \\");
+		System.out.println("/         \\");
+		System.out.println("-\"-\'-\"-\'-\"-");
+		System.out.println("\\         /");
+		System.out.println(" \\_______/");
+	}
+
+}
+
+154 	XCCMG 	BHIP 	MYQF 	BJP4 Self-Check 1.11: downwardSpiral 	No 	2018-09-26 09:18:06 	2 	
+155 	XCCMG 	BHIP 	MYQF 	BJP4 Self-Check 1.12: DoubleSlash 	Yes 	2018-09-26 09:17:27 	1 	
+156 	XCCMG 	BHIP 	MYQF 	BJP4 Self-Check 1.13: Sally 	Yes 	2018-09-29 11:45:28 	1 	
+
+System.out.println("\"Several slashes are sometimes seen,\"");
+		System.out.println("said Sally. \"I've said so.\" See?");
+		System.out.println("\\ / \\\\ // \\\\\\ ///");
+
+157 	XCCMG 	BHIP 	MYQF 	BJP4 Self-Check 1.19: SecretMessage-errors 	Yes 	2018-09-29 10:14:07 	1 	
+
+public class SecretMessage {
+    public static void main(String[] args) {
+        System.out.println("Speak friend");
+        System.out.println("and enter");
+}
+}
+
+158 	XCCMG 	BHIP 	MYQF 	BJP4 Self-Check 1.21: methodHeaderSyntax 	Yes 	2018-09-29 10:14:49 	1 	
+159 	XCCMG 	BHIP 	MYQF 	BJP4 Self-Check 1.22: Tricky 	Yes 	2018-09-29 10:22:42 	1 	
+160 	XCCMG 	BHIP 	MYQF 	BJP4 Self-Check 1.29: LotsOfErrors-errors 	Yes 	2018-09-29 11:17:00 	3 	
+
+public class LotsOfErrors {
+    public static void main(String[] args) {
+        System.out.println("Hello, world!");
+        message();
+    }
+
+    public static void message() {
+        System.out.println("This program surely cannot ");
+        System.out.println("have any \"errors\" in it");
+    }
+                           }
+
+161 	XCCMG 	BHIP 	MYQF 	BJP4 Self-Check 1.03: binary2 	Yes 	2018-09-26 09:24:24 	1 	
+162 	XCCMG 	BHIP 	MYQF 	BJP4 Self-Check 1.06: legalIdentifiers 	Yes 	2018-09-29 09:41:59 	4 	
+163 	XCCMG 	BHIP 	MYQF 	BJP4 Self-Check 1.07: outputSyntax 	Yes 	2018-09-29 09:42:25 	1 	
+164 	WIASY 	IJGG 	ZJG 	BJP4 Exercise 1.10: Egg2 	Yes 	2018-09-30 17:57:54 	12 	
+
+public class Egg2{
+    public static void main(String[] args) {
+        figure1();
+        figure2();
+        figure3();
+    }
+    public static void figure1() {
+        System.out.println("  _______");
+        System.out.println(" /       \\");
+        System.out.println("/         \\");
+        System.out.println("\\         /");
+        System.out.println(" \\_______/");
+        System.out.println("-\"-'-\"-'-\"-");
+    }
+    public static void figure2()  {
+        System.out.println("  _______");
+        System.out.println(" /       \\");
+        System.out.println("/         \\");
+        System.out.println("\\         /");
+        System.out.println(" \\_______/");
+        System.out.println("-\"-'-\"-'-\"-");
+        System.out.println("\\         /");
+        System.out.println(" \\_______/");
+    }
+    public static void figure3() {
+        System.out.println("  _______");
+        System.out.println(" /       \\");
+        System.out.println("/         \\");
+        System.out.println("-\"-'-\"-'-\"-");
+        System.out.println("\\         /");
+        System.out.println(" \\_______/");
+    }
+}
+
+165 	WIASY 	IJGG 	ZJG 	BJP4 Exercise 1.14: Lanterns 	No 	2018-10-14 14:11:57 	94 	
+
+public class Lanterns {
+    public static void main(String[] args) {
+        drawTop();
+        drawMid();
+    }
+    public static void drawHat() {
+        int NUMOFROWS = 3;
+        for (int row = 1; row <=NUMOFROWS; row++) {
+            for (int sp = 1; sp <= (NUMOFROWS -row)*2; sp++) {
+                System.out.print(" ");
+            }
+            for (int star = 1; star <= row*4+1 ; star++) {
+                System.out.print("*");
+            }
+            for (int sp = 1; sp <=(NUMOFROWS -row)*2; sp++) {
+                System.out.print(" ");
+            }
+            System.out.println();
+        }
+    }
+       
+    public static void drawTop() {
+        drawHat();
+        System.out.println();
+    }
+    
+    public static void drawMid() {
+        drawHat();
+    }
+}
+
+166 	WIASY 	IJGG 	ZJG 	BJP4 Exercise 1.09: Egg 	Yes 	2018-09-30 17:28:04 	2 	
+
+public class Egg{
+    public static void main(String[] args) {
+        System.out.println("  _______");
+        System.out.println(" /       \\");
+        System.out.println("/         \\");
+        System.out.println("-\"-'-\"-'-\"-");
+        System.out.println("\\         /");
+        System.out.println(" \\_______/");
+    }
+}
+
+167 	WIASY 	IJGG 	ZJG 	BJP4 Self-Check 1.12: DoubleSlash 	Yes 	2018-09-26 09:07:12 	1 	
+168 	WIASY 	IJGG 	ZJG 	BJP4 Self-Check 1.13: Sally 	Yes 	2018-09-30 16:18:53 	7 	
+
+System.out.println("\"Several slashes are sometimes seen,\"\nsaid Sally. \"I've said so.\" See?");
+System.out.println("\\ / \\\\ // \\\\\\ ///");
+
+169 	WIASY 	IJGG 	ZJG 	BJP4 Self-Check 1.19: SecretMessage-errors 	Yes 	2018-09-30 16:22:31 	3 	
+
+public class SecretMessage {
+    public static void main(String[] args) {
+        System.out.println("Speak friend");
+        System.out.println("and enter");
+}
+}
+
+170 	WIASY 	IJGG 	ZJG 	BJP4 Self-Check 1.21: methodHeaderSyntax 	Yes 	2018-09-30 16:42:54 	1 	
+171 	WIASY 	IJGG 	ZJG 	BJP4 Self-Check 1.22: Tricky 	Yes 	2018-09-30 16:49:21 	1 	
+172 	WIASY 	IJGG 	ZJG 	BJP4 Self-Check 1.29: LotsOfErrors-errors 	Yes 	2018-09-30 17:13:33 	5 	
+
+public class LotsOfErrors {
+    public static void main(String[] args) {
+        System.out.println("Hello, world!");
+        message();
+    }
+
+    public static void message() {
+        System.out.println("This program surely cannot ");
+        System.out.println("have any \"errors\" in it");
+    }
+}
+
+173 	WIASY 	IJGG 	ZJG 	BJP4 Self-Check 1.03: binary2 	Yes 	2018-09-30 15:23:06 	1 	
+174 	WIASY 	IJGG 	ZJG 	BJP4 Self-Check 1.06: legalIdentifiers 	Yes 	2018-09-30 15:42:36 	6 	
+175 	WIASY 	IJGG 	ZJG 	BJP4 Self-Check 1.07: outputSyntax 	Yes 	2018-09-30 15:43:22 	1 	
+176 	SWTUU 	JBIH 	TXQJP 	BJP4 Exercise 1.10: Egg2 	Yes 	2018-10-01 11:04:50 	16 	
+
+public class Egg2 {
+
+	public static void main(String[] args) {
+		  drawSolution () ;
+	    
+    }
+	public static void drawSolution () {
+		drawFirst () ;
+		drawSecond () ;
+		drawThird () ;
+	}
+	public static void drawFirst () {
+        System.out.println("  _______");
+        System.out.println(" /       \\");
+        System.out.println("/         \\");
+        System.out.println("\\         /");
+        System.out.println(" \\_______/");
+        System.out.println("-\"-'-\"-'-\"-"); 
+    }
+    
+    public static void drawSecond () {
+        System.out.println("  _______");
+        System.out.println(" /       \\");
+        System.out.println("/         \\");
+        System.out.println("\\         /");
+        System.out.println(" \\_______/");
+        System.out.println("-\"-'-\"-'-\"-");
+        System.out.println("\\         /");
+        System.out.println(" \\_______/"); 
+    }
+    
+    public static void drawThird () {
+        System.out.println("  _______");
+        System.out.println(" /       \\");
+        System.out.println("/         \\");
+        System.out.println("-\"-'-\"-'-\"-");
+        System.out.println("\\         /");
+        System.out.println(" \\_______/"); 
+    }
+
+}
+
+177 	SWTUU 	JBIH 	TXQJP 	BJP4 Exercise 1.14: Lanterns 	Yes 	2018-10-14 15:23:15 	7 	
+
+public class Lanterns {
+    public static void main(String[] args) {
+       TrianglesStar();
+       Slashes();
+        Line();
+        TrianglesStar();
+        Stars();
+        Slashes();
+        Slashes();
+       Stars();
+        Stars();
+    }
+    
+    public static void TrianglesStar() {
+        Triangle();
+        System.out.println();
+        Triangle();
+    }
+    
+    public static void Triangle() {
+        System.out.println("    *****");
+        System.out.println("  *********");
+        System.out.println("*************");
+    }
+    
+    public static void Slashes() {
+        System.out.println("* | | | | | *");
+    }
+   public static void Line() {
+        System.out.println("*************");
+    }
+    
+    public static void Stars() {
+        System.out.println("    *****");
+    }
+}
+
+178 	SWTUU 	JBIH 	TXQJP 	BJP4 Exercise 1.09: Egg 	Yes 	2018-10-01 11:45:16 	24 	
+
+public class Egg {
+    	public static void main(String[] args) {
+		drawSolution ();
+	}
+	
+	public static void drawSolution () {
+		drawFirstshape () ; 
+	}
+	
+	public static void drawFirstshape () {
+		System.out.println("  _______");
+		System.out.println(" /       \\");
+		System.out.println("/         \\");
+		System.out.println("-\"-'-\"-'-\"-");
+		System.out.println("\\         /");
+		System.out.println(" \\_______/");
+		
+	}
+		
+}
+
+179 	SWTUU 	JBIH 	TXQJP 	BJP4 Self-Check 1.12: DoubleSlash 	Yes 	2018-09-26 09:11:04 	5 	
+180 	SWTUU 	JBIH 	TXQJP 	BJP4 Self-Check 1.13: Sally 	Yes 	2018-09-30 13:59:46 	4 	
+
+System.out.println("\"Several slashes are sometimes seen,\"");
+System.out.println("said Sally. \"I've said so.\" See?" );
+System.out.println("\\ / \\\\ // \\\\\\ ///");
+
+181 	SWTUU 	JBIH 	TXQJP 	BJP4 Self-Check 1.16: withoutPrintStatements 	No 	2018-12-04 18:16:40 	2 	
+
+System.out.print("Twas ");
+System.out.print("brillig and the ");
+System.out.println(" ");
+System.out.print("  slithy toves did");
+System.out.print(" ");
+System.out.println("gyre and");
+System.out.println(  "gimble");
+System.out.println();
+System.out.println(  "in the wabe." );
+
+182 	SWTUU 	JBIH 	TXQJP 	BJP4 Self-Check 1.19: SecretMessage-errors 	Yes 	2018-09-30 20:10:39 	48 	
+
+public class SecretMessage {
+
+    public static void main(String[] args) {
+        System.out.println("Speak friend");
+        System.out.println("and enter");
+        }
+    
+}
+
+183 	SWTUU 	JBIH 	TXQJP 	BJP4 Self-Check 1.02: binary1 	No 	2018-12-04 22:05:32 	3 	
+184 	SWTUU 	JBIH 	TXQJP 	BJP4 Self-Check 1.21: methodHeaderSyntax 	Yes 	2018-09-30 14:15:52 	1 	
+185 	SWTUU 	JBIH 	TXQJP 	BJP4 Self-Check 1.22: Tricky 	Yes 	2018-09-30 14:31:13 	4 	
+186 	SWTUU 	JBIH 	TXQJP 	BJP4 Self-Check 1.23: Strange 	Yes 	2018-12-04 18:26:54 	18 	
+187 	SWTUU 	JBIH 	TXQJP 	BJP4 Self-Check 1.29: LotsOfErrors-errors 	Yes 	2018-09-30 20:47:20 	34 	
+
+public class LotsOfErrors {
+    public static void main(String[] args) {
+        System.out.println("Hello, world!");
+        message();
+    }
+
+    public static void message() {
+        System.out.println("This program surely cannot");
+        System.out.println("have any \"errors\" in it");
+    }
+                           
+}
+
+188 	SWTUU 	JBIH 	TXQJP 	BJP4 Self-Check 1.03: binary2 	Yes 	2018-09-30 13:39:04 	1 	
+189 	SWTUU 	JBIH 	TXQJP 	BJP4 Self-Check 1.06: legalIdentifiers 	Yes 	2018-09-30 13:45:07 	2 	
+190 	SWTUU 	JBIH 	TXQJP 	BJP4 Self-Check 1.07: outputSyntax 	Yes 	2018-09-30 13:46:20 	1 	
+191 	ZDIGE 	OVD 	NFMHG 	BJP4 Exercise 1.14: OVDterns 	Yes 	2018-04-05 17:01:53 	2 	
+
+public class Lanterns {
+
+	public static void main(String[] args) {
+		part1();
+		System.out.println();
+		part1();
+		vertical_bars();
+		xiii_stars();
+		part1();
+		System.out.println();
+		part1();
+		v_stars();
+		vertical_bars();
+		vertical_bars();
+		v_stars();
+		v_stars();	
+
+	}
+	public static void part1(){
+		v_stars();
+		ix_stars();
+		xiii_stars();
+		
+	}
+	public static void v_stars() {
+		System.out.println("    *****    ");
+			}
+	public static void ix_stars(){
+		System.out.println("  *********  ");
+		
+	}
+	public static void xiii_stars(){
+		System.out.println("*************");
+		
+	}
+	public static void vertical_bars(){
+		System.out.println("* | | | | | *");
+	}
+	
+}
+
+192 	ZDIGE 	OVD 	NFMHG 	BJP4 Self-Check 1.01: binaryNumbers 	Yes 	2017-09-26 08:08:14 	1 	
+193 	ZHRB 	JATJ 	GOQRO 	BJP4 Exercise 1.10: Egg2 	Yes 	2018-09-30 16:04:17 	4 	
+
+public class Egg2 {
+    public static void main(String[] args) {
+        egg1();
+        egg2();
+        egg3();
+    }
+    
+    public static void egg1() {
+        System.out.println("  _______");
+        System.out.println(" /       \\");
+        System.out.println("/         \\");
+        System.out.println("\\         /");
+        System.out.println(" \\_______/");
+        System.out.println("-\"-\'-\"-\'-\"-");
+    }
+    
+    public static void egg2() {
+        System.out.println("  _______");
+        System.out.println(" /       \\");
+        System.out.println("/         \\");
+        System.out.println("\\         /");
+        System.out.println(" \\_______/");
+        System.out.println("-\"-\'-\"-\'-\"-");
+        System.out.println("\\         /");
+        System.out.println(" \\_______/");
+    }
+    
+    public static void egg3() {
+        System.out.println("  _______");
+        System.out.println(" /       \\");
+        System.out.println("/         \\");
+        System.out.println("-\"-\'-\"-\'-\"-");
+        System.out.println("\\         /");
+        System.out.println(" \\_______/");
+    }
+}
+
+194 	ZHRB 	JATJ 	GOQRO 	BJP4 Exercise 1.14: Lanterns 	Yes 	2018-10-10 09:29:27 	3 	
+
+public class Lanterns {
+    public static void main(String[] args) {
+		stars();
+		System.out.println();
+		stars();
+		star2();
+		star3();
+		stars();
+		System.out.println();
+		stars();
+		star4();
+		star2();
+		star2();
+		star4();
+		star4();
+
+    }
+    public static void stars() {
+		System.out.println("    *****    ");
+		System.out.println("  *********  ");
+		System.out.println("*************");
+	}
+	public static void star2() {
+		System.out.println("* | | | | | *");
+	}
+	public static void star3() {
+		System.out.println("*************");
+	}
+	public static void star4() {
+		System.out.println("    *****");
+	}
+}
+
+195 	ZHRB 	JATJ 	GOQRO 	BJP4 Exercise 1.09: Egg 	Yes 	2018-09-30 15:44:48 	3 	
+
+public class Egg {
+    public static void main(String[] args) {
+        System.out.println("  _______  ");
+        System.out.println(" /       \\");
+        System.out.println("/         \\");
+        System.out.println("-\"-\'-\"-\'-\"-");
+        System.out.println("\\         /");
+        System.out.println(" \\_______/");
+    }
+}
+
+196 	ZHRB 	JATJ 	GOQRO 	BJP4 Self-Check 1.01: binaryNumbers 	Yes 	2018-09-30 15:02:08 	2 	
+197 	ZHRB 	JATJ 	GOQRO 	BJP4 Self-Check 1.12: DoubleSlash 	Yes 	2018-09-26 09:07:52 	4 	
+198 	ZHRB 	JATJ 	GOQRO 	BJP4 Self-Check 1.13: Sally 	Yes 	2018-09-26 09:24:27 	5 	
+
+System.out.println("\"Several slashes are sometimes seen,\"");
+System.out.println("said Sally. \"I've said so.\" See?");
+System.out.print("\\ / \\\\ // \\\\\\ ///");
+
+199 	ZHRB 	JATJ 	GOQRO 	BJP4 Self-Check 1.19: SecretMessage-errors 	Yes 	2018-09-30 15:28:04 	10 	
+
+public class SecretMessage {
+    public static void main(String[] args) {
+        System.out.println("Speak friend");
+        System.out.println("and enter");
+    }
+}
+
+200 	ZHRB 	JATJ 	GOQRO 	BJP4 Self-Check 1.21: methodHeaderSyntax 	Yes 	2018-09-30 15:24:41 	3 	
+201 	ZHRB 	JATJ 	GOQRO 	BJP4 Self-Check 1.22: Tricky 	Yes 	2018-09-30 15:29:13 	1 	
+202 	ZHRB 	JATJ 	GOQRO 	BJP4 Self-Check 1.29: LotsOfErrors-errors 	Yes 	2018-09-30 15:47:19 	7 	
+
+public class LotsOfErrors {
+    public static void main(String[] args) {
+        System.out.println("Hello, world!");
+        message();
+    }
+
+    public static void message() {
+        System.out.println("This program surely cannot ");
+        System.out.println("have any \"errors\" in it");
+    }
+}
+
+203 	ZHRB 	JATJ 	GOQRO 	BJP4 Self-Check 1.03: binary2 	Yes 	2018-09-30 15:09:31 	1 	
+204 	ZHRB 	JATJ 	GOQRO 	BJP4 Self-Check 1.06: legalIdentifiers 	Yes 	2018-09-30 15:13:43 	6 	
+205 	ZHRB 	JATJ 	GOQRO 	BJP4 Self-Check 1.07: outputSyntax 	Yes 	2018-09-30 15:14:02 	1 	
+206 	YCYBW 	KEAA 	KROI 	BJP4 Exercise 1.10: Egg2 	Yes 	2018-09-30 05:29:58 	1 	
+
+public class Egg2 {
+    public static void main(String[] args) {
+    top();
+    bot();
+    mid();
+    top();
+    bot();
+    mid();
+    bot();
+    top();
+    mid();
+    bot();
+    }
+    
+    //draw the top half
+    public static void top() {
+        System.out.println("  _______  ");
+        System.out.println(" /       \\");
+        System.out.println("/         \\");
+    }
+    
+    //draw the middle part
+    public static void mid() {
+        System.out.println("-\"-'-\"-'-\"-");
+    }
+    
+    //draw the bottom half
+    public static void bot() {
+        System.out.println("\\         /");
+        System.out.println(" \\_______/");
+    }
+}
+
+207 	YCYBW 	KEAA 	KROI 	BJP4 Exercise 1.09: Egg 	Yes 	2018-09-30 05:24:47 	1 	
+
+public class Egg {
+    public static void main(String[] args) {
+        System.out.println("  _______  ");
+        System.out.println(" /       \\");
+        System.out.println("/         \\");
+        System.out.println("-\"-'-\"-'-\"-");
+        System.out.println("\\         /");
+        System.out.println(" \\_______/");
+    }
+}
+
+208 	YCYBW 	KEAA 	KROI 	BJP4 Self-Check 1.12: DoubleSlash 	Yes 	2018-09-26 09:09:08 	2 	
+209 	YCYBW 	KEAA 	KROI 	BJP4 Self-Check 1.13: Sally 	Yes 	2018-09-30 05:05:45 	2 	
+
+System.out.println("\"Several slashes are sometimes seen,\"");
+System.out.println("said Sally. \"I've said so.\" See?");
+System.out.print("\\ / \\\\ // \\\\\\ ///");
+
+210 	YCYBW 	KEAA 	KROI 	BJP4 Self-Check 1.19: SecretMessage-errors 	Yes 	2018-09-30 05:14:36 	6 	
+
+public class SecretMessage {
+    public static void main(String[] args) {
+        System.out.println("Speak friend");
+        System.out.println("and enter");
+    }
+}
+
+211 	YCYBW 	KEAA 	KROI 	BJP4 Self-Check 1.21: methodHeaderSyntax 	Yes 	2018-09-30 05:15:19 	1 	
+212 	YCYBW 	KEAA 	KROI 	BJP4 Self-Check 1.22: Tricky 	Yes 	2018-09-30 05:16:23 	1 	
+213 	YCYBW 	KEAA 	KROI 	BJP4 Self-Check 1.29: LotsOfErrors-errors 	Yes 	2018-09-30 05:19:29 	4 	
+
+public class LotsOfErrors {
+    public static void main(String[] args) {
+        System.out.println("Hello, world!");
+        message();
+    }
+
+    public static void message(){
+        System.out.println("This program surely cannot ");
+        System.out.println("have any \"errors\" in it");
+    }
+}
+
+214 	YCYBW 	KEAA 	KROI 	BJP4 Self-Check 1.03: binary2 	Yes 	2018-09-30 04:47:47 	2 	
+215 	YCYBW 	KEAA 	KROI 	BJP4 Self-Check 1.06: legalIdentifiers 	Yes 	2018-09-30 05:50:48 	9 	
+216 	YCYBW 	KEAA 	KROI 	BJP4 Self-Check 1.07: outputSyntax 	Yes 	2018-09-30 05:03:28 	1 	
+217 	NZUHC 	RSVNF 	ZXXRY 	BJP4 Exercise 1.10: Egg2 	Yes 	2018-09-30 14:44:41 	4 	
+
+public class Egg2 {
+    public static void main(String[] args) {
+        egg1();
+        egg1();
+        egg2();
+        egg3();
+    }
+    public static void egg1() {
+        System.out.println("  _______  ");
+        System.out.println(" /       \\ ");
+        System.out.println("/         \\ ");
+        System.out.println("\\         / ");
+        System.out.println(" \\_______/  ");
+        System.out.println("-\"-'-\"-'-\"- ");
+    }
+        
+    public static void egg2() {
+        System.out.println("\\         / ");
+        System.out.println(" \\_______/ ");
+    }   
+    public static void egg3() {
+        System.out.println("  _______  ");
+        System.out.println(" /       \\ ");
+        System.out.println("/         \\ ");
+        System.out.println("-\"-'-\"-'-\"- ");
+        System.out.println("\\         / ");
+        System.out.println(" \\_______/ ");
+    }
+}
+
+218 	NZUHC 	RSVNF 	ZXXRY 	BJP4 Exercise 1.09: Egg 	Yes 	2018-09-27 19:50:34 	8 	
+
+public class Egg {
+    public static void main(String [] args) {
+		System.out.println("  _______  ");
+		System.out.println(" /       \\ ");
+		System.out.println("/         \\");
+		System.out.println("-\"-'-\"-'-\"-");
+		System.out.println("\\         /");
+		System.out.println(" \\_______/");
+
+
+    }
+}
+
+219 	NZUHC 	RSVNF 	ZXXRY 	BJP4 Self-Check 1.01: binaryNumbers 	Yes 	2018-09-26 09:14:05 	2 	
+220 	NZUHC 	RSVNF 	ZXXRY 	BJP4 Self-Check 1.12: DoubleSlash 	Yes 	2018-09-26 09:13:00 	3 	
+221 	NZUHC 	RSVNF 	ZXXRY 	BJP4 Self-Check 1.13: Sally 	Yes 	2018-09-26 09:23:59 	4 	
+
+System.out.println("\"Several slashes are sometimes seen,\"\nsaid Sally. \"I've said so.\" See?");
+System.out.print("\\ / \\\\ // \\\\\\ ///");
+
+222 	NZUHC 	RSVNF 	ZXXRY 	BJP4 Self-Check 1.19: SecretMessage-errors 	Yes 	2018-09-27 19:38:55 	3 	
+
+public class SecretMessage {
+    public static void main(String[] args) {
+        System.out.println("Speak friend");
+        System.out.println("and enter");
+} 
+}
+
+223 	NZUHC 	RSVNF 	ZXXRY 	BJP4 Self-Check 1.21: methodHeaderSyntax 	Yes 	2018-09-26 13:52:32 	1 	
+224 	NZUHC 	RSVNF 	ZXXRY 	BJP4 Self-Check 1.22: Tricky 	Yes 	2018-09-26 13:55:54 	1 	
+225 	NZUHC 	RSVNF 	ZXXRY 	BJP4 Self-Check 1.29: LotsOfErrors-errors 	Yes 	2018-09-27 19:46:44 	6 	
+
+public class LotsOfErrors {
+    public static void main(String[] args) {
+        System.out.println("Hello, world!");
+        message();
+    }
+
+    public static void message() {
+        System.out.println("This program surely cannot ");
+        System.out.println("have any \"errors\" in it");
+    }
+}
+
+226 	NZUHC 	RSVNF 	ZXXRY 	BJP4 Self-Check 1.03: binary2 	Yes 	2018-09-26 13:47:04 	1 	
+227 	NZUHC 	RSVNF 	ZXXRY 	BJP4 Self-Check 1.05: javaVsClass 	Yes 	2018-09-26 09:17:57 	3 	
+228 	NZUHC 	RSVNF 	ZXXRY 	BJP4 Self-Check 1.06: legalIdentifiers 	No 	2018-09-26 13:48:38 	9 	
+229 	NZUHC 	RSVNF 	ZXXRY 	BJP4 Self-Check 1.07: outputSyntax 	Yes 	2018-09-26 09:20:06 	1 	
+230 	NZUHC 	RSVNF 	ZXXRY 	BJP4 Self-Check 1.08: confounding 	No 	2018-09-26 10:15:58 	1 	
+231 	UTMLF 	OLQEF 	HMGKO 	BJP4 Exercise 1.10: Egg2 	No 	2018-10-05 21:00:46 	2 	
+
+public class Egg2 {
+
+	public static void main(String[] args) {
+
+		hexagon();
+		
+		
+		middle();
+		
+		
+		hexagon();
+		
+		
+		halfbottom();
+		
+		
+		wholeEgg();
+		
+		
+	}
+		
+		public static void wholeEgg() {
+			
+			upper();
+			middle();
+			bottom();
+			
+		
+		}
+			
+		public static void hexagon () {
+			
+			upper();
+			bottom();
+	
+			
+		}
+		
+		
+		
+		public static void middle() {
+			
+			 System.out.println("\"_\'_\"_\'_\"_ ");
+				
+		}
+			
+			
+		
+		public static void upper() {
+		 System.out.println("  _______  ");
+		 System.out.println(" /       \\ ");
+		 System.out.println("/         \\");
+		 
+		
+		}
+		
+		
+		public static void bottom() {
+		
+		 System.out.println("\\         / ");
+		 System.out.println(" \\       / ");
+		 System.out.println("  \\_____/ ");
+		 
+		 
+		}
+		
+		public static void halfbottom () {
+			
+			System.out.println("\"_\'_\"_\'_\"_ ");
+			System.out.println("\\          / ");
+		    System.out.println(" \\        / ");
+			System.out.println("  \\______/ ");
+			
+			
+			}
+			
+			
+			
+
+
+}
+
+232 	UTMLF 	OLQEF 	HMGKO 	BJP4 Exercise 1.14: Lanterns 	No 	2018-10-14 21:59:43 	2 	
+
+public class Lanterns {
+
+
+		    public static void main(String[] args) {
+		        Firstpart();
+		        Secondpart();
+		        Thirdpart();
+		        Firstpart();
+		        Fourthpart();
+		        Secondpart();
+		        Secondpart();
+		        Firstpart();
+		        Fourthpart();
+		    }
+		    
+		    public static void Firstpart() {
+		        Triangle();
+		        System.out.println();
+		        Triangle();
+		    }
+		    
+		    public static void Triangle() {
+		        System.out.println("    *****");
+		        System.out.println("  *********");
+		        System.out.println("*************");
+		    }
+		    
+		    public static void Secondpart() {
+		        System.out.println("* | | | | | *");
+		    }
+		   public static void Thirdpart() {
+		        System.out.println("*************");
+		    }
+		    
+		    public static void Fourthpart() {
+		        System.out.println("    *****");
+		    }
+		    
+		}
+
+233 	UTMLF 	OLQEF 	HMGKO 	BJP4 Exercise 1.09: Egg 	No 	2018-10-07 23:06:26 	8 	
+
+public class Egg {
+
+	public static void main(String[] args) {
+		
+		wholeEgg();
+	}
+		
+		
+		
+		public static void wholeEgg() {
+			
+			upperEgg();
+			bottomEgg();
+				
+		}
+	
+		
+		public static void upperEgg() {
+		 System.out.println("  _______  ");
+		 System.out.println(" /       \\ ");
+		 System.out.println("/         \\");
+		 System.out.println("\"_\'_\"_\'_\"_ ");
+		}
+		
+		
+		public static void bottomEgg() {
+		 System.out.println("\\          / ");
+		 System.out.println(" \\        / ");
+		 System.out.println("  \\______/ ");
+		 
+		 
+		}
+			
+			
+			
+			
+}
+
+234 	UTMLF 	OLQEF 	HMGKO 	BJP4 Self-Check 1.12: DoubleSlash 	No 	2018-09-26 09:25:29 	2 	
+235 	UTMLF 	OLQEF 	HMGKO 	BJP4 Self-Check 1.13: Sally 	Yes 	2018-09-30 19:49:04 	15 	
+
+System.out.println("\"Several slashes are sometimes seen,\" ");
+System.out.println("said Sally. \"I've said so.\" See?");
+System.out.println("\\ / \\\\ // \\\\\\ ///");
+
+236 	UTMLF 	OLQEF 	HMGKO 	BJP4 Self-Check 1.19: SecretMessage-errors 	Yes 	2018-09-30 20:07:24 	5 	
+
+public class SecretMessage {
+
+	public static void main(String[] args) {
+        
+		System.out.println("Speak friend");
+		System.out.println("and enter");
+	}
+
+}
+
+237 	UTMLF 	OLQEF 	HMGKO 	BJP4 Self-Check 1.21: methodHeaderSyntax 	Yes 	2018-09-30 20:12:25 	1 	
+238 	UTMLF 	OLQEF 	HMGKO 	BJP4 Self-Check 1.22: Tricky 	Yes 	2018-09-30 20:22:16 	2 	
+239 	UTMLF 	OLQEF 	HMGKO 	BJP4 Self-Check 1.29: LotsOfErrors-errors 	Yes 	2018-09-30 21:03:40 	15 	
+
+public class LotsOfErrors {
+    
+    
+    public static void main(String[] args) {
+        System.out.println("Hello, world!");
+        message();
+    }
+
+    public static void message() {
+        
+        
+        System.out.println("This program surely cannot ");
+        
+        System.out.print("have any \"errors\" in it ");
+           }
+                         }
+
+240 	UTMLF 	OLQEF 	HMGKO 	BJP4 Self-Check 1.03: binary2 	Yes 	2018-09-30 00:15:56 	2 	
+241 	UTMLF 	OLQEF 	HMGKO 	BJP4 Self-Check 1.06: legalIdentifiers 	Yes 	2018-09-30 01:44:21 	80 	
+242 	UTMLF 	OLQEF 	HMGKO 	BJP4 Self-Check 1.07: outputSyntax 	Yes 	2018-09-30 00:31:28 	1 	
+243 	NOOZJ 	RGRF 	HQIAA 	BJP4 Exercise 1.10: Egg2 	Yes 	2018-10-02 21:53:11 	1 	
+
+public class Egg2 {
+    public static void main(String[] args) {
+        egg1();
+        egg2();
+        egg3();
+    }
+    
+    public static void egg1() {
+        System.out.println("  _______");
+        System.out.println(" /       \\");
+        System.out.println("/         \\");
+        System.out.println("\\         /");
+        System.out.println(" \\_______/");
+        System.out.println("-\"-\'-\"-\'-\"-");
+    }
+    
+    public static void egg2() {
+        System.out.println("  _______");
+        System.out.println(" /       \\");
+        System.out.println("/         \\");
+        System.out.println("\\         /");
+        System.out.println(" \\_______/");
+        System.out.println("-\"-\'-\"-\'-\"-");
+        System.out.println("\\         /");
+        System.out.println(" \\_______/");
+    }
+    
+    public static void egg3() {
+        System.out.println("  _______");
+        System.out.println(" /       \\");
+        System.out.println("/         \\");
+        System.out.println("-\"-\'-\"-\'-\"-");
+        System.out.println("\\         /");
+        System.out.println(" \\_______/");
+    }
+}
+
+244 	NOOZJ 	RGRF 	HQIAA 	BJP4 Exercise 1.14: Lanterns 	Yes 	2018-10-13 15:55:01 	9 	
+
+public class Lanterns {
+    public static void main(String[] args){
+        top1();
+        top();
+        body1();
+        top1();
+        top();
+        body2();
+    }
+    
+    public static void top() {
+        System.out.println("    *****");
+        System.out.println("  *********");
+        System.out.println("*************");
+    }
+    
+    public static void top1() {
+        top();
+        System.out.println();
+    }
+    
+    public static void body1() {
+        System.out.println("* | | | | | *");
+        System.out.println("*************");
+    }
+    
+    public static void body2() {
+        System.out.println("    *****");
+        System.out.println("* | | | | | *");
+        System.out.println("* | | | | | *");
+        System.out.println("    *****");
+        System.out.println("    *****");
+    }
+}
+
+245 	NOOZJ 	RGRF 	HQIAA 	BJP4 Exercise 1.09: Egg 	Yes 	2018-10-02 21:52:46 	4 	
+
+public class Egg {
+
+	public static void main(String[] args) {
+		System.out.println("  _______  ");
+        System.out.println(" /       \\");
+        System.out.println("/         \\");
+       System.out.println("-\"-\'-\"-\'-\"-");
+        System.out.println("\\         /");
+        System.out.println(" \\_______/");
+
+	}
+
+}
+
+246 	NOOZJ 	RGRF 	HQIAA 	BJP4 Self-Check 1.12: DoubleSlash 	Yes 	2018-09-26 09:19:38 	11 	
+247 	NOOZJ 	RGRF 	HQIAA 	BJP4 Self-Check 1.13: Sally 	No 	2018-10-02 22:03:19 	11 	
+
+System.out.println("\"Several slashes are sometimes seen,\"");
+System.out.println("said Salley. \"I've said so.\" See?");
+System.out.println("\\ / \\\\ // \\\\\\ ///");
+
+248 	NOOZJ 	RGRF 	HQIAA 	BJP4 Self-Check 1.19: SecretMessage-errors 	Yes 	2018-10-02 22:01:48 	7 	
+
+public class SecretMessage {
+    
+    public static void main(String[] args) {
+        System.out.println("Speak friend");
+        System.out.println("and enter");
+    }
+}
+
+249 	NOOZJ 	RGRF 	HQIAA 	BJP4 Self-Check 1.03: binary2 	Yes 	2018-10-02 20:46:39 	1 	
+250 	NOOZJ 	RGRF 	HQIAA 	BJP4 Self-Check 1.06: legalIdentifiers 	No 	2018-10-02 20:55:34 	12 	
+251 	NOOZJ 	RGRF 	HQIAA 	BJP4 Self-Check 1.07: outputSyntax 	Yes 	2018-10-02 20:53:23 	1 	
+252 	RXUYI 	YTJQF EISSH 	Marcela 	BJP4 Exercise 1.01: Stewie 	Yes 	2018-10-07 19:23:46 	1 	
+
+public class Stewie{
+    public static void main(String[]args){
+        System.out.println("//////////////////////");
+        System.out.println("|| Victory is mine! ||");
+        System.out.println("\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\");
+    }
+}
+
+253 	RXUYI 	YTJQF EISSH 	Marcela 	BJP4 Exercise 1.10: Egg2 	Yes 	2018-09-30 21:10:55 	2 	
+
+public class Egg2 {
+    public static void main(String[] args) {
+        statistic1();
+        statistic3();
+        statistic2();
+        statistic1();
+        statistic3();
+        statistic2();
+        statistic3();
+        statistic1();
+        statistic2();
+        statistic3();
+    }    
+    public static void statistic1(){
+        System.out.println("  _______");
+        System.out.println(" /       \\");
+        System.out.println("/         \\");
+    }    
+    public static void statistic2(){    
+        System.out.println("-\"-'-\"-'-\"-");
+    }
+    public static void statistic3(){    
+        System.out.println("\\         /");
+        System.out.println(" \\_______/");
+    }
+}
+
+254 	RXUYI 	YTJQF EISSH 	Marcela 	BJP4 Exercise 1.14: Lanterns 	Yes 	2018-10-03 09:17:38 	4 	
+
+public class Lanterns {
+
+	public static void main(String[] args) {
+        triangle();
+        System.out.println(""); 
+        triangle();
+        line();
+        starb();
+        triangle();
+        System.out.println(""); 
+        triangle();
+        stars();
+        line();
+        line();
+        stars();
+        stars();
+        
+	}	
+		
+	public static void triangle(){ 
+        stars();
+        starm();
+        starb();
+	}
+    public static void stars(){
+        System.out.println("    *****");
+    }
+    public static void starm(){
+        System.out.println("  *********");
+    }
+    public static void starb(){
+        System.out.println("*************"); 
+    }    
+    public static void line(){
+        System.out.println("* | | | | | *"); 
+    }    
+}
+
+255 	RXUYI 	YTJQF EISSH 	Marcela 	BJP4 Exercise 1.02: Spikey 	No 	2018-10-08 08:18:19 	4 	
+
+public class Spikey{
+    public static void main(String[]args){
+        for (int i=1;i<=3;i++){
+            for (int j=1; i-4<=j <=3-1;j++){
+                System.out.print(" ");
+            }
+            System.out.print("test");
+        }
+    }
+}
+            /*space a=2-b     i-4<=j<=3-i
+                    1=4-2b+b
+                    b=3 a=-1
+                    b=-4a
+                    1=5a-4a
+                    a=1 b=-4 */
+
+256 	RXUYI 	YTJQF EISSH 	Marcela 	BJP4 Exercise 1.03: WellFormed 	Yes 	2018-10-08 08:49:24 	2 	
+
+public class WellFormed{
+    public static void main(String[] args){
+        System.out.println("A well-formed Java program has");
+        System.out.println("a main method with { and } \nbraces. \n");
+        System.out.println("A System.out.println statement");
+        System.out.println("has ( and ) and usually a");
+        System.out.println("String that starts and ends");
+        System.out.println("with a \" character.");
+        System.out.println("(But we type \\\" instead!)");
+    }
+}
+
+257 	RXUYI 	YTJQF EISSH 	Marcela 	BJP4 Exercise 1.04: Difference 	Yes 	2018-10-08 09:42:47 	2 	
+
+public class Difference{
+    public static void main(String[]args){
+        System.out.println("What is the difference between");
+        System.out.println("a ' and a \"?  Or between a \" and a \\\"?\n");
+        System.out.println("One is what we see when we're typing our program.");
+        System.out.println("The other is what appears on the \"console.\"");
+    }
+}
+
+258 	RXUYI 	YTJQF EISSH 	Marcela 	BJP4 Exercise 1.05: MuchBetter 	Yes 	2018-10-09 14:59:05 	1 	
+
+public class MuchBetter{
+    public static void main(String[]args){
+        System.out.println("A \"quoted\" String is \n'much' better if you learn");
+        System.out.println("the rules of \"escape sequences.\"");
+        System.out.println("Also, \"\" represents an empty String.");
+        System.out.println("Don't forget: use \\\" instead of \" !");
+        System.out.println("'' is not the same as \"");
+    }
+}
+
+259 	RXUYI 	YTJQF EISSH 	Marcela 	BJP4 Exercise 1.06: Meta 	Yes 	2018-10-09 15:03:55 	2 	
+
+public class Meta{
+    public static void main(String[] args){
+        System.out.print("public class Hello { \n    public static void");
+        System.out.print(" main(String[] args) { \n        System.out.println");
+        System.out.print("(\"Hello, world!\"); \n    }\n}");
+    }
+}
+
+260 	RXUYI 	YTJQF EISSH 	Marcela 	BJP4 Exercise 1.09: Egg 	Yes 	2018-09-30 21:04:36 	1 	
+
+public class Egg {
+    public static void main(String[] args) {
+        System.out.println("  _______");
+        System.out.println(" /       \\");
+        System.out.println("/         \\");
+        System.out.println("-\"-'-\"-'-\"-");
+        System.out.println("\\         /");
+        System.out.println(" \\_______/");
+    }
+}
+
+261 	RXUYI 	YTJQF EISSH 	Marcela 	BJP4 Self-Check 1.01: binaryNumbers 	Yes 	2018-10-01 08:08:15 	1 	
+262 	RXUYI 	YTJQF EISSH 	Marcela 	BJP4 Self-Check 1.10: Shaq 	Yes 	2018-10-07 19:03:20 	7 	
+263 	RXUYI 	YTJQF EISSH 	Marcela 	BJP4 Self-Check 1.11: downwardSpiral 	Yes 	2018-10-08 08:13:36 	16 	
+264 	RXUYI 	YTJQF EISSH 	Marcela 	BJP4 Self-Check 1.12: DoubleSlash 	Yes 	2018-09-26 09:10:27 	9 	
+265 	RXUYI 	YTJQF EISSH 	Marcela 	BJP4 Self-Check 1.13: Sally 	Yes 	2018-09-30 15:43:56 	3 	
+
+System.out.println("\"Several slashes are sometimes seen,\"");
+System.out.println("said Sally. \"I've said so.\" See?");
+System.out.println("\\ / \\\\ // \\\\\\ ///");
+
+266 	RXUYI 	YTJQF EISSH 	Marcela 	BJP4 Self-Check 1.14: TestOfKnowledge 	Yes 	2018-10-01 09:06:16 	2 	
+
+System.out.println("This is a test of your");
+System.out.println("knowledge of \"quotes\" used");
+System.out.println("in 'string literals.'");
+System.out.println("\nYou're bound to \"get it right\"");
+System.out.println("if you read the section on");
+System.out.println("''quotes.''");
+
+267 	RXUYI 	YTJQF EISSH 	Marcela 	BJP4 Self-Check 1.15: printlnSlashes 	Yes 	2018-10-01 09:06:58 	1 	
+
+System.out.println("/ \\ // \\\\ /// \\\\\\");
+
+268 	RXUYI 	YTJQF EISSH 	Marcela 	BJP4 Self-Check 1.16: withoutPrintStatements 	Yes 	2018-10-01 09:10:07 	3 	
+
+System.out.println("Twas brillig and the  ");
+System.out.println("  slithy toves did gyre and");
+System.out.println("gimble");
+System.out.println();
+System.out.println("in the wabe.");
+
+269 	RXUYI 	YTJQF EISSH 	Marcela 	BJP4 Self-Check 1.17: Commentary 	Yes 	2018-10-08 08:15:19 	6 	
+270 	RXUYI 	YTJQF EISSH 	Marcela 	BJP4 Self-Check 1.18: MyProgram-errors 	Yes 	2018-10-01 09:14:34 	2 	
+
+public class MyProgram {
+    public static void main(String[] args) {
+        System.out.println("This is a test of the");
+        System.out.println("emergency broadcast system.");
+    }
+}
+
+271 	RXUYI 	YTJQF EISSH 	Marcela 	BJP4 Self-Check 1.19: SecretMessage-errors 	Yes 	2018-09-30 15:50:11 	2 	
+
+public class SecretMessage {
+    public static void main(String[] args) {
+        System.out.println("Speak friend");
+        System.out.println("and enter");
+    }    
+}
+
+272 	RXUYI 	YTJQF EISSH 	Marcela 	BJP4 Self-Check 1.02: binary1 	Yes 	2018-10-01 08:27:18 	1 	
+273 	RXUYI 	YTJQF EISSH 	Marcela 	BJP4 Self-Check 1.20: FamousSpeech-errors 	Yes 	2018-10-01 09:17:57 	2 	
+
+public class FamousSpeech{
+    public static void main(String[] args) {
+        System.out.println("Four score and seven years ago,");
+        System.out.println("our fathers brought forth on");
+        System.out.println("this continent a new nation");
+        System.out.println("conceived in liberty,");
+        System.out.println("and dedicated to the proposition");
+        System.out.println("that");    // this part should
+        System.out.println("all");      //  really say,
+        System.out.println("men");     //   "all PEOPLE!" */
+        System.out.println("are");
+        System.out.println("created");
+        System.out.println("equal");
+    }
+}
+
+274 	RXUYI 	YTJQF EISSH 	Marcela 	BJP4 Self-Check 1.21: methodHeaderSyntax 	Yes 	2018-09-30 20:51:23 	1 	
+275 	RXUYI 	YTJQF EISSH 	Marcela 	BJP4 Self-Check 1.22: Tricky 	Yes 	2018-09-30 20:54:00 	1 	
+276 	RXUYI 	YTJQF EISSH 	Marcela 	BJP4 Self-Check 1.23: Strange 	Yes 	2018-10-01 09:19:50 	1 	
+277 	RXUYI 	YTJQF EISSH 	Marcela 	BJP4 Self-Check 1.24: Strange2 	Yes 	2018-10-01 09:23:27 	1 	
+278 	RXUYI 	YTJQF EISSH 	Marcela 	BJP4 Self-Check 1.25: Strange3 	Yes 	2018-10-01 09:26:48 	1 	
+279 	RXUYI 	YTJQF EISSH 	Marcela 	BJP4 Self-Check 1.26: Confusing 	Yes 	2018-10-01 09:28:35 	1 	
+280 	RXUYI 	YTJQF EISSH 	Marcela 	BJP4 Self-Check 1.27: Confusing2 	Yes 	2018-10-01 09:32:40 	1 	
+281 	RXUYI 	YTJQF EISSH 	Marcela 	BJP4 Self-Check 1.28: Confusing3 	No 	2018-10-07 19:14:57 	2 	
+282 	RXUYI 	YTJQF EISSH 	Marcela 	BJP4 Self-Check 1.29: LotsOfErrors-errors 	Yes 	2018-09-30 20:57:45 	3 	
+
+public class LotsOfErrors {
+    public static void main(String[] args) {
+        System.out.println("Hello, world!");
+        message();
+    }
+
+    public static void message() {
+        System.out.println("This program surely cannot ");
+        System.out.println("have any \"errors\" in it");
+    }
+}
+
+283 	RXUYI 	YTJQF EISSH 	Marcela 	BJP4 Self-Check 1.03: binary2 	Yes 	2018-09-26 09:27:22 	3 	
+284 	RXUYI 	YTJQF EISSH 	Marcela 	BJP4 Self-Check 1.30: javaClub 	Yes 	2018-10-01 09:42:32 	3 	
+285 	RXUYI 	YTJQF EISSH 	Marcela 	BJP4 Self-Check 1.31: GiveAdvice 	Yes 	2018-10-07 19:17:55 	1 	
+
+// This is a comment
+// This is comment number 2
+public class GiveAdvice{ 
+    public static void main (String[ ]args){ 
+        System.out.println ("Programs can be easy or");  
+        System.out.println("difficult to read, depending");
+        System.out.println("upon their format.");
+        System.out.println("");
+        System.out.println("Everyone, including yourself,");
+        System.out.println("will be happier if you choose");
+        System.out.println("to format your programs.");  
+    }
+}
+
+286 	RXUYI 	YTJQF EISSH 	Marcela 	BJP4 Self-Check 1.32: Messy 	Yes 	2018-10-07 19:19:49 	2 	
+
+// oi cara de boi
+// chau cara de pau
+public class Messy{
+    public static void main(String[]args){
+        message ();
+        System.out.println("");
+        message ();
+    } 
+    public static void message() { 
+        System.out.println("I really wish that");
+        System.out.println("I had formatted my source");
+        System.out.println("code correctly!");
+    }
+}
+
+287 	RXUYI 	YTJQF EISSH 	Marcela 	BJP4 Self-Check 1.05: javaVsClass 	Yes 	2018-10-01 08:41:22 	1 	
+288 	RXUYI 	YTJQF EISSH 	Marcela 	BJP4 Self-Check 1.06: legalIdentifiers 	Yes 	2018-09-30 15:37:30 	4 	
+289 	RXUYI 	YTJQF EISSH 	Marcela 	BJP4 Self-Check 1.07: outputSyntax 	Yes 	2018-09-30 15:39:57 	1 	
+290 	RXUYI 	YTJQF EISSH 	Marcela 	BJP4 Self-Check 1.08: confounding 	Yes 	2018-10-01 08:42:50 	2 	
+291 	RXUYI 	YTJQF EISSH 	Marcela 	BJP4 Self-Check 1.09: Archie 	Yes 	2018-10-07 19:02:12 	6 	
+292 	BDKCA 	XMHCH 	AGQXJ 	BJP4 Exercise 1.10: Egg2 	Yes 	2018-10-01 14:44:06 	3 	
+
+public class Egg2 {
+    public static void main (String[] args) {
+        top();
+        bottom();
+        middle();
+        top();
+        bottom();
+        middle();
+        bottom();
+        top();
+        middle();
+        bottom();
+        
+    }
+    
+    public static void top(){
+        System.out.println("  _______");
+        System.out.println(" /       \\");
+        System.out.println("/         \\");
+    }
+    public static void middle(){
+        System.out.println("-\"-'-\"-'-\"-");
+    }
+    public static void bottom(){
+        System.out.println("\\         /");
+        System.out.println(" \\_______/");
+    }
+}
+
+293 	BDKCA 	XMHCH 	AGQXJ 	BJP4 Exercise 1.09: Egg 	Yes 	2018-10-01 14:37:50 	7 	
+
+public class Egg {
+    public static void main (String[] args) {
+        top();
+        middle();
+        bottom();
+    }
+    
+    public static void top(){
+        System.out.println("  _______");
+        System.out.println(" /       \\");
+        System.out.println("/         \\");
+    }
+    public static void middle(){
+        System.out.println("-\"-'-\"-'-\"-");
+    }
+    public static void bottom(){
+        System.out.println("\\         /");
+        System.out.println(" \\_______/");
+    }
+}
+
+294 	BDKCA 	XMHCH 	AGQXJ 	BJP4 Self-Check 1.12: DoubleSlash 	Yes 	2018-09-26 09:05:30 	4 	
+295 	BDKCA 	XMHCH 	AGQXJ 	BJP4 Self-Check 1.13: Sally 	Yes 	2018-09-26 09:24:00 	2 	
+
+System.out.println("\"Several slashes are sometimes seen,\"");
+System.out.println("said Sally. \"I've said so.\" See?");
+System.out.print("\\ / \\\\ // \\\\\\ ///");
+
+296 	BDKCA 	XMHCH 	AGQXJ 	BJP4 Self-Check 1.19: SecretMessage-errors 	Yes 	2018-10-01 13:58:06 	2 	
+
+public class SecretMessage {
+    public static void main(String[] args) {
+        System.out.println("Speak friend");
+        System.out.println("and enter");
+    }
+}
+
+297 	BDKCA 	XMHCH 	AGQXJ 	BJP4 Self-Check 1.21: methodHeaderSyntax 	Yes 	2018-10-01 13:58:46 	1 	
+298 	BDKCA 	XMHCH 	AGQXJ 	BJP4 Self-Check 1.22: Tricky 	Yes 	2018-10-01 14:00:53 	1 	
+299 	BDKCA 	XMHCH 	AGQXJ 	BJP4 Self-Check 1.29: LotsOfErrors-errors 	Yes 	2018-10-01 14:05:43 	5 	
+
+public class LotsOfErrors {
+    public static void main(String[] args) {
+        System.out.println("Hello, world!");
+        message();
+    }
+
+    public static void message() {
+        System.out.println("This program surely cannot ");
+        System.out.println("have any \"errors\" in it");
+    }
+}
+
+300 	BDKCA 	XMHCH 	AGQXJ 	BJP4 Self-Check 1.03: binary2 	Yes 	2018-10-01 14:59:31 	11 	
+301 	BDKCA 	XMHCH 	AGQXJ 	BJP4 Self-Check 1.06: legalIdentifiers 	No 	2018-10-03 21:09:59 	13 	
+302 	BDKCA 	XMHCH 	AGQXJ 	BJP4 Self-Check 1.07: outputSyntax 	Yes 	2018-10-01 13:53:49 	1 	
+303 	OQWQ 	NUSJ 	YKOIC 	BJP4 Exercise 1.10: Egg2 	Yes 	2018-10-02 22:37:55 	8 	
+
+public class Egg2{
+    public static void main(String[] agrs) {
+        drawEgg1();
+        drawEgg2andHalf();
+        drawEgg3();
+    }
+    public static void drawEgg1 () {
+        System.out.println("  _______");
+        System.out.println(" /       \\");
+        System.out.println("/         \\");
+        System.out.println("\\         /");
+        System.out.println(" \\_______/ ");
+        System.out.println("-\"-'-\"-'-\"-");                   
+    }
+    public static void drawEgg2andHalf () {
+        System.out.println("  _______");
+        System.out.println(" /       \\");
+        System.out.println("/         \\");
+        System.out.println("\\         /");
+        System.out.println(" \\_______/ ");
+        System.out.println("-\"-'-\"-'-\"-"); 
+        System.out.println("\\         /");
+        System.out.println(" \\_______/ ");
+    }                                           
+    public static void drawEgg3 () {
+         System.out.println("  _______");
+        System.out.println(" /       \\");
+        System.out.println("/         \\");
+        System.out.println("-\"-'-\"-'-\"-");
+        System.out.println("\\         /");
+        System.out.println(" \\_______/ ");
+    }    
+                           }
+
+304 	OQWQ 	NUSJ 	YKOIC 	BJP4 Exercise 1.09: Egg 	Yes 	2018-10-02 22:21:11 	2 	
+
+public class Egg{
+    public static void main(String[] args) {
+        drawTop();
+        drawMiddle();
+        drawBottom();
+    }
+    public static void drawTop () {
+        System.out.println("  _______");
+        System.out.println(" /       \\");
+        System.out.println("/         \\");
+    }
+    public static void drawMiddle () {
+        System.out.println("-\"-'-\"-'-\"-");
+    }
+    public static void drawBottom () {
+        System.out.println("\\         /");
+        System.out.println(" \\_______/ ");
+    }
+}
+
+305 	OQWQ 	NUSJ 	YKOIC 	BJP4 Self-Check 1.01: binaryNumbers 	Yes 	2018-10-02 20:55:09 	2 	
+306 	OQWQ 	NUSJ 	YKOIC 	BJP4 Self-Check 1.12: DoubleSlash 	Yes 	2018-09-26 09:50:28 	6 	
+307 	OQWQ 	NUSJ 	YKOIC 	BJP4 Self-Check 1.13: Sally 	Yes 	2018-10-02 21:52:38 	4 	
+
+System.out.println("\"Several slashes are sometimes seen,\"");
+System.out.println("said Sally. \"I've said so.\" See?");
+System.out.println("\\ / \\\\ // \\\\\\ ///");
+
+308 	OQWQ 	NUSJ 	YKOIC 	BJP4 Self-Check 1.19: SecretMessage-errors 	Yes 	2018-10-02 21:55:50 	3 	
+
+public class SecretMessage {
+    public static void main(String[] args) {
+        System.out.println("Speak friend");
+        System.out.println("and enter");
+    }
+}
+
+309 	OQWQ 	NUSJ 	YKOIC 	BJP4 Self-Check 1.02: binary1 	Yes 	2018-10-02 21:00:32 	2 	
+310 	OQWQ 	NUSJ 	YKOIC 	BJP4 Self-Check 1.21: methodHeaderSyntax 	Yes 	2018-10-02 21:57:45 	1 	
+311 	OQWQ 	NUSJ 	YKOIC 	BJP4 Self-Check 1.22: Tricky 	Yes 	2018-10-02 22:02:42 	5 	
+312 	OQWQ 	NUSJ 	YKOIC 	BJP4 Self-Check 1.29: LotsOfErrors-errors 	Yes 	2018-10-02 22:06:01 	4 	
+
+public class LotsOfErrors {
+    public static void main(String[] args) {
+        System.out.println("Hello, world!");
+        message();
+    }
+
+    public static void message() {
+        System.out.println("This program surely cannot");
+        System.out.println("have any \"errors\" in it");
+    }
+                           }
+
+313 	OQWQ 	NUSJ 	YKOIC 	BJP4 Self-Check 1.03: binary2 	Yes 	2018-09-26 09:16:55 	3 	
+314 	OQWQ 	NUSJ 	YKOIC 	BJP4 Self-Check 1.06: legalIdentifiers 	Yes 	2018-10-02 21:35:43 	10 	
+315 	OQWQ 	NUSJ 	YKOIC 	BJP4 Self-Check 1.07: outputSyntax 	Yes 	2018-10-02 21:37:09 	1 	
+316 	VGIGN 	VUYIW 	VGJB 	BJP4 Exercise 1.10: Egg2 	Yes 	2018-10-01 21:05:16 	4 	
+
+public class Egg2 {
+	public static void main(String[] args) {
+        drawEgg2();
+        drawEgg2();
+        drawUpDown();
+        drawEgg3();
+}
+        
+        
+       public static void drawEgg2(){
+           System.out.println("  _______");
+           System.out.println(" /       \\");
+           System.out.println("/         \\");
+           System.out.println("\\         /");
+           System.out.println(" \\_______/");
+           System.out.println("-\"-'-\"-'-\"-");
+}
+      
+                              
+        public static void drawUpDown(){
+               System.out.println("\\         /");
+               System.out.println(" \\_______/");
+}
+            
+        public static void drawEgg3(){
+           System.out.println("  _______");
+           System.out.println(" /       \\");
+           System.out.println("/         \\");
+           System.out.println("-\"-'-\"-'-\"-");
+           System.out.println("\\         /");
+           System.out.println(" \\_______/");
+              
+              
+        }
+}
+
+317 	VGIGN 	VUYIW 	VGJB 	BJP4 Exercise 1.14: Lanterns 	Yes 	2018-10-11 16:34:09 	19 	
+
+public class Lanterns {
+	public static void main(String[]args){
+        int space = 4;
+        int star = 5;
+        for (int i = 1 ; i <= 3 ; i++){
+            for (int j = 1 ; j <= space ; j++)
+                System.out.print(" ");
+                
+            
+            space -= 2;
+            
+            for (int j = 1 ; j <= star ; j++)
+                System.out.print("*");
+                
+            
+            star += 4;
+           
+     System.out.println();
+     
+            
+            
+       
+        }
+        System.out.println();
+        space = 4; 
+        star = 5; 
+        for (int i = 1; i <= 3 ; i++){
+            for (int j = 1; j<= space ; j++)
+                System.out.print(" ");    
+            space = space - 2;
+             
+            for (int j = 1; j<=star; j++)
+                System.out.print("*");
+            star = star + 4;
+         System.out.println();
+            
+        }  
+         System.out.println("* | | | | | *");
+                        
+         int stars = 13;
+         for (int i = 1; i<= stars; i++)
+             System.out.print("*");
+        System.out.println();
+    
+        
+        
+        
+        
+        space = 4; 
+        star = 5; 
+        for (int i = 1; i <= 3 ; i++){
+            for (int j = 1; j<= space ; j++)
+                System.out.print(" ");
+                
+            space = space - 2;
+             
+            for (int j = 1; j<=star; j++)
+                System.out.print("*");
+            star = star + 4;
+            
+          System.out.println();
+            
+            
+        } 
+        System.out.println();
+        
+        space = 4; 
+        star = 5; 
+        for (int i = 1; i <= 3 ; i++){
+            for (int j = 1; j<= space ; j++)
+                System.out.print(" ");    
+            space = space - 2;
+             
+            for (int j = 1; j<=star; j++)
+                System.out.print("*");
+            star = star + 4;
+            
+            
+       System.out.println();
+        }
+        System.out.println("    *****");
+            
+            System.out.println("* | | | | | *");
+            System.out.println("* | | | | | *");
+            System.out.println("    *****");
+            System.out.println("    *****");
+            
+        
+     }
+   }
+
+318 	VGIGN 	VUYIW 	VGJB 	BJP4 Exercise 1.09: Egg 	Yes 	2018-10-01 20:48:39 	7 	
+
+public class Egg {
+	public static void main(String[] args) {
+        drawEgg();
+        drawUpDown();
+}
+        
+        
+       public static void drawEgg(){
+           System.out.println("  _______");
+           System.out.println(" /       \\");
+           System.out.println("/         \\");
+           System.out.println("-\"-'-\"-'-\"-");
+                              }
+                              
+        public static void drawUpDown(){
+               System.out.println("\\         /");
+               System.out.println(" \\_______/");
+              
+        }
+}
+
+319 	VGIGN 	VUYIW 	VGJB 	BJP4 Self-Check 1.12: DoubleSlash 	Yes 	2018-09-26 09:21:51 	7 	
+320 	VGIGN 	VUYIW 	VGJB 	BJP4 Self-Check 1.13: Sally 	Yes 	2018-09-30 13:30:20 	6 	
+
+System.out.println("\"Several slashes are sometimes seen,\"" );
+System.out.println("said Sally. \"I've said so.\" See? ");
+System.out.println("\\ / \\\\ // \\\\\\ ///");
+
+321 	VGIGN 	VUYIW 	VGJB 	BJP4 Self-Check 1.19: SecretMessage-errors 	No 	2018-09-30 13:34:36 	1 	
+
+public class SecretMessage {
+    public static void main(string[] args) {
+        System.out.print("Speak friend");
+        System.out.println("and enter");
+}
+
+322 	VGIGN 	VUYIW 	VGJB 	BJP4 Self-Check 1.02: binary1 	Yes 	2018-09-29 12:42:19 	2 	
+323 	VGIGN 	VUYIW 	VGJB 	BJP4 Self-Check 1.21: methodHeaderSyntax 	Yes 	2018-09-30 13:35:30 	1 	
+324 	VGIGN 	VUYIW 	VGJB 	BJP4 Self-Check 1.29: LotsOfErrors-errors 	No 	2018-09-30 13:40:33 	2 	
+
+public class LotsOfErrors {
+    public static void main(String[] args) {
+        System.out.println("Hello, world!");
+        message();
+    }
+
+    public static void message (
+        System.out.println("This program surely cannot ");
+        System.out.println("have any \"errors\" in it");
+    }
+
+325 	VGIGN 	VUYIW 	VGJB 	BJP4 Self-Check 1.03: binary2 	Yes 	2018-09-29 12:45:17 	1 	
+326 	VGIGN 	VUYIW 	VGJB 	BJP4 Self-Check 1.06: legalIdentifiers 	No 	2018-09-29 12:48:56 	1 	
+327 	VGIGN 	VUYIW 	VGJB 	BJP4 Self-Check 1.07: outputSyntax 	Yes 	2018-09-29 12:46:09 	1 	
+328 	VGIGN 	VUYIW 	VGJB 	BJP4 Self-Check 1.08: confounding 	No 	2018-10-17 08:11:27 	1 	
+329 	TCMKE 	GHE 	YKJHQ 	BJP4 Exercise 1.10: Egg2 	Yes 	2018-09-26 16:41:29 	8 	
+
+public class Egg2{
+    public static void main(String[] args){
+        top();
+        bottom();
+        line();
+        top();
+        bottom();
+        line();
+        bottom();
+        top();
+        line();
+        bottom();
+    }
+}
+
+public static void top(){
+        System.out.println("  _______");
+        System.out.println(" /       \\");
+        System.out.println("/         \\");
+}
+
+public static void bottom(){
+        System.out.println("\\         /");
+        System.out.println(" \\_______/");
+}
+
+public static void line(){
+        System.out.println("-\"-'-\"-'-\"-");
+}
+
+330 	TCMKE 	GHE 	YKJHQ 	BJP4 Exercise 1.14: Lanterns 	Yes 	2018-10-10 09:37:46 	7 	
+
+public class Lanterns {
+
+	public static void main(String[] args) {
+		top();
+		System.out.println();
+		top();
+		body();
+		bot();
+		top();
+		System.out.println();
+		top();
+		line();
+		body();
+		body();
+		line();
+		line();
+
+	}
+
+	private static void line() {
+		System.out.println("    *****");
+		
+	}
+
+	private static void bot() {
+		System.out.println("*************");
+		
+	}
+
+	private static void body() {
+		System.out.println("* | | | | | *");
+		
+	}
+
+	private static void top() {
+		System.out.println("    *****");
+		System.out.println("  *********");
+		System.out.println("*************");
+	}
+
+}
+
+331 	TCMKE 	GHE 	YKJHQ 	BJP4 Exercise 1.09: Egg 	Yes 	2018-09-26 16:22:14 	3 	
+
+public class Egg {
+    public static void main(String[] args) {
+		System.out.println("  _______");
+		System.out.println(" /       \\");
+		System.out.println("/         \\");
+		System.out.println("-\"-'-\"-'-\"-");
+		System.out.println("\\         /");
+		System.out.println(" \\_______/");
+    }
+}
+
+332 	TCMKE 	GHE 	YKJHQ 	BJP4 Self-Check 1.01: binaryNumbers 	Yes 	2018-09-24 18:55:49 	1 	
+333 	TCMKE 	GHE 	YKJHQ 	BJP4 Self-Check 1.10: Shaq 	Yes 	2018-09-26 16:00:47 	1 	
+334 	TCMKE 	GHE 	YKJHQ 	BJP4 Self-Check 1.11: downwardSpiral 	Yes 	2018-09-26 16:05:46 	3 	
+335 	TCMKE 	GHE 	YKJHQ 	BJP4 Self-Check 1.12: DoubleSlash 	Yes 	2018-09-26 09:12:35 	6 	
+336 	TCMKE 	GHE 	YKJHQ 	BJP4 Self-Check 1.13: Sally 	Yes 	2018-09-26 09:21:28 	4 	
+
+System.out.println("\"Several slashes are sometimes seen,\"");
+System.out.println("said Sally. \"I've said so.\" See?");
+System.out.println("\\ / \\\\ // \\\\\\ ///");
+
+337 	TCMKE 	GHE 	YKJHQ 	BJP4 Self-Check 1.19: SecretMessage-errors 	Yes 	2018-09-26 16:09:14 	4 	
+
+public class SecretMessage {
+    public static void main(String[] args) {
+        System.out.println("Speak friend");
+        System.out.println("and enter");
+    }
+}
+
+338 	TCMKE 	GHE 	YKJHQ 	BJP4 Self-Check 1.21: methodHeaderSyntax 	Yes 	2018-09-26 16:09:33 	1 	
+339 	TCMKE 	GHE 	YKJHQ 	BJP4 Self-Check 1.22: Tricky 	Yes 	2018-09-26 16:11:24 	1 	
+340 	TCMKE 	GHE 	YKJHQ 	BJP4 Self-Check 1.29: LotsOfErrors-errors 	Yes 	2018-09-26 16:17:21 	11 	
+
+public class LotsOfErrors {
+    public static void main(String[] args) {
+        System.out.println("Hello, world!");
+        message();
+    }
+    public static void message(){
+        System.out.println("This program surely cannot ");
+        System.out.println("have any \"errors\" in it");
+    }
+}
+
+341 	TCMKE 	GHE 	YKJHQ 	BJP4 Self-Check 1.03: binary2 	Yes 	2018-09-26 17:47:31 	4 	
+342 	TCMKE 	GHE 	YKJHQ 	BJP4 Self-Check 1.06: legalIdentifiers 	Yes 	2018-09-26 15:50:57 	4 	
+343 	TCMKE 	GHE 	YKJHQ 	BJP4 Self-Check 1.07: outputSyntax 	Yes 	2018-09-26 15:51:10 	1 	
+344 	TCMKE 	GHE 	YKJHQ 	BJP4 Self-Check 1.08: confounding 	Yes 	2018-09-26 15:53:26 	5 	
+345 	TCMKE 	GHE 	YKJHQ 	BJP4 Self-Check 1.09: Archie 	Yes 	2018-09-26 16:00:01

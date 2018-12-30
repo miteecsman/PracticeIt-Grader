@@ -1,0 +1,66 @@
+JFPP IALI AFWU #1 Attempted 11 of 11
+	Missing 0:
+	Failed 0: 
+	Extras 0: 
+
+XVAH MFTI HTMJ #2 Attempted 30 of 11
+	Missing 0:
+	Failed 1: Ex 1:10 
+	Extras 19: SC 1:1 SC 1:2 SC 1:5 SC 1:8 SC 1:9 SC 1:10 SC 1:11 SC 1:14 SC 1:15 SC 1:16 SC 1:17 SC 1:18 SC 1:23 SC 1:24 SC 1:25 SC 1:31 SC 1:32 Ex 1:15 Ex 1:16 
+
+HBYG WIJ HVGD #3 Attempted 11 of 11
+	Missing 0:
+	Failed 0: 
+	Extras 0: 
+
+RAIG BHFR MRUG #4 Attempted 11 of 11
+	Missing 0:
+	Failed 0: 
+	Extras 0: 
+
+AGLG AOMJ BGZQ #5 Attempted 11 of 11
+	Missing 0:
+	Failed 1: SC 1:6 
+	Extras 0: 
+
+ZSDO NATH IWBC #6 Attempted 11 of 11
+	Missing 0:
+	Failed 0: 
+	Extras 0: 
+
+CNIO JVWJ JCJE #7 Attempted 11 of 11
+	Missing 0:
+	Failed 0: 
+	Extras 0: 
+
+MRWS DAIV QOXJ #8 Attempted 14 of 11
+	Missing 0:
+	Failed 1: SC 1:6 
+	Extras 3: SC 1:1 SC 1:5 SC 1:8 
+
+ZHZE ADYG NWJL #9 Attempted 12 of 11
+	Missing 0:
+	Failed 3: SC 1:12 Ex 1:9 Ex 1:10 
+	Extras 1: Ex 1:14 
+
+MSBQ AVGW LTIF #10 Attempted 9 of 11
+	Missing 3:SC 1:21 SC 1:22 SC 1:29 
+	Failed 2: SC 1:6 SC 1:13 
+	Extras 1: Ex 1:14 
+
+VFJP UISB BVCU #11 Attempted 11 of 11
+	Missing 0:
+	Failed 1: SC 1:6 
+	Extras 0: 
+
+KAQI CCLP KIDA #12 Attempted 13 of 11
+	Missing 0:
+	Failed 0: 
+	Extras 2: SC 1:1 SC 1:2 
+
+RWZE CCRH IFC #13 Attempted 17 of 11
+	Missing 0:
+	Failed 0: 
+	Extras 6: SC 1:1 SC 1:8 SC 1:9 SC 1:10 SC 1:11 Ex 1:14 
+
+
