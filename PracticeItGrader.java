@@ -28,6 +28,8 @@ import java.security.MessageDigest;
  * Version 1.1 - 4/26/18 fixed chapter 3G -> 20, 11a/b/c -> 111/2/3
  * Version 1.2 - 5/29/18 added totals to Missing/Failed/Extras
  * Version 1.2.1 - 10/11/18 fixed first names with a single space in them "First Middle"
+ * Version 1.3 - 12/30/18 Split out Problem & Student into their own files & 
+ *                      changed static student & problem data structures to locals passed as parameters
  */
 public class PracticeItGrader {
     // Set to true to output diagnostic debugging info
