@@ -27,7 +27,7 @@ import java.security.MessageDigest;
  * Version 1.0 - 4/14/18 initial version
  * Version 1.1 - 4/26/18 fixed chapter 3G -> 20, 11a/b/c -> 111/2/3
  * Version 1.2 - 5/29/18 added totals to Missing/Failed/Extras
- * Version 1.2.1 - 10/11/18 fixed first names with a single space in them "Jae Hyeon"
+ * Version 1.2.1 - 10/11/18 fixed first names with a single space in them "First Middle"
  */
 public class PracticeItGrader {
     // Set to true to output diagnostic debugging info
@@ -59,7 +59,7 @@ public class PracticeItGrader {
      * printResults - prints the results from class members
      * 
      *
-     * andynou Andy Nou #15 Attempted 2 of 12
+     * username firstname Lastname #15 Attempted 2 of 12
      *   Missing: SC 10:16 SC 10:18 Ex 10:2 Ex 10:3 Ex 10:4 Ex 10:6 Ex 10:7 Ex 10:10 Ex 10:12 Ex 10:14 Ex 10:15 
      *   Failed: SC 10:8 
      *   Extras: SC 10:2 
