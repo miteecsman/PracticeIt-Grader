@@ -15,7 +15,7 @@ import java.time.*;
  * Version 1.3 - 12/30/18 Split out Problem & Student into their own files & 
  *                      changed static student & problem data structures to locals passed as parameters
  * Version 1.3.1 - 12/30/18 added ifEncrypt to scramble student usernames
- * Version 1.4 - 12/30/18 added dtDeadline to count problems by deadline
+ * Version 1.4 - 12/30/18 added date field to count problems by deadline
  *
  */
 class Problem implements Comparable<Problem> {
