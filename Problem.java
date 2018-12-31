@@ -1,7 +1,7 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
+import java.time.format.*;
+import java.time.*;
 
 /**
  * Class Problem
@@ -10,7 +10,12 @@ import java.util.Scanner;
  * 
  * See readProblemNumber for details on how to handle 3G or 11a
  * 
- * @author George
+ * @author George Hu
+ * 
+ * Version 1.3 - 12/30/18 Split out Problem & Student into their own files & 
+ *                      changed static student & problem data structures to locals passed as parameters
+ * Version 1.3.1 - 12/30/18 added ifEncrypt to scramble student usernames
+ * Version 1.4 - 12/30/18 added dtDeadline to count problems by deadline
  *
  */
 class Problem implements Comparable<Problem> {
@@ -18,16 +23,15 @@ class Problem implements Comparable<Problem> {
     int chapter; 
     int number;
     boolean ifCompleted;
+    LocalDateTime date;
 
-    // Set to true to output diagnostic debugging info
-    static boolean ifDebug = false;
-
-    public Problem(String type, int chapter, int number, boolean ifCompleted) {
+    public Problem(String type, int chapter, int number, boolean ifCompleted, LocalDateTime date) {
         super();
         this.type = type;
         this.chapter = chapter;
         this.number = number;
         this.ifCompleted = ifCompleted;
+        this.date = date;
     }
 
     public Problem(String type, int chapter, int number) {
@@ -55,6 +59,13 @@ class Problem implements Comparable<Problem> {
         this.number = number;
     }
 
+    public LocalDateTime getDate() {
+        return this.date;
+    }
+    
+    public void setDate(LocalDateTime date) {
+        this.date = date;
+    }
 
     public boolean isIfCompleted() {
         return ifCompleted;
@@ -129,7 +140,7 @@ class Problem implements Comparable<Problem> {
     public static int[] splitProblemNumber(String token) {
         int[] chapterVerse = new int[2];
         String[] problem = token.split("[ .:]+");
-        if (ifDebug)
+        if (PracticeItGrader.ifDebug)
             System.out.println(problem[0] + ":" + problem[1]);
         if (problem[0].length() == 2 && problem[0].charAt(1) == 'G') {
             // this must be Chapter 3G
@@ -203,8 +214,10 @@ class Problem implements Comparable<Problem> {
     public static ArrayList<Student> readProblems(ArrayList<Student> studentList) throws FileNotFoundException {
         boolean ifSkip = false;
         int problemNum = 0;
-        String results[];
+        String line; // raw line
+        String results[]; // split line
         String ignoredStudent = "";
+        PrintStream ps = null;
 
         // If no list of class members, must initialize this 
         Boolean ifClassList = studentList == null ? false : true;
@@ -218,6 +231,12 @@ class Problem implements Comparable<Problem> {
         }
         Scanner sc = new Scanner(f);
 
+        // If we're encrypting the student usernames, write the file out
+        if (PracticeItGrader.ifEncrypt) {
+            File fEncrypt = new File("Encrypted Results.txt");
+            ps = new PrintStream(fEncrypt);
+        }
+        
         while (sc.hasNextLine()) {
 
             // Get a line, or skip lines until a valid line is found
@@ -235,7 +254,7 @@ class Problem implements Comparable<Problem> {
                 //      0           1       2      3       4    5      6     7         8            9         10       11
                 // OR it could be code
 
-                String line = sc.nextLine();
+                line = sc.nextLine();
                 // System.out.println(line);               // debugging code to print every line
                 results = line.split("[\t ]+");
                 // Skip code lines or blank lines
@@ -252,6 +271,10 @@ class Problem implements Comparable<Problem> {
                         ifSkip = true;
                 } else
                     ifSkip = true;
+                
+                // If encrypting file, still need to output code lines
+                if (PracticeItGrader.ifEncrypt && ifSkip)
+                    ps.println(line);
             } while (ifSkip);
 
             // Split line into tokens
@@ -263,7 +286,15 @@ class Problem implements Comparable<Problem> {
             String lastName = results[2];
             String firstName = results[3];
             
-            // Some firstnames have a space in it such as "Jae Hyeon"
+            // if encrypting, output the line but replace student names with encrypted
+            if (PracticeItGrader.ifEncrypt) {
+                line = line.replace(username, Student.toHash(username));
+                line = line.replace(lastName, Student.toHash(lastName));
+                line = line.replace(firstName, Student.toHash(firstName));
+                ps.println(line);
+            }
+            
+            // Some firstnames have a space in it such as "Mary Jo"
             // This causes it to parse the name into two spots, so we will ignore the
             // second word and check that we find "BJP" in the next spot
             if (results[4].indexOf("BJP") != 0) {
@@ -294,16 +325,21 @@ class Problem implements Comparable<Problem> {
                 if (studentNum == -1) {
                     if (!s.getUserName().equalsIgnoreCase(ignoredStudent)) {
                         // Only print this once per ignored student
-                        if (ifDebug) System.out.println("Skipping " + s);
+                        if (PracticeItGrader.ifDebug) System.out.println("Skipping " + s);
                         ignoredStudent = s.getUserName();
                     }
                 } else
                     s = studentList.get(studentNum);
             }
 
+            // Get time problem was submitted
+            String dateTime = results[9] + " " + results[10];
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern ( "yyyy-MM-dd HH:mm:ss" , Locale.ENGLISH );
+            LocalDateTime date = LocalDateTime.parse(dateTime, formatter);
+            
             // Add problem to the student
             if (studentNum != -1) {
-                Problem p = new Problem(type, chapterVerse[0], chapterVerse[1], comp);
+                Problem p = new Problem(type, chapterVerse[0], chapterVerse[1], comp, date);
                 s.getProblems().add(p);
             }
 

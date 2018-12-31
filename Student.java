@@ -9,16 +9,16 @@ import java.util.Scanner;
  * 
  * This stores information for a PracticeIt student - username, first name, last name, list of problems
  * 
- * @author George
+ * @author George Hu
+ * 
+ * Version 1.3 - 12/30/18 Split out Problem & Student into their own files & 
+ *                      changed static student & problem data structures to locals passed as parameters
  */
 class Student {
     String userName;
     String firstName;
     String lastName;
     ArrayList<Problem> problems;
-
-    // Set to true to output diagnostic debugging info
-    static boolean ifDebug = false;
 
     public Student(String userName, String firstName, String lastName) {
         super();
@@ -113,7 +113,7 @@ class Student {
                     String results[] = line.split("[ ]+");
                     Student s = new Student(results[0], results[1], results[2]);
                     studentList.add(s);
-                    if (ifDebug) System.out.println("Found Student " + i++ + ":" + s);
+                    if (PracticeItGrader.ifDebug) System.out.println("Found Student " + i++ + ":" + s);
                 }
             }
         }

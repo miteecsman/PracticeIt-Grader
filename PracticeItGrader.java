@@ -1,6 +1,8 @@
 import java.util.*;
 import java.io.*;
 import java.security.MessageDigest;
+import java.time.format.*;
+import java.time.*;
 
 /**
  * 
@@ -27,14 +29,20 @@ import java.security.MessageDigest;
  * Version 1.0 - 4/14/18 initial version
  * Version 1.1 - 4/26/18 fixed chapter 3G -> 20, 11a/b/c -> 111/2/3
  * Version 1.2 - 5/29/18 added totals to Missing/Failed/Extras
- * Version 1.2.1 - 10/11/18 fixed first names with a single space in them "First Middle"
+ * Version 1.2.1 - 10/11/18 fixed first names with a single space in them e.g "Mary Jo"
  * Version 1.3 - 12/30/18 Split out Problem & Student into their own files & 
  *                      changed static student & problem data structures to locals passed as parameters
+ * Version 1.3.1 - 12/30/18 added ifEncrypt to scramble student usernames
+ * Version 1.4 - 12/30/18 added dtDeadline to count problems by deadline
  */
 public class PracticeItGrader {
     // Set to true to output diagnostic debugging info
     static boolean ifDebug = false;
-
+    // Set to true to change real student names (George) into hashed letters (AFLTZ)
+    static boolean ifEncrypt = false;
+    // Set to year,mo,day,h,m,s to calculate # of problems before that time
+    static LocalDateTime dtDeadline = null; // LocalDateTime.of(2018,9,30,0,0,0);
+    
     public static void main(String[] args) throws FileNotFoundException {
         // Problem class - type, number, time
         ArrayList<Problem> problemList = null;
@@ -60,6 +68,9 @@ public class PracticeItGrader {
     /**
      * printResults - prints the results from class members
      * 
+     * @param ifClassList - if false, just print the list of students
+     * @param problemList - list of problems done by student
+     * @param studentList - list of students
      *
      * username firstname Lastname #15 Attempted 2 of 12
      *   Missing: SC 10:16 SC 10:18 Ex 10:2 Ex 10:3 Ex 10:4 Ex 10:6 Ex 10:7 Ex 10:10 Ex 10:12 Ex 10:14 Ex 10:15 
@@ -70,21 +81,24 @@ public class PracticeItGrader {
         // Output class list
         int iStudent = 1;
         for (Student s : studentList) {
-            System.out.printf("%s %s %s #%d Attempted %d of %d\n", 
-                    s.getUserName(), s.getFirstName(), s.getLastName(), iStudent++, 
-                    s.getProblems() != null ? s.getProblems().size() : 0, 
-                            problemList != null ? problemList.size() : 0);
+            // Always print out the student usernames, if no class list this is all we'll do
+            if (ifEncrypt)
+                // Print encrypted names to hide student info when sharing samples
+                System.out.printf("%s %s %s #%d Attempted %d of %d\n", 
+                        Student.toHash(s.getUserName()), Student.toHash(s.getFirstName()), Student.toHash(s.getLastName()), iStudent++, 
+                        s.getProblems() != null ? s.getProblems().size() : 0, 
+                                problemList != null ? problemList.size() : 0);
+            else
+                System.out.printf("%s %s %s #%d Attempted %d of %d\n", 
+                        s.getUserName(), s.getFirstName(), s.getLastName(), iStudent++, 
+                        s.getProblems() != null ? s.getProblems().size() : 0, 
+                                problemList != null ? problemList.size() : 0);
 
             // Only print problems if we already have the class list
-            //   otherwise we should just print the students names for use in filtering
             if (ifClassList) {
                 ArrayList<Problem> assigned = (ArrayList<Problem>) problemList.clone();
                 ArrayList<Problem> extras = new ArrayList<Problem>();
                 ArrayList<Problem> failed = new ArrayList<Problem>();
-
-
-                // type starts empty, detect changes
-                //                                String type = "";
 
                 // Process each problem for printing
                 for (int iProblem = 0; iProblem<s.getProblems().size(); iProblem++) {
@@ -107,7 +121,7 @@ public class PracticeItGrader {
                 Collections.sort(failed);
                 Collections.sort(extras);
 
-                // Print "Missing SC 1.2", "Extras: Ex 3.4"
+                // Print "Missing SC 1.2", "Failed: SC 2.3", "Extras: Ex 3.4"
                 System.out.printf("\tMissing %d:", assigned.size());
                 for (Problem p: assigned)
                     System.out.printf(p.toString());
@@ -120,6 +134,18 @@ public class PracticeItGrader {
                 for (Problem p: extras)
                     System.out.printf(p.toString());
                 System.out.println();
+                
+                // Determine how many completed by deadline
+                if (dtDeadline != null) {
+                    ArrayList<Problem> probsByDate= (ArrayList<Problem>)(s.getProblems().clone());
+                    Collections.sort(probsByDate, new Sortproblembytime());
+                    LocalDateTime dt = LocalDateTime.of(2018,9,30,0,0,0);
+                    int count = 0;
+                    for (Problem p: probsByDate)
+                        if (p.getDate().compareTo(dt) < 0)
+                            count++;
+                    System.out.println(count + " problems completed before " + dt.toString());
+                }
             }
 
             // newline for each student
@@ -129,6 +155,24 @@ public class PracticeItGrader {
         System.out.println();
     }
 }
+
+/**
+ * Comparator to sort problems by time instead of the default chapter:verse
+ */
+class Sortproblembytime implements Comparator<Problem> 
+{ 
+    // Used for sorting in ascending order of time
+    @Override
+    public int compare(Problem a, Problem b) 
+    {
+        if (a.getDate() == null)
+            return -1;
+        else if (b.getDate() == null)
+            return 1;
+        else
+            return a.getDate().compareTo(b.getDate());
+    } 
+} 
 
 
 
