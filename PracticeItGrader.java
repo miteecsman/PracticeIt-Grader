@@ -34,6 +34,7 @@ import java.time.*;
  *                      changed static student & problem data structures to locals passed as parameters
  * Version 1.3.1 - 12/30/18 added ifEncrypt to scramble student usernames
  * Version 1.4 - 12/30/18 added dtDeadline to count problems by deadline
+ * Version 1.4.1 - 2/10/19 dtDeadline only counts assigned & drops "T<HH:MM:SS>" 
  */
 public class PracticeItGrader {
     // Set to true to output diagnostic debugging info
@@ -41,7 +42,7 @@ public class PracticeItGrader {
     // Set to true to change real student names (George) into hashed letters (AFLTZ)
     static boolean ifEncrypt = false;
     // Set to year,mo,day,h,m,s to calculate # of problems before that time
-    static LocalDateTime dtDeadline = null; // LocalDateTime.of(2018,9,30,0,0,0);
+    static LocalDateTime dtDeadline = null; // LocalDateTime.of(2019,1,20,23,59,59);
     
     public static void main(String[] args) throws FileNotFoundException {
         // Problem class - type, number, time
@@ -100,12 +101,20 @@ public class PracticeItGrader {
                 ArrayList<Problem> extras = new ArrayList<Problem>();
                 ArrayList<Problem> failed = new ArrayList<Problem>();
 
+                int countAttemptByDeadline = 0;
+                
                 // Process each problem for printing
                 for (int iProblem = 0; iProblem<s.getProblems().size(); iProblem++) {
                     Problem p = s.getProblems().get(iProblem);
 
                     int iRemove = -1;
                     if (assigned != null && (iRemove = assigned.indexOf(p)) != -1) {
+                        // Problem is on the assigned list
+                        // check if it's done by deadline
+                        if (dtDeadline != null && p.date.compareTo(dtDeadline) <= 0) {
+                            countAttemptByDeadline++;
+                        }
+                        
                         if (!p.isIfCompleted())
                             failed.add(p);
                         // remove it from list of assigned problems
@@ -135,16 +144,11 @@ public class PracticeItGrader {
                     System.out.printf(p.toString());
                 System.out.println();
                 
-                // Determine how many completed by deadline
+                // Print how many completed by deadline
                 if (dtDeadline != null) {
-                    ArrayList<Problem> probsByDate= (ArrayList<Problem>)(s.getProblems().clone());
-                    Collections.sort(probsByDate, new Sortproblembytime());
-                    LocalDateTime dt = LocalDateTime.of(2018,9,30,0,0,0);
-                    int count = 0;
-                    for (Problem p: probsByDate)
-                        if (p.getDate().compareTo(dt) < 0)
-                            count++;
-                    System.out.println(count + " problems completed before " + dt.toString());
+                    System.out.println("\t" + countAttemptByDeadline + 
+                            " assigned attempted before " + 
+                            dtDeadline.toString().substring(0,10));
                 }
             }
 
