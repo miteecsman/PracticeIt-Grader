@@ -99,7 +99,10 @@ class Student {
      */
     public static ArrayList<Student> readStudents() throws FileNotFoundException {
         ArrayList<Student> studentList = null;
-        
+        if (PracticeItGrader.ifDebug) {
+            System.out.println("readStudents Begin");
+        }
+
         // If "Student Usernames.txt" file exists, load it
         File fStudents = new File("Student Usernames.txt");
         Boolean ifClassList = fStudents.canRead();
@@ -116,6 +119,9 @@ class Student {
                     if (PracticeItGrader.ifDebug) System.out.println("Found Student " + i++ + ":" + s);
                 }
             }
+        }
+        if (PracticeItGrader.ifDebug) {
+            System.out.println("readStudents End");
         }
         return studentList;
 

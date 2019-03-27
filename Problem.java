@@ -140,8 +140,6 @@ class Problem implements Comparable<Problem> {
     public static int[] splitProblemNumber(String token) {
         int[] chapterVerse = new int[2];
         String[] problem = token.split("[ .:]+");
-        if (PracticeItGrader.ifDebug)
-            System.out.println(problem[0] + ":" + problem[1]);
         if (problem[0].length() == 2 && problem[0].charAt(1) == 'G') {
             // this must be Chapter 3G
             // Currently chapters can only be integers, so assign it chapter 20
@@ -216,9 +214,16 @@ class Problem implements Comparable<Problem> {
         int problemNum = 0;
         String line; // raw line
         String results[]; // split line
-        String ignoredStudent = "";
+        String ignoredStudent = "";   // debug only
         PrintStream ps = null;
+        String currentPIType = null;
 
+        if (PracticeItGrader.ifDebug) {
+            System.out.println();
+            System.out.println("readProblems Begin");
+        }
+
+        
         // If no list of class members, must initialize this 
         Boolean ifClassList = studentList == null ? false : true;
         if (studentList == null)
@@ -246,8 +251,13 @@ class Problem implements Comparable<Problem> {
                 //    System.out.println("we're here!!!");
                 
                 // We could be skipping code lines when the file ends
-                if (!sc.hasNextLine())
+                if (!sc.hasNextLine()) {
+                    if (PracticeItGrader.ifDebug) {
+                        System.out.println();
+                        System.out.println("readProblems End");
+                    }
                     return studentList;
+                }
 
                 // Format of line
                 // <problem#> <username> <last> <first> <book PIType number name> <completed> <2018-04-04 22:18:01> <tries>
@@ -321,16 +331,35 @@ class Problem implements Comparable<Problem> {
                     // Build Class List if not supplied
                     studentList.add(s);
             } else {
-                // This may be a student who is no longer in the class list
-                if (studentNum == -1) {
-                    if (!s.getUserName().equalsIgnoreCase(ignoredStudent)) {
-                        // Only print this once per ignored student
-                        if (PracticeItGrader.ifDebug) System.out.println("Skipping " + s);
-                        ignoredStudent = s.getUserName();
-                    }
-                } else
+                // Print student's name once, skip repeats
+                if (PracticeItGrader.ifDebug && !s.getUserName().equalsIgnoreCase(ignoredStudent)) {
+                    if (ignoredStudent.length() != 0)
+                        // No need for line break after problems if this is the first student 
+                        System.out.println();
+                    System.out.println((studentNum == -1 ? "Skipping " : "Starting ") + s);
+                    // We don't want to see this student name anymore
+                    ignoredStudent = s.getUserName(); 
+                    // reset problem type for correct linebreaks
+                    currentPIType = null; 
+                }
+                if (studentNum != -1)
+                    // Find existing student record
                     s = studentList.get(studentNum);
             }
+
+            // Print problem numbers
+            if (PracticeItGrader.ifDebug) {
+                // currentPIType should be null for each new student, set for each type
+                // Newline between two types
+                if (currentPIType != null && !currentPIType.equalsIgnoreCase(type))
+                    System.out.println();
+                // Print type for each new type
+                if (currentPIType == null || !currentPIType.equalsIgnoreCase(type))
+                    System.out.print(type + " ");
+                System.out.print(chapterVerse[0] + ":" + chapterVerse[1] + " ");
+                currentPIType = type;
+                }
+
 
             // Get time problem was submitted
             String dateTime = results[9] + " " + results[10];
@@ -344,6 +373,11 @@ class Problem implements Comparable<Problem> {
             }
 
         }
+        if (PracticeItGrader.ifDebug) {
+            System.out.println();
+            System.out.println("readProblems End");
+        }
+
         return studentList;     // in case it was null to being with
     }
 

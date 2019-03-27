@@ -81,6 +81,12 @@ public class PracticeItGrader {
     public static void printResults(Boolean ifClassList, ArrayList<Problem> problemList, ArrayList<Student> studentList) {
         // Output class list
         int iStudent = 1;
+        
+        if (ifDebug) {
+            System.out.println();
+            System.out.println("printResults Begin");
+        }
+        
         for (Student s : studentList) {
             // Always print out the student usernames, if no class list this is all we'll do
             System.out.printf("%s %s %s #%d ", 
@@ -158,7 +164,10 @@ public class PracticeItGrader {
             System.out.println();
 
         }
-        System.out.println();
+        
+        if (ifDebug) {
+            System.out.println("printResults End");
+        }
     }
 }
 
