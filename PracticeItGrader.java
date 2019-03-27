@@ -83,17 +83,12 @@ public class PracticeItGrader {
         int iStudent = 1;
         for (Student s : studentList) {
             // Always print out the student usernames, if no class list this is all we'll do
-            if (ifEncrypt)
-                // Print encrypted names to hide student info when sharing samples
-                System.out.printf("%s %s %s #%d Attempted %d of %d\n", 
-                        Student.toHash(s.getUserName()), Student.toHash(s.getFirstName()), Student.toHash(s.getLastName()), iStudent++, 
-                        s.getProblems() != null ? s.getProblems().size() : 0, 
-                                problemList != null ? problemList.size() : 0);
-            else
-                System.out.printf("%s %s %s #%d Attempted %d of %d\n", 
-                        s.getUserName(), s.getFirstName(), s.getLastName(), iStudent++, 
-                        s.getProblems() != null ? s.getProblems().size() : 0, 
-                                problemList != null ? problemList.size() : 0);
+            System.out.printf("%s %s %s #%d ", 
+                    // Print encrypted names to hide student info when sharing samples
+                    ifEncrypt ? Student.toHash(s.getUserName()) : s.getUserName(), 
+                    ifEncrypt ? Student.toHash(s.getFirstName()) : s.getFirstName(), 
+                    ifEncrypt ? Student.toHash(s.getLastName()) : s.getLastName(), 
+                    iStudent++); 
 
             // Only print problems if we already have the class list
             if (ifClassList) {
@@ -125,6 +120,10 @@ public class PracticeItGrader {
                     }
 
                 }
+                
+                // Continue Print # attemped out of assigned, but don't count any extras
+                System.out.printf("Attempted %d of %d assigned\n", 
+                        s.getProblems().size() - extras.size(), problemList.size());
 
                 Collections.sort(assigned);
                 Collections.sort(failed);
@@ -150,7 +149,10 @@ public class PracticeItGrader {
                             " assigned attempted before " + 
                             dtDeadline.toString().substring(0,10));
                 }
-            }
+            } // end if Classlist
+            else
+                // print class members on separate lines
+                System.out.println();
 
             // newline for each student
             System.out.println();
