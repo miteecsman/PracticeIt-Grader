@@ -16,6 +16,7 @@ import java.time.*;
  *                      changed static student & problem data structures to locals passed as parameters
  * Version 1.3.1 - 12/30/18 added ifEncrypt to scramble student usernames
  * Version 1.4 - 12/30/18 added date field to count problems by deadline
+ * Version 1.5 - 9/30/19 changed from using TXT scraping to CSV file due to PracticeIt changes
  *
  */
 class Problem implements Comparable<Problem> {
@@ -62,7 +63,7 @@ class Problem implements Comparable<Problem> {
     public LocalDateTime getDate() {
         return this.date;
     }
-    
+
     public void setDate(LocalDateTime date) {
         this.date = date;
     }
@@ -202,35 +203,81 @@ class Problem implements Comparable<Problem> {
     }
 
     /**
+     * Strips the "" from around a quoted string from a CSV file
+     * 
+     * @param quoted - "Hello"
+     * @return Hello
+     */
+    public static String stripQuotes(String quoted) {
+        if (PracticeItGrader.ifDebug && 
+                (quoted.charAt(0) != '"' || quoted.charAt(quoted.length()-1) != '"'))
+            System.out.printf("stripQuotes - encountered %s but expected quotes around it", quoted);
+        return quoted.substring(1, quoted.length()-1);
+    }
+
+    public static enum CSV {USER, LAST, FIRST, PROBLEM, SOLVED, DATETIME, TRIES, CODE} 
+
+    /**
+     * Splits the PracticeIt Problem combined descriptor into separate fields
+     * 
+     * CSV gives us whole "BJP4 Exercise 8.07: addTimeSpan" which needs to be split out
+     *                       0       1      2        3
+     * 
+     * @param results - array of CSV fields, 4th item contains the problem description
+     * @param chapterVerse - modified here to hold the chapter & problem number
+     * @return String with Exercise/Self-Check
+     */
+    public static String splitPIProblem(String results[], int[] chapterVerse) {
+        // Field PROBLEM needs to be split up
+        // CSV gives us whole "BJP4 Exercise 8.07: addTimeSpan" which needs to be split out
+        //                      0       1      2        3
+        String piTypeCombined = results[CSV.PROBLEM.ordinal()];
+        String[] piTypes = piTypeCombined.split("[ ]+");
+
+        // Validate problem format
+        if (piTypes.length != 4 ||
+                !piTypes[0].substring(0, 3).equals("BJP") ||
+                (!(piTypes[1].equals("Exercise") || piTypes[1].equals("Self-Check"))))
+            System.out.printf("readProblems unexpected problem format: %s\n", piTypeCombined);
+
+        // Problem Subfield 2: Split 1:10 into 1 and 10
+        int[] chapterVerseTemp = Problem.splitProblemNumber(piTypes[2]);
+        System.arraycopy(chapterVerseTemp, 0, chapterVerse, 0, chapterVerseTemp.length);
+
+        // Problem Subfield 0: We ignore BJPX field
+        // Problem Subfield 3: We ignore problem name for now
+        // Problem Subfield 1: Exercise or Self-Check
+        return piTypes[1];
+    }
+    
+    /**
      * readProblems - reads all problems from PracticeIt student results, stores into class arrays
      * 
-     * Format of line
-     * <problem#> <username> <last> <first> <book PIType number name> <completed> <2018-04-04 22:18:01> <tries>
-     *     0           1       2      3       4    5      6     7         8            9         10       11
-     *  OR it could be code
+     * Format of header line
+     *        "Username","Last","First","Problem","Solved?","Date/Time","Tries","Solution Code"
+     *             0        1      2        3         4         5          6         7
+     *        "abcmoney6","Doe","John","BJP4 Exercise 8.07: addTimeSpan","No","2019-09-25 16:45:33","1","//test code"
+     * After header is usually code lines which are skipped
      */
     public static ArrayList<Student> readProblems(ArrayList<Student> studentList) throws FileNotFoundException {
         boolean ifSkip = false;
-        int problemNum = 0;
+        int problemNum = 1;
         String line; // raw line
         String results[]; // split line
         String ignoredStudent = "";   // debug only
         PrintStream ps = null;
-        String currentPIType = null;
 
         if (PracticeItGrader.ifDebug) {
             System.out.println();
             System.out.println("readProblems Begin");
         }
 
-        
         // If no list of class members, must initialize this 
         Boolean ifClassList = studentList == null ? false : true;
         if (studentList == null)
             studentList = new ArrayList<Student>();
-        
-        // Read PracticeIt results into structures
-        File f = new File("PracticeIt Results Raw.txt");
+
+        File f = new File("practice-it.csv");
         if (!f.canRead()) {
             System.out.println("Can't find file");
         }
@@ -241,90 +288,104 @@ class Problem implements Comparable<Problem> {
             File fEncrypt = new File("Encrypted Results.txt");
             ps = new PrintStream(fEncrypt);
         }
-        
-        while (sc.hasNextLine()) {
 
-            // Get a line, or skip lines until a valid line is found
-            do {
-                // debugging help - put the item item # here and set breakpoint 
-                // if (problemNum == 111)
-                //    System.out.println("we're here!!!");
-                
-                // We could be skipping code lines when the file ends
-                if (!sc.hasNextLine()) {
-                    if (PracticeItGrader.ifDebug) {
-                        System.out.println();
-                        System.out.println("readProblems End");
+        // get headers & verify
+        line = sc.nextLine(); 
+        results = line.split("[,]+");
+        if (results.length != 8 || 
+                !stripQuotes(results[CSV.USER.ordinal()]).equals("Username") ||
+                !stripQuotes(results[CSV.LAST.ordinal()]).equals("Last") ||
+                !stripQuotes(results[CSV.CODE.ordinal()]).equals("Solution Code"))
+            System.out.printf("readProblems expected first line to be headers but found %s",line);
+
+        // Loop through all lines
+        while (sc.hasNextLine()) {
+            ///////////////////////////////////////////////////////
+            // Read lines, discard code lines 
+            ///////////////////////////////////////////////////////
+
+            line = sc.nextLine();
+            // debugging help - put the item item # here and set breakpoint 
+//            if (problemNum == 246)
+//             System.out.println(line);               
+
+            // If we're in code, need to skip lines.
+            if (ifSkip) {
+                // Line could be blank
+                if (line.length() != 0) {
+                    //   Code ends with a line ending in a single quote
+                    if (line.charAt(line.length()-1) == '"' &&
+                            line.charAt(line.length()-2) != '"') {
+                        ifSkip = false;
                     }
-                    return studentList;
                 }
 
-                // Format of line
-                // <problem#> <username> <last> <first> <book PIType number name> <completed> <2018-04-04 22:18:01> <tries>
-                //      0           1       2      3       4    5      6     7         8            9         10       11
-                // OR it could be code
-
-                line = sc.nextLine();
-                // System.out.println(line);               // debugging code to print every line
-                results = line.split("[\t ]+");
-                // Skip code lines or blank lines
-                // if line is just \t it returns a zero length array
-                if (results.length != 0) {
-                    // check if this is code 
-                    Scanner scTemp = new Scanner(results[0]);
-                    // it needs to start with digit in col 0 & be the next problem number
-                    if (results[0].length() != 0 && Character.isDigit(results[0].charAt(0)) && scTemp.hasNextInt() && scTemp.nextInt() == problemNum + 1)
-                        // next problem
-                        ifSkip = false;
-                    else
-                        // in code
-                        ifSkip = true;
-                } else
-                    ifSkip = true;
-                
                 // If encrypting file, still need to output code lines
                 if (PracticeItGrader.ifEncrypt && ifSkip)
                     ps.println(line);
-            } while (ifSkip);
 
-            // Split line into tokens
-            // <problem#> <username> <last> <first> <book PIType number name> <completed> <2018-04-04 22:18:01> <tries>
-            //      0           1       2      3       4    5      6     7         8            9         10       11
-            problemNum = Integer.parseInt(results[0]);
-
-            String username = results[1];
-            String lastName = results[2];
-            String firstName = results[3];
+                continue;
+            }
             
+            // Print out each problem header
+            if (PracticeItGrader.ifDebug)
+                System.out.printf("%d, %s\n", problemNum, line);
+            
+            // Code starts by ending a line without a single quote
+            if (line.charAt(line.length()-1) != '"' 
+                    //   except for the weird case where it just has a single quote to open the code on next line
+                    //   which we can identify by a comma right before the quote
+                    || line.charAt(line.length()-2) == ',' )
+                ifSkip = true;
+            problemNum++;
+
+            ///////////////////////////////////////////////////////
+            // Split header into fields needed to construct Student & Problem 
+            ///////////////////////////////////////////////////////
+
+            // Format of line
+            // 
+            // This is the new CSV format that we are given
+            // "Username","Last","First","Problem","Solved?","Date/Time","Tries","Solution Code"
+            // New  0        1      2        3         4         5          6         7
+            // "abcmoney6","Doe","John","BJP4 Exercise 8.07: addTimeSpan","No","2019-09-25 16:45:33","1","//test code"
+
+            // Split header into fields and strip quotes
+            results = line.split("[,]+");
+            for (int index = CSV.USER.ordinal(); index < CSV.CODE.ordinal(); index++)
+                results[index] = stripQuotes(results[index]);
+
+            // Field USER, LAST, FIRST used directly
+            String userName = results[CSV.USER.ordinal()];
+            String lastName = results[CSV.LAST.ordinal()];
+            String firstName = results[CSV.FIRST.ordinal()];
+
             // if encrypting, output the line but replace student names with encrypted
             if (PracticeItGrader.ifEncrypt) {
-                line = line.replace(username, Student.toHash(username));
+                line = line.replace(userName, Student.toHash(userName));
                 line = line.replace(lastName, Student.toHash(lastName));
                 line = line.replace(firstName, Student.toHash(firstName));
                 ps.println(line);
             }
-            
-            // Some firstnames have a space in it such as "Mary Jo"
-            // This causes it to parse the name into two spots, so we will ignore the
-            // second word and check that we find "BJP" in the next spot
-            if (results[4].indexOf("BJP") != 0) {
-                if (results[5].indexOf("BJP") != 0)
-                    System.out.println("ERROR - can't parse entry " + problemNum);
-                
-                // We need to slide results 5.. back to 4..
-                for (int x = 5; x <= 11; x++)
-                    results[x-1] = results[x];
-            }
-            
-            String type = results[5];
-            //                        String problemName = results[7];
-            Boolean comp = (results[8].toUpperCase().charAt(0) == 'Y');
 
-            // Split 1:10 into 1 and 10
-            int[] chapterVerse = Problem.splitProblemNumber(results[6]);
+            int[] chapterVerse = new int[2];
+            String type = splitPIProblem(results, chapterVerse);
+
+            // Field SOLVED is either Y or N
+            Boolean comp = results[CSV.SOLVED.ordinal()].toUpperCase().charAt(0) == 'Y';
+
+            // Field DATETIME, TRIES, CODE unused at this time
+            // Eventually we should examine DATETIME to find average time taken & unusual times
+            
+            ///////////////////////////////////////////////////////
+            // Done reading the file, now creating data structures 
+            ///////////////////////////////////////////////////////
+            
+            // heavy debugging - print out parsed fields
+            // System.out.printf("user=%s, first=%s, last=%s, type=%s, chapter=%d, verse=%d, solved=%b\n", userName, firstName, lastName, type, chapterVerse[0], chapterVerse[1], comp);
 
             // build or lookup the student
-            Student s = new Student(username, firstName, lastName);
+            Student s = new Student(userName, firstName, lastName);
             int studentNum = studentList.indexOf(s);
             if (!ifClassList) {
                 if (studentNum == -1)
@@ -340,32 +401,17 @@ class Problem implements Comparable<Problem> {
                     // We don't want to see this student name anymore
                     ignoredStudent = s.getUserName(); 
                     // reset problem type for correct linebreaks
-                    currentPIType = null; 
+                    // currentPIType = null; see below for old usage 
                 }
                 if (studentNum != -1)
                     // Find existing student record
                     s = studentList.get(studentNum);
             }
-
-            // Print problem numbers
-            if (PracticeItGrader.ifDebug) {
-                // currentPIType should be null for each new student, set for each type
-                // Newline between two types
-                if (currentPIType != null && !currentPIType.equalsIgnoreCase(type))
-                    System.out.println();
-                // Print type for each new type
-                if (currentPIType == null || !currentPIType.equalsIgnoreCase(type))
-                    System.out.print(type + " ");
-                System.out.print(chapterVerse[0] + ":" + chapterVerse[1] + " ");
-                currentPIType = type;
-                }
-
-
-            // Get time problem was submitted
-            String dateTime = results[9] + " " + results[10];
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern ( "yyyy-MM-dd HH:mm:ss" , Locale.ENGLISH );
-            LocalDateTime date = LocalDateTime.parse(dateTime, formatter);
             
+            // Get time problem was submitted
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern ( "yyyy-MM-dd HH:mm:ss" , Locale.ENGLISH );
+            LocalDateTime date = LocalDateTime.parse(results[CSV.DATETIME.ordinal()], formatter);
+
             // Add problem to the student
             if (studentNum != -1) {
                 Problem p = new Problem(type, chapterVerse[0], chapterVerse[1], comp, date);
@@ -380,7 +426,8 @@ class Problem implements Comparable<Problem> {
 
         return studentList;     // in case it was null to being with
     }
-
-
 }
+    
+
+
 
