@@ -13,12 +13,15 @@ import java.util.Scanner;
  * 
  * Version 1.3 - 12/30/18 Split out Problem & Student into their own files & 
  *                      changed static student & problem data structures to locals passed as parameters
+ * Version 1.5.3 - 4/16/20 - Handle names with multiple words by adding "billy bob" around them in student usernames.txt
+ * Version 2.0 - 5/30/20 added cheat checks for tries, times, code hash, red flags
  */
 class Student {
     String userName;
     String firstName;
     String lastName;
     ArrayList<Problem> problems;
+    int cheatingIndex;  // Count of possible cheating signs
 
     public Student(String userName, String firstName, String lastName) {
         super();
@@ -58,6 +61,14 @@ class Student {
 
     public void setProblems(ArrayList<Problem> problems) {
         this.problems = problems;
+    }
+
+    public int getCheatingIndex() {
+        return this.cheatingIndex;
+    }
+
+    public void setCheatingIndex(int cheatingIndex) {
+        this.cheatingIndex = cheatingIndex;
     }
 
     @Override
@@ -113,7 +124,18 @@ class Student {
             while (sc.hasNextLine()) {
                 String line = sc.nextLine();
                 if (line.length() != 0) {
-                    String results[] = line.split("[ ]+");
+                    Scanner scLine = new Scanner(line);
+                    // Handle names with more than one word - put quotes around them in student usernames.txt
+                    // found this regex online to allow quoted strings
+                    String results[] = new String[5];
+                    String rx = "[^\"\\s]+|\"(\\\\.|[^\\\\\"])*\"";
+                    // find each quoted / non-quoted word
+                    for (int index = 0; index < results.length; index++) {
+                        results[index] = scLine.findInLine(rx);
+                        // strip the quotes off if needed
+                        if (results[index] != null && results[index].charAt(0) == '"')
+                            results[index] = Problem.stripQuotes(results[index]);
+                    }
                     Student s = new Student(results[0], results[1], results[2]);
                     studentList.add(s);
                     if (PracticeItGrader.ifDebug) System.out.println("Found Student " + i++ + ":" + s);

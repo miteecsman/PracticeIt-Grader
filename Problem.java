@@ -17,15 +17,42 @@ import java.time.*;
  * Version 1.3.1 - 12/30/18 added ifEncrypt to scramble student usernames
  * Version 1.4 - 12/30/18 added date field to count problems by deadline
  * Version 1.5 - 9/30/19 changed from using TXT scraping to CSV file due to PracticeIt changes
- *
+ * Version 2.0 - 5/30/20 added cheat checks for tries, times, code hash, red flags
+ * 
+ * Problem is used in several situations
+ *   When reading a list of assigned problems it fills the type/chapter/number fields
+ *     It will also check for a cheaters file and fill in the codeHash & redFlag
+ *     
+ *   When reading student problems it fills in all fields
+ *     Student HAS-A list of Problems
+ *     It will record single Map entries for the student's tries, codeHash
+ *     
+ *   When printing out the problems it will do analysis across all students and
+ *     fill the problem Maps with all student codeHash (as well as known cheaters)
+ *     and list of tries and times.
+ * 
  */
 class Problem implements Comparable<Problem> {
-    String type;
-    int chapter; 
-    int number;
-    boolean ifCompleted;
-    LocalDateTime date;
+    private String type; // Must be "Self-Check" or will be interpreted to be "Exercise"
+    private int chapter; // Chapter in BJP 
+    private int number; // Problem number in BJP chapter
+    private boolean ifCompleted; // Successfully completed
+    private LocalDateTime date; // timestamp when completed
+    private Map<String, Integer> tries; // map of userName -> number of attempts on problem
+    private Map<String, Integer> codeHash; // map of userName -> hash value of problem
+    private Map<String, Long> times; // map of userName -> seconds to do problem
+    private String redFlag; // code that's a red flag for cheating
 
+    /**
+     * Full constructor with most all fields
+     *  Maps are created blank
+     *  
+     * @param type
+     * @param chapter
+     * @param number
+     * @param ifCompleted
+     * @param date
+     */
     public Problem(String type, int chapter, int number, boolean ifCompleted, LocalDateTime date) {
         super();
         this.type = type;
@@ -33,14 +60,24 @@ class Problem implements Comparable<Problem> {
         this.number = number;
         this.ifCompleted = ifCompleted;
         this.date = date;
+        this.tries = new HashMap<String, Integer>();
+        this.codeHash = new HashMap<String, Integer>();
+        this.times = new HashMap<String, Long>();
+        this.redFlag = null;
     }
 
+    /**
+     * Simple constructor used for just reading problem definitions
+     *   and not student problem completions
+     *   
+     * @param type
+     * @param chapter
+     * @param number
+     */
     public Problem(String type, int chapter, int number) {
-        super();
-        this.type = type;
-        this.chapter = chapter;
-        this.number = number;
+        this(type, chapter, number, false, LocalDateTime.now());
     }
+    
     public String getType() {
         return type;
     }
@@ -74,6 +111,27 @@ class Problem implements Comparable<Problem> {
     public void setIfCompleted(boolean ifCompleted) {
         this.ifCompleted = ifCompleted;
     }
+    
+    public Map<String, Integer>getTries() {
+        return this.tries;
+    }
+
+    public Map<String, Integer> getCodeHash() {
+        return this.codeHash;
+    }
+
+    public Map<String, Long> getTimes() {
+        return this.times;
+    }
+
+    public String getRedFlag() {
+        return this.redFlag;
+    }
+
+    public void setRedFlag(String redFlag) {
+        this.redFlag = redFlag;
+    }
+
     @Override
     public String toString() {
         if (type.equals("Self-Check")) 
@@ -199,6 +257,80 @@ class Problem implements Comparable<Problem> {
             } while (token != null);
             // go back to next problem type or end
         }
+        
+        ////////////////////////////////////////////////////////////////////
+        // Read file of cheater problems
+        //
+        // Cheaters.txt
+        //
+        // **userName Exercise 12:18 result.lastIndexOf
+        // public static void waysToClimb(int n) {
+        //     waysToClimb(n, 0, "[");
+        // }
+        //
+        // ** flags beginning of line
+        // last single token (no whitespace) is a red flag for cheaters
+        // code will continue until next ** at head of line
+        ////////////////////////////////////////////////////////////////////
+        File fCheaters = new File("Cheaters.txt");
+        if (fCheaters.canRead()) {
+            Scanner scCheaters = new Scanner (fCheaters);
+            String type = null;
+            int[] chapterVerse = null; // Used as flag for reading code
+            String userName = null;
+            int codeHash = 0;
+            String redFlag = null;
+            while (scCheaters.hasNextLine()) {
+                String line = scCheaters.nextLine();
+
+                //////////////////////////////////////////////////////////////
+                // Starting New Problem 
+                //   "**" <username> <Exercise | Self-Check> <Chapter>:<Verse> <redFlag>                    
+                //////////////////////////////////////////////////////////////
+                if (line.length() >= 2 && line.indexOf("**") == 0) {
+                    ///////////////////////////////////
+                    // End of code - store codeHash & redFlags into assigned problem  
+                    ///////////////////////////////////
+                    if (chapterVerse != null) {
+                        // create temp problem just to find it in list of assigned
+                        int index = problemList.indexOf(new Problem(type, chapterVerse[0], chapterVerse[1]));
+                        if (index != -1) { // maybe it's not assigned
+                            problemList.get(index).getCodeHash().put(userName,  codeHash);
+                            if (redFlag != null)
+                                problemList.get(index).setRedFlag(redFlag);
+                        }
+                        redFlag = null;
+                        codeHash = 0;
+                        chapterVerse = null;
+                    }
+                    
+                    // read fields for new problem
+                    Scanner sc = new Scanner(line);
+                    userName = sc.next();
+                    type = sc.next();
+                    // validate type
+                    if (!type.equals("Self-Check") && !type.equals("Exercise")) {
+                        System.out.println("ERROR - expecting new problem, found " + userName + type);
+                    }
+                    chapterVerse = Problem.splitProblemNumber(sc.next());
+                    
+                    ///////////////////////////////////
+                    // redFlag is optional last argument
+                    ///////////////////////////////////
+                    if (sc.hasNext()) {
+                        redFlag = sc.next();
+                        // check that this is the end of the line
+                        if (sc.hasNext())
+                            System.out.printf("ERROR: unexpected %s in cheaters.txt\n", sc.next());
+                    }
+                } else {
+                    // validate that we aren't missing a problem declaration
+                    if (chapterVerse == null)
+                        System.out.printf("ERROR: expected new problem **username but found %s\n", line);
+                    codeHash += computeCodeHash(line, false, false);
+                } // end in code
+            } // end line
+        } // end reading cheaters
         return problemList;
     }
 
@@ -251,6 +383,27 @@ class Problem implements Comparable<Problem> {
     }
     
     /**
+     * Computes the hash value for a line of code
+     *   can remove leading or trailing quote mark
+     *   will convert BJP .CSV quote style of ""hello"" -> "hello"
+     * 
+     * @param code
+     * @param fRemoveLeadingQuote - line starts with a leading quote eg "public static void main
+     * @param fRemoveTrailingQuote - line ends with a trailing quote eg }"
+     */
+    public static int computeCodeHash(String line, boolean fRemoveLeadingQuote, boolean fRemoveTrailingQuote) {
+        int codeHash = 0;
+        if (fRemoveLeadingQuote || fRemoveTrailingQuote)
+            line = line.substring((fRemoveLeadingQuote ? 1 : 0), line.length() - (fRemoveTrailingQuote ? 1 : 0));
+        line = line.replace("\"\"", "\"");
+        Scanner scCode = new Scanner (line);
+        while (scCode.hasNext())
+            codeHash += scCode.next().hashCode();
+
+        return codeHash;
+    }
+    
+    /**
      * readProblems - reads all problems from PracticeIt student results, stores into class arrays
      * 
      * Format of header line
@@ -258,14 +411,20 @@ class Problem implements Comparable<Problem> {
      *             0        1      2        3         4         5          6         7
      *        "abcmoney6","Doe","John","BJP4 Exercise 8.07: addTimeSpan","No","2019-09-25 16:45:33","1","//test code"
      * After header is usually code lines which are skipped
+     * 
+     * @param studentList - list of students we want to read problems for, all others ignored
+     * @param assignedProblems - assigned Problems - needed to watch for red flags
      */
-    public static ArrayList<Student> readProblems(ArrayList<Student> studentList) throws FileNotFoundException {
-        boolean ifSkip = false;
+    public static ArrayList<Student> readProblems(
+            ArrayList<Student> studentList,
+            ArrayList<Problem> assignedProblems) throws FileNotFoundException {
+        boolean ifInCode = false;
         int problemNum = 1;
         String line; // raw line
         String results[]; // split line
         String ignoredStudent = "";   // debug only
         PrintStream ps = null;
+        String redFlag = null;
 
         if (PracticeItGrader.ifDebug) {
             System.out.println();
@@ -298,10 +457,18 @@ class Problem implements Comparable<Problem> {
                 !stripQuotes(results[CSV.CODE.ordinal()]).equals("Solution Code"))
             System.out.printf("readProblems expected first line to be headers but found %s",line);
 
+        // These variables can exist between lines if we're scanning code lines
+        Problem currentProblem = null;
+        String userName = null;
+        int[] chapterVerse = new int[2];
+        int codeHash = 0; // hash of code
+        String type = null;
+        int studentNum = -1;
+        
         // Loop through all lines
         while (sc.hasNextLine()) {
             ///////////////////////////////////////////////////////
-            // Read lines, discard code lines 
+            // Read lines
             ///////////////////////////////////////////////////////
 
             line = sc.nextLine();
@@ -310,33 +477,62 @@ class Problem implements Comparable<Problem> {
 //             System.out.println(line);               
 
             // If we're in code, need to skip lines.
-            if (ifSkip) {
-                // Line could be blank
+            if (ifInCode) {
+                // debugging for codehash for a particular student & problem
+//                if (fInProblem(currentProblem, 12, 18)  && userName.equals("studentname")) {
+//                    System.out.println("breakpoint");
+//                }
+                
+                //////////////////////////////////////////////////////////////
+                //   Code ends with a line ending in one quote
+                //////////////////////////////////////////////////////////////
                 if (line.length() != 0) {
-                    //   Code ends with a line ending in a single quote
                     if (line.charAt(line.length()-1) == '"' &&
                             line.charAt(line.length()-2) != '"') {
-                        ifSkip = false;
+                        if (studentNum != -1) { // we could be ignoring this student
+                            ////////////////////////////////////////
+                            // Store code hash of this problem
+                            ////////////////////////////////////////
+                            codeHash += computeCodeHash(line, false, true);
+                            currentProblem.getCodeHash().put(userName,  codeHash);
+                        }
+                        // reset code status
+                        codeHash = 0;
+                        redFlag = null;
+                        ifInCode = false;
                     }
+                    else
+                        // calculate code has by adding hash of each token
+                        codeHash += computeCodeHash(line, false, false);
+                } 
+                ////////////////////////////////////
+                // check for any red flags
+                ////////////////////////////////////
+                if (redFlag != null && line.contains(redFlag)) {
+                    PracticeItGrader.flagCheater(studentList, userName, 10);
+                    System.out.printf("Student %s had red flag %s in %s\n", 
+                            userName, redFlag, currentProblem);
                 }
 
                 // If encrypting file, still need to output code lines
-                if (PracticeItGrader.ifEncrypt && ifSkip)
+                if (PracticeItGrader.ifEncrypt && ifInCode)
                     ps.println(line);
 
-                continue;
-            }
+                continue; // go to next line
+            } // end code 
             
             // Print out each problem header
             if (PracticeItGrader.ifDebug)
                 System.out.printf("%d, %s\n", problemNum, line);
             
-            // Code starts by ending a line without a single quote
+            ///////////////////////////////////////////////////////
+            // Code starts by ending a line without a quote
+            ///////////////////////////////////////////////////////
             if (line.charAt(line.length()-1) != '"' 
                     //   except for the weird case where it just has a single quote to open the code on next line
                     //   which we can identify by a comma right before the quote
                     || line.charAt(line.length()-2) == ',' )
-                ifSkip = true;
+                ifInCode = true;
             problemNum++;
 
             ///////////////////////////////////////////////////////
@@ -356,9 +552,10 @@ class Problem implements Comparable<Problem> {
                 results[index] = stripQuotes(results[index]);
 
             // Field USER, LAST, FIRST used directly
-            String userName = results[CSV.USER.ordinal()];
+            userName = results[CSV.USER.ordinal()];
             String lastName = results[CSV.LAST.ordinal()];
             String firstName = results[CSV.FIRST.ordinal()];
+            int tries = Integer.parseInt(results[CSV.TRIES.ordinal()]);
 
             // if encrypting, output the line but replace student names with encrypted
             if (PracticeItGrader.ifEncrypt) {
@@ -368,14 +565,32 @@ class Problem implements Comparable<Problem> {
                 ps.println(line);
             }
 
-            int[] chapterVerse = new int[2];
-            String type = splitPIProblem(results, chapterVerse);
+            type = splitPIProblem(results, chapterVerse);
 
             // Field SOLVED is either Y or N
             Boolean comp = results[CSV.SOLVED.ordinal()].toUpperCase().charAt(0) == 'Y';
 
             // Field DATETIME, TRIES, CODE unused at this time
             // Eventually we should examine DATETIME to find average time taken & unusual times
+            
+            // calculate code hash by adding hash of each token
+            String code = results[CSV.CODE.ordinal()];
+            // validate and remove leading double quote on first line of code
+            if (code == null || code.charAt(0) != '"') {
+                System.out.println("Error: Code should start with \" but instead found " + code);
+            }
+
+            ////////////////////////////////////////////////////////////
+            // compute code hash on initial line to check for cheating
+            ////////////////////////////////////////////////////////////
+//            if (chapterVerse[0] == 12 && chapterVerse[1] == 18)
+//                System.out.println("Breakpoint");
+            if (code.length() > 1) {  // line could start or end without any code 
+                // Validate that it's just a quote
+                if (code.charAt(0) != '"')
+                    System.out.println("ERROR: Expected only char on code line was quote but found " + code.charAt(0) + " on line " + line);
+                codeHash += computeCodeHash(code, true, false);
+            }
             
             ///////////////////////////////////////////////////////
             // Done reading the file, now creating data structures 
@@ -386,7 +601,7 @@ class Problem implements Comparable<Problem> {
 
             // build or lookup the student
             Student s = new Student(userName, firstName, lastName);
-            int studentNum = studentList.indexOf(s);
+            studentNum = studentList.indexOf(s);
             if (!ifClassList) {
                 if (studentNum == -1)
                     // Build Class List if not supplied
@@ -414,8 +629,20 @@ class Problem implements Comparable<Problem> {
 
             // Add problem to the student
             if (studentNum != -1) {
-                Problem p = new Problem(type, chapterVerse[0], chapterVerse[1], comp, date);
-                s.getProblems().add(p);
+                currentProblem = new Problem(type, chapterVerse[0], chapterVerse[1], comp, date);
+                s.getProblems().add(currentProblem);
+                
+                // Set number of tries
+                currentProblem.getTries().put(userName,  tries);
+                
+                // If student has a one-liner this is the only place we store the codeHash
+                currentProblem.getCodeHash().put(userName,  codeHash);
+                
+                // get any red flag string for the assigned problem - once per problem 
+                int assignedProbIndex = assignedProblems.indexOf(currentProblem);
+                if (assignedProbIndex != -1)
+                    redFlag = assignedProblems.get(assignedProbIndex).getRedFlag();
+
             }
 
         }
@@ -425,6 +652,18 @@ class Problem implements Comparable<Problem> {
         }
 
         return studentList;     // in case it was null to being with
+    }
+    
+    /**
+     * Debugging helper to set breakpoints at a particular problem
+     * 
+     * @param p
+     * @param chapter
+     * @param number
+     * @return
+     */
+    public static boolean fInProblem(Problem p, int chapter, int number) {
+        return p.getChapter() == chapter && p.getNumber() == number;
     }
 }
     

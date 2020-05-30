@@ -1,7 +1,6 @@
 import java.util.*;
 import java.io.*;
 import java.security.MessageDigest;
-import java.time.format.*;
 import java.time.*;
 
 /**
@@ -35,7 +34,10 @@ import java.time.*;
  * Version 1.3.1 - 12/30/18 added ifEncrypt to scramble student usernames
  * Version 1.4 - 12/30/18 added dtDeadline to count problems by deadline
  * Version 1.4.1 - 2/10/19 dtDeadline only counts assigned & drops "T<HH:MM:SS>"
- * Version 1.5 - 9/30/19 - updated comments to support Problem.java v1.5 changes 
+ * Version 1.5 - 9/30/19 - updated comments to support Problem.java v1.5 changes
+ * Version 1.5.1 - 4/15/20 - added a check for problems older than a week before deadline
+ * Version 1.5.2 - 4/15/20 - determined time spent on each problem 
+ * Version 2.0 - 5/30/20 added cheat checks for tries, times, code hash, red flags
  */
 public class PracticeItGrader {
     // Set to true to output diagnostic debugging info
@@ -43,7 +45,7 @@ public class PracticeItGrader {
     // Set to true to change real student names (George) into hashed letters (AFLTZ)
     static boolean ifEncrypt = false;
     // Set to year,mo,day,h,m,s to calculate # of problems before that time
-    static LocalDateTime dtDeadline = LocalDateTime.of(2019,9,25,23,59,59); // LocalDateTime.of(2019,1,20,23,59,59);
+    static LocalDateTime dtDeadline = LocalDateTime.of(2020,05,20,23,59,59); // LocalDateTime.of(2019,1,20,23,59,59);
     
     public static void main(String[] args) throws FileNotFoundException {
         // Problem class - type, number, time
@@ -58,11 +60,12 @@ public class PracticeItGrader {
         studentList = Student.readStudents();
         ifClassList = studentList == null ? false : true;
 
-        // Reads problems performed by students and stores into studentList, will create list if null
-        studentList = Problem.readProblems(studentList);
-
         // Reads list of assigned problems to filter results by
         problemList = Problem.readAssignedProblems();
+
+        // Reads problems performed by students and stores into studentList, will create list if null
+        // problemList passed in for red flag detection
+        studentList = Problem.readProblems(studentList, problemList);
 
         printResults(ifClassList, problemList, studentList);
     }
@@ -71,8 +74,8 @@ public class PracticeItGrader {
      * printResults - prints the results from class members
      * 
      * @param ifClassList - if false, just print the list of students
-     * @param problemList - list of problems done by student
-     * @param studentList - list of students
+     * @param problemList - list of assigned problems 
+     * @param studentList - list of students, each with an embedded list of problems attempted
      *
      * username firstname Lastname #15 Attempted 2 of 12
      *   Missing: SC 10:16 SC 10:18 Ex 10:2 Ex 10:3 Ex 10:4 Ex 10:6 Ex 10:7 Ex 10:10 Ex 10:12 Ex 10:14 Ex 10:15 
@@ -88,6 +91,9 @@ public class PracticeItGrader {
             System.out.println("printResults Begin");
         }
         
+        /////////////////////////////////////////////////////////////////////
+        // Process each Student
+        /////////////////////////////////////////////////////////////////////
         for (Student s : studentList) {
             // Always print out the student usernames, if no class list this is all we'll do
             System.out.printf("%s %s %s #%d ", 
@@ -103,18 +109,44 @@ public class PracticeItGrader {
                 ArrayList<Problem> extras = new ArrayList<Problem>();
                 ArrayList<Problem> failed = new ArrayList<Problem>();
 
-                int countAttemptByDeadline = 0;
+                int countAttemptByDeadline = 0, countOld = 0;
                 
+                // This is an arbitrary # of days to flag "old" problems done for a previous class, etc
+                LocalDateTime dtStart = dtDeadline.minusDays(10);
+                
+                // This is a list of all problem submission times
+                LinkedList<LocalDateTime> dates = new LinkedList<>();
+                
+                /////////////////////////////////////////////////////////////
                 // Process each problem for printing
+                /////////////////////////////////////////////////////////////
                 for (int iProblem = 0; iProblem<s.getProblems().size(); iProblem++) {
                     Problem p = s.getProblems().get(iProblem);
 
+                    //////////////////////////////////////////////////////////
+                    // Cheat Checking - transfer each student's problem info to 
+                    //   whole class' list of assigned problems
+                    //////////////////////////////////////////////////////////
+                    int indexAssignedProblem = problemList.indexOf(p);
+                    if (indexAssignedProblem != -1) {
+                        Problem assignedProblem = problemList.get(indexAssignedProblem);
+                        String studentName = s.getUserName();
+                        if (p.getCodeHash().size() > 1)
+                            System.out.printf("ERROR - student %s problem %s should only have one code hash\n", studentName, p);
+                        assignedProblem.getCodeHash().put(studentName, p.getCodeHash().get(studentName));
+                        assignedProblem.getTries().put(studentName, p.getTries().get(studentName));
+                    }
+                    
                     int iRemove = -1;
                     if (assigned != null && (iRemove = assigned.indexOf(p)) != -1) {
                         // Problem is on the assigned list
                         // check if it's done by deadline
-                        if (dtDeadline != null && p.date.compareTo(dtDeadline) <= 0) {
-                            countAttemptByDeadline++;
+                        if (dtDeadline != null) {
+                                if (p.getDate().compareTo(dtDeadline) <= 0)
+                                    countAttemptByDeadline++;
+                                if (p.getDate().isBefore(dtStart))
+                                    countOld++;
+                                dates.add(p.getDate());
                         }
                         
                         if (!p.isIfCompleted())
@@ -125,7 +157,6 @@ public class PracticeItGrader {
                         // add it to the extras list
                         extras.add(p);
                     }
-
                 }
                 
                 // Continue Print # attemped out of assigned, but don't count any extras
@@ -155,8 +186,38 @@ public class PracticeItGrader {
                     System.out.println("\t" + countAttemptByDeadline + 
                             " assigned attempted before " + 
                             dtDeadline.toString().substring(0,10));
-                }
-            } // end if Classlist
+                    System.out.println("\t" + countOld +
+                            " done before " + dtStart.toString().substring(0,10));
+                }                    
+
+                ///////////////////////////////////////////////////////////////
+                // Store problem times 
+                //
+                // Find length of time to complete each problem for later comparison to others
+                // We can only do this once all problems are read by sorting & subtracting
+                // We will store a 0 second duration to mark the first problem
+                // Problems with a long delay will be filtered out when checking for cheaters
+                ///////////////////////////////////////////////////////////////
+                Collections.sort(dates);
+                LocalDateTime dtCurrent = null;
+                if (!dates.isEmpty())
+                    dtCurrent = dates.getFirst();
+                for (LocalDateTime dtNext : dates) {
+                    // Find problem based on dtNext and store student's times
+                    for (Problem p : s.getProblems()) {
+                        if (p.getDate().equals(dtNext)) {
+                            // Store this <Student, time> into the original problem list's map
+                            int index = problemList.indexOf(p);
+
+                            problemList.get(index).getTimes().put(s.userName, Duration.between(dtCurrent, dtNext).getSeconds());
+                        }
+                    }
+                    dtCurrent = dtNext;
+                } // end examining all timestamps
+                
+                // separate each student
+                System.out.println();
+            } // end printing problems for a student in class
             else
                 // print class members on separate lines
                 System.out.println();
@@ -164,31 +225,165 @@ public class PracticeItGrader {
             // newline for each student
             System.out.println();
 
+        } // done with all students
+        
+        ////////////////////////////////////////////////////////////////////
+        // Cheating Checks
+        //
+        // We're done processing all student problems
+        // Do cheating checks for each problem based on student -> code hashes & times
+        ////////////////////////////////////////////////////////////////////
+        for (Problem p : problemList) {
+            ///////////////////////////////////////////////////////////////
+            // Check for signs of cheating by abnormally low times
+            //    check for times < 1/2 of the median
+            //    exclude first problems (0 time) and > 60 min
+            ///////////////////////////////////////////////////////////////
+
+            // We have a map of all <Student Name, duration in min>
+            // Sort map into ArrayList based on durations 
+            List<Map.Entry<String, Long>> studentTimeEntries = new ArrayList<> (p.getTimes().entrySet());
+            studentTimeEntries.sort(Map.Entry.comparingByValue());
+
+            // Eliminate bottom 0's which are student's first problems
+            int zeros = 0;
+            if (studentTimeEntries.size() != 0) {
+                while (studentTimeEntries.get(0).getValue() == 0) {
+                    studentTimeEntries.remove(0);
+                    zeros++;
+                }
+            }
+                
+            // Work from longest times backwards, removing unreasonably high times
+            while (studentTimeEntries.get(studentTimeEntries.size()-1).getValue() > 60*60)
+                studentTimeEntries.remove(studentTimeEntries.size()-1);
+
+            // Print out the whole range of times to see
+            System.out.printf("(min)Times for %s are: ", p);
+            for (Map.Entry<String, Long>studentEntry : studentTimeEntries)
+                System.out.print(studentEntry.getValue()/60 + " ");
+            // We may have removed a bunch of 0 entries for first problem
+            if (zeros > studentTimeEntries.size() / 2) 
+                System.out.printf(" excluded %d users as first problem", zeros);
+            System.out.println();
+            
+            // Examine bottom third and flag times < half of median
+            long medianTime = studentTimeEntries.get(studentTimeEntries.size()/2).getValue();
+            int topTimeIndex = studentTimeEntries.size()/3;
+            System.out.printf("(min)Times: median %d vs: ", medianTime/60);
+            for (int index = 0; index < topTimeIndex; index++) {
+                if (studentTimeEntries.get(index).getValue() < medianTime / 2) {
+                    Map.Entry<String, Long> cheaterEntry = studentTimeEntries.get(index); 
+                    System.out.printf("%s=%d ", cheaterEntry.getKey(), cheaterEntry.getValue()/60, medianTime/60);
+                    flagCheater(studentList, cheaterEntry.getKey(), 3);
+                }
+            }
+            System.out.println();  // end Times line
+
+            //////////////////////////////////////////////////////////////////
+            // Looking for abnormally low # of tries
+            //    check for < 1/2 of the median # of tries
+            //////////////////////////////////////////////////////////////////
+            List<Map.Entry<String, Integer>> triesEntries = new ArrayList<> (p.getTries().entrySet());
+            triesEntries.sort(Map.Entry.comparingByValue());
+
+            System.out.printf("# Tries for %s are: ", p);
+            for (Map.Entry<String, Integer>studentEntry : triesEntries)
+                System.out.print(studentEntry.getValue() + " ");
+            System.out.println();
+
+            int medianTries = triesEntries.get(triesEntries.size()/2).getValue();
+            System.out.printf("# Tries median %d vs: ", medianTries);
+            for (int index = 0; index < triesEntries.size(); index++) {
+                if (triesEntries.get(index).getValue() < medianTries / 2) {
+                    Map.Entry<String, Integer> cheaterEntry = triesEntries.get(index); 
+                    System.out.printf("%s=%d ", cheaterEntry.getKey(), cheaterEntry.getValue());
+                    flagCheater(studentList, cheaterEntry.getKey(), 1);
+                }
+            }
+            System.out.println(); // new line after tries
+            
+            //////////////////////////////////////////////////////////////////
+            // Looking for duplicate code in exercises
+            //    check for exact code matches
+            //    Can't detect modified code but tries, times, red flags will add up
+            //////////////////////////////////////////////////////////////////
+            if (p.getType().equals("Exercise")) { // only exercises worth checking
+                // Nested loop to check for duplicates
+                // I'd like to remove to only print each once but due to concurrentMod
+                //   Set the hash to 0 instead
+                Map<String, Integer> hashes = p.getCodeHash();
+                for (String userName : hashes.keySet()) {
+                    int hash = hashes.get(userName);
+                    hashes.put(userName, 0);
+                    if (hash != 0 && hashes.containsValue(hash)) {
+                        flagCheater(studentList, userName, 5);
+                        System.out.printf("Problem %s: %s duplicated by: ", p, userName);
+                        for (String otherName : hashes.keySet()) {
+                            int hashOther = hashes.get(otherName);
+                            if (hashOther == hash) {
+                                flagCheater(studentList, userName, 5);
+                                System.out.printf("%s ", otherName);
+                                hashes.put(otherName,  0);
+                            }
+                        }
+                        System.out.println();  // end hash check line
+                    }
+                }
+            } // end code hash check 
+            System.out.println(); // separating line per problem
+        } // end of all Problems
+        
+        /////////////////////////////////////////////////////////////////////
+        // print out the cheater scores
+        /////////////////////////////////////////////////////////////////////
+
+        // Sort by cheater scores
+        // This uses a anonymous class instead of creating a separate comparator class
+        Collections.sort(studentList, new Comparator<Student>() {
+            @Override
+            public int compare(Student s1, Student s2) {
+                return s2.getCheatingIndex() - s1.getCheatingIndex();
+            }
+        });
+
+        // Only print top 1/3rd of non-zero items
+        int end = studentList.size()-1;
+        while (studentList.get(end).getCheatingIndex() == 0)
+            end--;
+        System.out.println("********  FINAL CHEATING ANALYSIS **********");
+        System.out.printf("Median cheating index was %d, Top 1/3rd suspicious are:\n", 
+                studentList.get(end/2).getCheatingIndex());
+        for (int index = 0; index < studentList.size() / 3; index++) {
+            Student s = studentList.get(index);
+            int score = s.getCheatingIndex();
+            if (score != 0) {
+                System.out.printf("%s index %d\n", s.getUserName(), s.getCheatingIndex());
+            }
         }
         
         if (ifDebug) {
             System.out.println("printResults End");
         }
-    }
-}
-
-/**
- * Comparator to sort problems by time instead of the default chapter:verse
- */
-class Sortproblembytime implements Comparator<Problem> 
-{ 
-    // Used for sorting in ascending order of time
-    @Override
-    public int compare(Problem a, Problem b) 
-    {
-        if (a.getDate() == null)
-            return -1;
-        else if (b.getDate() == null)
-            return 1;
-        else
-            return a.getDate().compareTo(b.getDate());
-    } 
-} 
+    } // end PrintResults
+    
+    /**
+     * Flag a student for cheating
+     * 
+     * @param studentList
+     * @param cheaterName
+     * @param seriousness - a numberic rating with greater being stronger indicator
+     */
+    public static void flagCheater(ArrayList<Student> studentList, String cheaterName, int seriousness) {
+        // Increase student's cheating index
+        for (Student s : studentList) {
+            if (s.getUserName().equals(cheaterName)) {
+                s.setCheatingIndex(s.getCheatingIndex()+seriousness);
+            }
+        }
+    } // end flagCheater
+    
+} // end PracticeItGrader
 
 
 
