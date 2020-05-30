@@ -1,0 +1,35 @@
+**creede15 Exercise 12:18 result.lastIndexOf
+public static void waysToClimb(int n) {
+    waysToClimb(n, 0, "[");
+}
+
+private static void waysToClimb(int n, int position, String result) {
+    if (n == position) {
+        int index = result.lastIndexOf(",");
+        if (index != -1) {
+            result = result.substring(0, index) + "]";
+            System.out.println(result);
+        }
+    } else if (n > position) {
+        waysToClimb(n, position + 1, result + "1, ");
+        waysToClimb(n, position + 2, result + "2, ");
+    }
+}
+
+**creede15 Exercise 12:19 Integer.toBinaryString
+public static void countBinary(int n) {
+    if (n == 0) {
+        System.out.println();
+    } else {
+        countBinary(0, (int)Math.pow(2, n), n);
+    }
+}
+
+public static void countBinary(int min, int max, int n) {
+    if (min < max) {
+        String s = Integer.toBinaryString(min);
+        s = String.format("%" + n + "s", s).replace(' ', '0');
+        System.out.println(s);
+        countBinary(min + 1, max, n);
+    }
+}
