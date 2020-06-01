@@ -15,6 +15,7 @@ import java.util.Scanner;
  *                      changed static student & problem data structures to locals passed as parameters
  * Version 1.5.3 - 4/16/20 - Handle names with multiple words by adding "billy bob" around them in student usernames.txt
  * Version 2.0 - 5/30/20 added cheat checks for tries, times, code hash, red flags
+ * Version 2.0.1 - 5/31/20 cleanup - added Flag class, catch null pointers
  */
 class Student {
     String userName;
@@ -22,6 +23,7 @@ class Student {
     String lastName;
     ArrayList<Problem> problems;
     int cheatingIndex;  // Count of possible cheating signs
+    ArrayList<Flag> flags; // Strings of suspicious flags
 
     public Student(String userName, String firstName, String lastName) {
         super();
@@ -29,6 +31,7 @@ class Student {
         this.firstName = firstName;
         this.lastName = lastName;
         this.problems = new ArrayList<Problem>();
+        this.flags = new ArrayList<Flag>();
     }
 
     public String getUserName() {
@@ -70,8 +73,16 @@ class Student {
     public void setCheatingIndex(int cheatingIndex) {
         this.cheatingIndex = cheatingIndex;
     }
+    
+    public ArrayList<Flag> getFlags() {
+        return this.flags;
+    }
 
     @Override
+    /**
+     * Compares two Students - used by indexOf to find a student
+     *   only compares userName which is unique among students
+     */
     public boolean equals(Object o) {
         // If the object is compared with itself then return true  
         if (o == this) {
@@ -87,12 +98,7 @@ class Student {
         // typecast o to Complex so that we can compare data members 
         Student s = (Student) o;
 
-        Boolean f = s.getFirstName().equalsIgnoreCase(this.getFirstName());
-        f &= s.getLastName().equalsIgnoreCase(this.getLastName());
-        f &= s.getUserName().equalsIgnoreCase(this.getUserName());
-
-        return (f);
-
+        return (s.getUserName().equalsIgnoreCase(this.getUserName()));
     }
 
     @Override

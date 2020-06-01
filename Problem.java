@@ -18,6 +18,7 @@ import java.time.*;
  * Version 1.4 - 12/30/18 added date field to count problems by deadline
  * Version 1.5 - 9/30/19 changed from using TXT scraping to CSV file due to PracticeIt changes
  * Version 2.0 - 5/30/20 added cheat checks for tries, times, code hash, red flags
+ * Version 2.0.1 - 5/31/20 cleanup - added Flag class, catch null pointers
  * 
  * Problem is used in several situations
  *   When reading a list of assigned problems it fills the type/chapter/number fields
@@ -509,9 +510,7 @@ class Problem implements Comparable<Problem> {
                 // check for any red flags
                 ////////////////////////////////////
                 if (redFlag != null && line.contains(redFlag)) {
-                    PracticeItGrader.flagCheater(studentList, userName, 10);
-                    System.out.printf("Student %s had red flag %s in %s\n", 
-                            userName, redFlag, currentProblem);
+                    PracticeItGrader.flagCheater(studentList, userName, currentProblem, "red flag", 20);
                 }
 
                 // If encrypting file, still need to output code lines

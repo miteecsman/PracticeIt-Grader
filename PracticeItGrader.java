@@ -38,6 +38,7 @@ import java.time.*;
  * Version 1.5.1 - 4/15/20 - added a check for problems older than a week before deadline
  * Version 1.5.2 - 4/15/20 - determined time spent on each problem 
  * Version 2.0 - 5/30/20 added cheat checks for tries, times, code hash, red flags
+ * Version 2.0.1 - 5/31/20 cleanup - added Flag class, catch null pointers
  */
 public class PracticeItGrader {
     // Set to true to output diagnostic debugging info
@@ -214,16 +215,8 @@ public class PracticeItGrader {
                     }
                     dtCurrent = dtNext;
                 } // end examining all timestamps
-                
-                // separate each student
-                System.out.println();
             } // end printing problems for a student in class
-            else
-                // print class members on separate lines
-                System.out.println();
-
-            // newline for each student
-            System.out.println();
+            System.out.println(); // newline for each student          
 
         } // done with all students
         
@@ -248,38 +241,41 @@ public class PracticeItGrader {
             // Eliminate bottom 0's which are student's first problems
             int zeros = 0;
             if (studentTimeEntries.size() != 0) {
-                while (studentTimeEntries.get(0).getValue() == 0) {
+                while (studentTimeEntries.size() != 0 && studentTimeEntries.get(0).getValue() == 0) {
                     studentTimeEntries.remove(0);
                     zeros++;
                 }
-            }
-                
-            // Work from longest times backwards, removing unreasonably high times
-            while (studentTimeEntries.get(studentTimeEntries.size()-1).getValue() > 60*60)
-                studentTimeEntries.remove(studentTimeEntries.size()-1);
 
-            // Print out the whole range of times to see
-            System.out.printf("(min)Times for %s are: ", p);
-            for (Map.Entry<String, Long>studentEntry : studentTimeEntries)
-                System.out.print(studentEntry.getValue()/60 + " ");
-            // We may have removed a bunch of 0 entries for first problem
-            if (zeros > studentTimeEntries.size() / 2) 
-                System.out.printf(" excluded %d users as first problem", zeros);
-            System.out.println();
+                // Work from longest times backwards, removing unreasonably high times
+                while (studentTimeEntries.size() != 0 && studentTimeEntries.get(studentTimeEntries.size()-1).getValue() > 60*60)
+                    studentTimeEntries.remove(studentTimeEntries.size()-1);
+
+                if (studentTimeEntries.size() != 0) {
+                    // Print out the whole range of times to see
+                    System.out.printf("(min)Times for %s are: ", p);
+                    for (Map.Entry<String, Long>studentEntry : studentTimeEntries)
+                        System.out.print(studentEntry.getValue()/60 + " ");
+                    // We may have removed a bunch of 0 entries for first problem
+                    if (zeros > studentTimeEntries.size() / 2) 
+                        System.out.printf(" excluded %d users as first problem", zeros);
+                    System.out.println();
+    
+                    // Examine bottom third and flag times < half of median
+                    int size = studentTimeEntries.size();
+                    long medianTime = studentTimeEntries.get(size/2).getValue();
+                    int topTimeIndex = size/3;
+                    System.out.printf("(min)Times: median %d vs: ", medianTime/60);
+                    for (int index = 0; index < topTimeIndex; index++) {
+                        if (studentTimeEntries.get(index).getValue() < medianTime / 2) {
+                            Map.Entry<String, Long> cheaterEntry = studentTimeEntries.get(index); 
+                            System.out.printf("%s=%d ", cheaterEntry.getKey(), cheaterEntry.getValue()/60, medianTime/60);
+                            flagCheater(studentList, cheaterEntry.getKey(), p, "Times", 3);
+                        }
+                    }
+                    System.out.println();  // end Times line
+                } // reduced student times exist
+            } // student times exist
             
-            // Examine bottom third and flag times < half of median
-            long medianTime = studentTimeEntries.get(studentTimeEntries.size()/2).getValue();
-            int topTimeIndex = studentTimeEntries.size()/3;
-            System.out.printf("(min)Times: median %d vs: ", medianTime/60);
-            for (int index = 0; index < topTimeIndex; index++) {
-                if (studentTimeEntries.get(index).getValue() < medianTime / 2) {
-                    Map.Entry<String, Long> cheaterEntry = studentTimeEntries.get(index); 
-                    System.out.printf("%s=%d ", cheaterEntry.getKey(), cheaterEntry.getValue()/60, medianTime/60);
-                    flagCheater(studentList, cheaterEntry.getKey(), 3);
-                }
-            }
-            System.out.println();  // end Times line
-
             //////////////////////////////////////////////////////////////////
             // Looking for abnormally low # of tries
             //    check for < 1/2 of the median # of tries
@@ -287,51 +283,49 @@ public class PracticeItGrader {
             List<Map.Entry<String, Integer>> triesEntries = new ArrayList<> (p.getTries().entrySet());
             triesEntries.sort(Map.Entry.comparingByValue());
 
-            System.out.printf("# Tries for %s are: ", p);
-            for (Map.Entry<String, Integer>studentEntry : triesEntries)
-                System.out.print(studentEntry.getValue() + " ");
-            System.out.println();
+            if (triesEntries.size() != 0) {
+                System.out.printf("# Tries for %s are: ", p);
+                for (Map.Entry<String, Integer>studentEntry : triesEntries)
+                    System.out.print(studentEntry.getValue() + " ");
+                System.out.println();
 
-            int medianTries = triesEntries.get(triesEntries.size()/2).getValue();
-            System.out.printf("# Tries median %d vs: ", medianTries);
-            for (int index = 0; index < triesEntries.size(); index++) {
-                if (triesEntries.get(index).getValue() < medianTries / 2) {
-                    Map.Entry<String, Integer> cheaterEntry = triesEntries.get(index); 
-                    System.out.printf("%s=%d ", cheaterEntry.getKey(), cheaterEntry.getValue());
-                    flagCheater(studentList, cheaterEntry.getKey(), 1);
+                int medianTries = triesEntries.get(triesEntries.size()/2).getValue();
+                System.out.printf("# Tries median %d vs: ", medianTries);
+                for (int index = 0; index < triesEntries.size(); index++) {
+                    if (triesEntries.get(index).getValue() < medianTries / 2) {
+                        Map.Entry<String, Integer> cheaterEntry = triesEntries.get(index); 
+                        System.out.printf("%s=%d ", cheaterEntry.getKey(), cheaterEntry.getValue());
+                        flagCheater(studentList, cheaterEntry.getKey(), p, "Tries", 1);
+                    }
                 }
-            }
-            System.out.println(); // new line after tries
+                System.out.println(); // new line after tries
+            } // tries
             
             //////////////////////////////////////////////////////////////////
             // Looking for duplicate code in exercises
             //    check for exact code matches
             //    Can't detect modified code but tries, times, red flags will add up
             //////////////////////////////////////////////////////////////////
-            if (p.getType().equals("Exercise")) { // only exercises worth checking
-                // Nested loop to check for duplicates
-                // I'd like to remove to only print each once but due to concurrentMod
-                //   Set the hash to 0 instead
-                Map<String, Integer> hashes = p.getCodeHash();
-                for (String userName : hashes.keySet()) {
-                    int hash = hashes.get(userName);
-                    hashes.put(userName, 0);
-                    if (hash != 0 && hashes.containsValue(hash)) {
-                        flagCheater(studentList, userName, 5);
-                        System.out.printf("Problem %s: %s duplicated by: ", p, userName);
-                        for (String otherName : hashes.keySet()) {
-                            int hashOther = hashes.get(otherName);
-                            if (hashOther == hash) {
-                                flagCheater(studentList, userName, 5);
-                                System.out.printf("%s ", otherName);
-                                hashes.put(otherName,  0);
-                            }
-                        }
-                        System.out.println();  // end hash check line
-                    }
+            Map<String, Integer> hashesMap = p.getCodeHash();
+
+            // only look for duplicates if 3/4th are unique
+            // only exercises worth checking
+            // put into set to determine uniqueness
+            Set<Integer> uniqueHashes = new HashSet<Integer>(hashesMap.values());
+            if (uniqueHashes.size() > hashesMap.size() * 3 / 4 &&
+                    p.getType().equals("Exercise")) { 
+                Map<Integer, ArrayList<String>> mapHashToNames = findCommonFlags(hashesMap);
+                // loop through each hash
+                for (int hash : mapHashToNames.keySet()) {
+                    // print list of names
+                    System.out.printf("Problem %s: duplicated by: %s\n", p, mapHashToNames.get(hash));
+                    for (String name : mapHashToNames.get(hash))
+                        flagCheater(studentList, name, p, "code", 5);
                 }
-            } // end code hash check 
-            System.out.println(); // separating line per problem
+            } // looking for duplicate code hash
+
+            if (p.getTimes().size() != 0)
+                System.out.println(); // separating line per problem if we've printed
         } // end of all Problems
         
         /////////////////////////////////////////////////////////////////////
@@ -348,19 +342,16 @@ public class PracticeItGrader {
         });
 
         // Only print top 1/3rd of non-zero items
-        int end = studentList.size()-1;
-        while (studentList.get(end).getCheatingIndex() == 0)
-            end--;
-        System.out.println("********  FINAL CHEATING ANALYSIS **********");
-        System.out.printf("Median cheating index was %d, Top 1/3rd suspicious are:\n", 
-                studentList.get(end/2).getCheatingIndex());
-        for (int index = 0; index < studentList.size() / 3; index++) {
-            Student s = studentList.get(index);
-            int score = s.getCheatingIndex();
-            if (score != 0) {
-                System.out.printf("%s index %d\n", s.getUserName(), s.getCheatingIndex());
-            }
-        }
+        if (studentList.size() != 0) {
+            int end = studentList.size()-1;
+            while (end >= 0 && studentList.get(end).getCheatingIndex() == 0)
+                end--;
+            System.out.println("********  FINAL CHEATING ANALYSIS **********");
+            System.out.printf("Median cheating index was %d, Top 1/3rd suspicious are:\n", 
+                    studentList.get(end/2).getCheatingIndex());
+            for (int indexStudent = 0; indexStudent < studentList.size() / 3; indexStudent++)
+                printStudentCheatingReport(studentList.get(indexStudent));
+        } // studentList exists
         
         if (ifDebug) {
             System.out.println("printResults End");
@@ -372,16 +363,86 @@ public class PracticeItGrader {
      * 
      * @param studentList
      * @param cheaterName
+     * @param reason - string reason for the flag
      * @param seriousness - a numberic rating with greater being stronger indicator
      */
-    public static void flagCheater(ArrayList<Student> studentList, String cheaterName, int seriousness) {
+    public static void flagCheater(ArrayList<Student> studentList, String cheaterName, Problem p, String reason, int seriousness) {
         // Increase student's cheating index
-        for (Student s : studentList) {
-            if (s.getUserName().equals(cheaterName)) {
-                s.setCheatingIndex(s.getCheatingIndex()+seriousness);
-            }
-        }
+        Student s = studentList.get(studentList.indexOf(new Student(cheaterName, null, null)));
+        s.setCheatingIndex(s.getCheatingIndex()+seriousness);
+        s.getFlags().add(new Flag(p, reason));
     } // end flagCheater
+    
+    /**
+     * Prepare groups of users who duplicated code from map of <UserName, CodeHash>
+     * This was parameterized to accept other flag types but not currently used except for int
+     *   
+     * input - [john=1, mary=2, phil=3, doug=2, jo=1, jerry=2]
+     * output - [1=[john, jo], 2=[mary, doug], 3=phil]
+     * 
+     * @param input - map of <UserName, flag> flag could be any type but typically int
+     * @return output - Map of <flag, List of Username> 
+     */
+    public static <T extends Comparable<T>> Map<T, ArrayList<String>> findCommonFlags(Map<String, T> input) {
+        List<Map.Entry<String, T>> listNameToFlag = new ArrayList<> (input.entrySet());
+        listNameToFlag.sort(Map.Entry.comparingByValue());
+        
+        Map<T, ArrayList<String>> mapFlagToNames = new HashMap<>();
+        
+        // loop through each hash backwards so we can remove easily
+        for (int index = listNameToFlag.size()-1; index > 0; index--) {
+            T item = listNameToFlag.get(index).getValue();
+            // if not unique
+            if (item.equals(listNameToFlag.get(index-1).getValue())) {
+                // create Map entry for the values from the original map
+                ArrayList<String> names = new ArrayList<String>();
+                mapFlagToNames.put(listNameToFlag.get(index).getValue(), names);
+                // add first name to list
+                names.add(listNameToFlag.get(index).getKey());
+                // remove any duplicates earlier in the list
+                while (index > 0 && item.equals(listNameToFlag.get(index-1).getValue())) {
+                    names.add(listNameToFlag.get(index-1).getKey());
+                    listNameToFlag.remove(index-1);
+                    index--;
+                }
+                // remove first offender
+                listNameToFlag.remove(index);
+            } // not unique
+        } // loop through hashes
+        return mapFlagToNames;
+    }
+
+    /**
+     * Print cheating report for a student
+     * 
+     * userName index <cheating rating>
+     * code: Ex 10:7 Ex 11:7 Ex 12:18 
+     * Times: Ex 11:19 SC 12:6 Ex 12:18 
+     * red flag: Ex 12:18 
+     * Tries: Ex 11:19 Ex 12:18 
+     * 
+     * @param s - student which contains details on cheating
+     */
+    public static void printStudentCheatingReport(Student s) {
+        if (s.cheatingIndex == 0)
+            return;
+        System.out.printf("%s index %d\n", s.getUserName(), s.getCheatingIndex());
+        // Build Map of <reason, list<problem numbers> from list<flags>
+        Map<String, ArrayList<String>> mapFlagProb = new HashMap<String, ArrayList<String>>();
+        for (Flag flag : s.getFlags()) {
+            // build arrayList if first of flag type
+            if (!mapFlagProb.containsKey(flag.getReason()))
+                mapFlagProb.put(flag.getReason(), new ArrayList<String>());
+            mapFlagProb.get(flag.getReason()).add(flag.getProblem().toString()); 
+        }
+        // Print out each flag type : list of problems
+        for (String reason : mapFlagProb.keySet()) {
+            System.out.print(reason + ": ");
+            for (String problemNum : mapFlagProb.get(reason))
+                System.out.printf(problemNum);
+            System.out.println();  // new line for each reason
+        }
+    }
     
 } // end PracticeItGrader
 
