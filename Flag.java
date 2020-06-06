@@ -2,6 +2,7 @@
  * Flag is a record flagging a potential cheating incident
  * 
  * Version 2.0.1 - 5/31/20 cleanup - added Flag class, catch null pointers
+ * Version 2.0.2 - 6/5/20 print cleanup - added equals for red flag searches
  *
  */
 public class Flag {
@@ -38,5 +39,19 @@ public class Flag {
     @Override
     public String toString() {
         return this.problem + this.reason; 
+    }
+    
+    @Override
+    /**
+     * Flag.equals compares the reason only
+     *     This is used to check if a "red flag" has already been filed so problem is not desired
+     */
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        
+        Flag f = (Flag)o;
+        
+        return (f.getReason() == this.getReason());
     }
 }

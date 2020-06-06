@@ -19,6 +19,7 @@ import java.time.*;
  * Version 1.5 - 9/30/19 changed from using TXT scraping to CSV file due to PracticeIt changes
  * Version 2.0 - 5/30/20 added cheat checks for tries, times, code hash, red flags
  * Version 2.0.1 - 5/31/20 cleanup - added Flag class, catch null pointers
+ * Version 2.0.2 - 6/5/20 print cleanup
  * 
  * Problem is used in several situations
  *   When reading a list of assigned problems it fills the type/chapter/number fields
@@ -320,7 +321,15 @@ class Problem implements Comparable<Problem> {
                     ///////////////////////////////////
                     if (sc.hasNext()) {
                         redFlag = sc.next();
-                        // check that this is the end of the line
+                        // grab everything between quotes if they exist
+                        if (redFlag.startsWith("\"")) {
+                            int first = line.indexOf(redFlag);
+                            int last = line.lastIndexOf('"');
+                            if (last == -1 || last == first)
+                                System.out.printf("ERROR: cheater %s missing end quote for red flag %s",userName, line);
+                            redFlag = line.substring(line.indexOf(redFlag)+1, line.lastIndexOf('"'));
+                        } else
+                        // verify that this is the end of the line
                         if (sc.hasNext())
                             System.out.printf("ERROR: unexpected %s in cheaters.txt\n", sc.next());
                     }
@@ -329,6 +338,10 @@ class Problem implements Comparable<Problem> {
                     if (chapterVerse == null)
                         System.out.printf("ERROR: expected new problem **username but found %s\n", line);
                     codeHash += computeCodeHash(line, false, false);
+                    
+//                    // debughash breakpoint
+//                    if (chapterVerse[0] == 11 && chapterVerse[1] == 2 && type.equals("Exercise"))
+//                        System.out.printf("cheater %s Ex %d.%d codehash %d\n", userName, chapterVerse[0], chapterVerse[1], codeHash);
                 } // end in code
             } // end line
         } // end reading cheaters
@@ -398,8 +411,10 @@ class Problem implements Comparable<Problem> {
             line = line.substring((fRemoveLeadingQuote ? 1 : 0), line.length() - (fRemoveTrailingQuote ? 1 : 0));
         line = line.replace("\"\"", "\"");
         Scanner scCode = new Scanner (line);
-        while (scCode.hasNext())
-            codeHash += scCode.next().hashCode();
+        while (scCode.hasNext()) {
+            String token = scCode.next();
+            codeHash += token.hashCode();
+        }
 
         return codeHash;
     }
@@ -465,6 +480,7 @@ class Problem implements Comparable<Problem> {
         int codeHash = 0; // hash of code
         String type = null;
         int studentNum = -1;
+        int codeLength = 0;
         
         // Loop through all lines
         while (sc.hasNextLine()) {
@@ -490,21 +506,34 @@ class Problem implements Comparable<Problem> {
                 if (line.length() != 0) {
                     if (line.charAt(line.length()-1) == '"' &&
                             line.charAt(line.length()-2) != '"') {
-                        if (studentNum != -1) { // we could be ignoring this student
-                            ////////////////////////////////////////
-                            // Store code hash of this problem
-                            ////////////////////////////////////////
-                            codeHash += computeCodeHash(line, false, true);
-                            currentProblem.getCodeHash().put(userName,  codeHash);
-                        }
+                        ////////////////////////////////////////
+                        // Store code hash of this problem
+                        ////////////////////////////////////////
+                        codeHash += computeCodeHash(line, false, true);
+                        codeLength += line.length();
+                        // If the problem is really short, store 0 for a code has
+                        if (codeLength < 300)
+                            codeHash = 0;
+                        currentProblem.getCodeHash().put(userName,  codeHash);
+                        
+                        // debughash printing to determine why codeHash doesn't match cheater
+//                        if (chapterVerse[0] == 11 && chapterVerse[1] == 2 && type.equals("Exercise") && userName.equals("adamogdon"))
+//                            System.out.printf("user %s Ex %d.%d codeHash %d\n", userName, chapterVerse[0], chapterVerse[1], codeHash);
+                            
                         // reset code status
                         codeHash = 0;
                         redFlag = null;
                         ifInCode = false;
-                    }
-                    else
+                        codeLength = 0;
+                    } else {
                         // calculate code has by adding hash of each token
                         codeHash += computeCodeHash(line, false, false);
+                        codeLength += line.length();
+                        
+                        // debughash printing to determine why codeHash doesn't match cheater
+//                        if (chapterVerse[0] == 11 && chapterVerse[1] == 2 && type.equals("Exercise") && userName.equals("adamogdon"))
+//                            System.out.printf("user %s Ex %d.%d codeHash %d\n", userName, chapterVerse[0], chapterVerse[1], codeHash);
+                    }
                 } 
                 ////////////////////////////////////
                 // check for any red flags
@@ -530,8 +559,10 @@ class Problem implements Comparable<Problem> {
             if (line.charAt(line.length()-1) != '"' 
                     //   except for the weird case where it just has a single quote to open the code on next line
                     //   which we can identify by a comma right before the quote
-                    || line.charAt(line.length()-2) == ',' )
+                    || line.charAt(line.length()-2) == ',' ) {
                 ifInCode = true;
+                codeHash = 0;
+            }
             problemNum++;
 
             ///////////////////////////////////////////////////////
@@ -582,14 +613,16 @@ class Problem implements Comparable<Problem> {
             ////////////////////////////////////////////////////////////
             // compute code hash on initial line to check for cheating
             ////////////////////////////////////////////////////////////
-//            if (chapterVerse[0] == 12 && chapterVerse[1] == 18)
-//                System.out.println("Breakpoint");
             if (code.length() > 1) {  // line could start or end without any code 
                 // Validate that it's just a quote
                 if (code.charAt(0) != '"')
                     System.out.println("ERROR: Expected only char on code line was quote but found " + code.charAt(0) + " on line " + line);
                 codeHash += computeCodeHash(code, true, false);
+                codeLength += code.length();
             }
+            // debughash printing to determine why codeHash doesn't match cheater
+//            if (chapterVerse[0] == 9 && chapterVerse[1] == 1 && type.equals("Exercise") && userName.equals("nkanooni"))
+//                System.out.printf("user %s Ex %d.%d codeHash %d\n", userName, chapterVerse[0], chapterVerse[1], codeHash);
             
             ///////////////////////////////////////////////////////
             // Done reading the file, now creating data structures 
@@ -627,22 +660,24 @@ class Problem implements Comparable<Problem> {
             LocalDateTime date = LocalDateTime.parse(results[CSV.DATETIME.ordinal()], formatter);
 
             // Add problem to the student
+            currentProblem = new Problem(type, chapterVerse[0], chapterVerse[1], comp, date);
             if (studentNum != -1) {
-                currentProblem = new Problem(type, chapterVerse[0], chapterVerse[1], comp, date);
                 s.getProblems().add(currentProblem);
-                
-                // Set number of tries
-                currentProblem.getTries().put(userName,  tries);
-                
-                // If student has a one-liner this is the only place we store the codeHash
-                currentProblem.getCodeHash().put(userName,  codeHash);
-                
-                // get any red flag string for the assigned problem - once per problem 
-                int assignedProbIndex = assignedProblems.indexOf(currentProblem);
-                if (assignedProbIndex != -1)
-                    redFlag = assignedProblems.get(assignedProbIndex).getRedFlag();
-
             }
+
+            //////////////////////////////////////////////////////////////////
+            // Cheat Checking
+            //////////////////////////////////////////////////////////////////
+            // Set number of tries
+            currentProblem.getTries().put(userName,  tries);
+
+            // If student has a one-liner this is the only place we store the codeHash
+            currentProblem.getCodeHash().put(userName,  codeHash);
+
+            // get any red flag string for the assigned problem - once per problem 
+            int assignedProbIndex = assignedProblems.indexOf(currentProblem);
+            if (assignedProbIndex != -1)
+                redFlag = assignedProblems.get(assignedProbIndex).getRedFlag();
 
         }
         if (PracticeItGrader.ifDebug) {
