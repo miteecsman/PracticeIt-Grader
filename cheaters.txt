@@ -1,3 +1,404 @@
+**ramakastriot Exercise 8.14 
+public class Line {
+    Point p1;
+    Point p2;
+    
+    public Line(Point p1, Point p2) {
+        this.p1 = p1;
+        this.p2 = p2;
+    }
+    
+    public Point getP1() {
+        return p1;
+    }
+    
+    public Point getP2() {
+        return p2;
+    }
+    
+    public String toString() {
+        return "[" + p1.toString() + ", " + p2.toString() + "]";
+    }
+}
+
+**creede15 Exercise 8.14
+public class Line {
+    private Point p1;
+    private Point p2;
+    
+    public Line(Point p1, Point p2) {
+        this.p1 = p1;
+        this.p2 = p2;
+    }
+    
+    public Point getP1() {
+        return p1;
+    }
+    
+    public Point getP2() {
+        return p2;
+    }
+    
+    public String toString() {
+        return "[(" + p1.getX() + ", " + p1.getY() + "), (" + p2.getX() + ", " + p2.getY() + ")]";
+    }
+}
+
+**creede15 Exercise 8.18
+public class Rectangle {
+    private int x;
+    private int y;
+    private int width;
+    private int height;
+    
+    public Rectangle(int x, int y, int width, int height) {
+        if (width > 0 && height > 0) {
+            this.width = width;
+            this.height = height;
+        } else {
+            throw new IllegalArgumentException();
+        }
+        this.x = x;
+        this.y = y;
+    }
+    
+    public int getHeight() {
+        return height;
+    }
+    
+    public int getWidth() {
+        return width;
+    }
+    
+    public int getX() {
+        return x;
+    }
+    
+    public int getY() {
+        return y;
+    }
+    
+    public String toString() {
+        return "Rectangle[x=" + x + ",y=" + y + ",width=" + width + ",height=" + height + "]";
+    }
+}
+
+**ramakastriot Exercise 8.18 
+public class Rectangle {
+    int x;
+    int y;
+    int width;
+    int height;
+    
+    public Rectangle(int x, int y, int width, int height) {
+        if(width < 0 || height < 0)
+            throw new IllegalArgumentException();
+            
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+    }
+    
+    public int getHeight() {
+        return height;
+    }
+    
+    public int getWidth() {
+        return width;
+    }
+    
+    public int getX() {
+        return x;
+    }
+    
+    public int getY() {
+        return y;
+    }
+    
+    public String toString() {
+        return "Rectangle[x=" + x + ",y=" + y + ",width=" + width + ",height="
+            + height + "]";
+    }
+}
+
+**creede15 Exercise 9.1 super()
+public class Marketer extends Employee {
+    public Marketer () {
+        super();
+    }
+    
+    public double getSalary() {
+        return super.getSalary() + 10000;
+    }
+    
+    public void advertise() {
+        System.out.println("Act now, while supplies last!");
+    }
+}
+
+**ramakastriot Exercise 9.11
+public class FilteredAccount extends Account {
+    int total = 0;
+    int zero = 0;
+    public FilteredAccount(Client c) {
+        super(c);
+    }
+    
+    public boolean process(Transaction t) {
+        total++;
+        
+        if(t.value() == 0) {
+            zero++;
+            return true;
+        }
+        
+        return super.process(t);
+    }
+    
+    public double percentFiltered() {
+        if(total == 0)
+            return 0.0;
+        
+        return ((double) zero) * 100 / total;
+    }
+}
+
+**creede15 Exercise 9.11
+public class FilteredAccount extends Account {
+    private int zeroTrans;
+    private int totalTrans;
+    
+    public FilteredAccount (Client c) {
+        super(c);
+        zeroTrans = 0;
+        totalTrans = 0;
+    }
+    
+    public boolean process(Transaction t) {
+        totalTrans++;
+        if (t.value() == 0) {
+            zeroTrans++; 
+            return true;
+        } else {
+            return super.process(t);
+        }
+    }
+
+    public double percentFiltered() {
+        if (totalTrans == 0) {
+            return 0.0;
+        }
+        return zeroTrans * 100.0 / totalTrans;
+    }  
+}
+
+**ramakastriot Exercise 10.10 list.clear()
+public void removeInRange(ArrayList<Integer> list, int val, int start, 
+    int end) {
+    if(start > end)
+        return;
+    
+    ArrayList<Integer> temp = new ArrayList<Integer>();
+    
+    for(int i = 0; i < start; i++)
+        temp.add(list.get(i));
+    
+    for(int i = start; i < end; i++) {
+        if(list.get(i) != val)
+            temp.add(list.get(i));
+    }
+    
+    for(int i = end; i < list.size(); i++)
+        temp.add(list.get(i));
+    
+    list.clear();
+    list.addAll(temp);
+}
+
+**creede15 Exercise 10.10
+public static void removeInRange(ArrayList<Integer> array, int value, int start, int end) {
+
+    for (int i = start; i < end; i++) {
+        if (array.get(i) == value) {
+            array.remove(i);
+            i--;
+            end--;
+        }
+    }
+    
+}
+
+**ramakastriot Exercise 10.14 list.clear()
+public void removeShorterStrings(ArrayList<String> list) {
+    ArrayList<String> holder = new ArrayList<String>();
+    int i = 0;
+
+    while(i <= list.size() - 2) {
+        if(list.get(i).length() > list.get(i+1).length())
+            holder.add(list.get(i));
+        else
+            holder.add(list.get(i+1));
+
+        i += 2;
+    }
+
+    if(i == list.size() - 1)
+        holder.add(list.get(i));
+
+    list.clear();
+    list.addAll(holder);
+}
+
+**creede15 Exercise 10.14 oldSize
+public static void removeShorterStrings(ArrayList<String> array) {
+    int oldSize = array.size();
+    
+    for (int i = 0; i < oldSize / 2; i++) {
+        int length1 = array.get(i).length();
+        int length2 = array.get(i + 1).length();
+        if (length1 == length2) {
+            array.remove(i);
+        } else if (length1 > length2) {
+            array.remove(i + 1);
+        } else {
+            array.remove(i);
+        }
+    }
+    
+}
+
+**creede15 Exercise 10.15 list.clear
+public void filterRange(ArrayList<Integer> list, int min, int max) {
+    ArrayList<Integer> temp = new ArrayList<Integer>();
+
+    for(int n : list) {
+        if(n < min || max < n)
+            temp.add(n);
+    }
+
+    list.clear();
+    list.addAll(temp);
+}
+
+**ramakastriot Exercise 10.15
+public static void filterRange(ArrayList<Integer> array, int min, int max) {
+
+    for (int i = 0; i < array.size(); i++) {
+        int num = array.get(i);
+        if (num <= max && num >= min) {
+            array.remove(i);
+            i--;
+        }
+    }
+    
+}
+
+**ramakastriot Exercise 10.18 
+public int compareTo(Point2D point) {
+    Point2D origin = new Point2D(0, 0);
+    double diff = this.distance(origin) - point.distance(origin);
+
+    if(diff < 0)
+        return -1;
+    else if(diff > 0)
+        return 1;
+
+    return 0;
+}
+
+**creede15 Exercise 10:18 "distance2 = Math.sqrt(p.x * p.x + p.y * p.y)"
+public int compareTo(Point2D p) {
+    double distance1 = Math.sqrt(x * x + y * y);
+    double distance2 = Math.sqrt(p.x * p.x + p.y * p.y);
+    if (distance1 - distance2 < 0) {
+        return -1;
+    } else if (distance1 - distance2 > 0) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+
+**creede15 Exercise 11:2 
+public static List<Integer> alternate(List<Integer> list1, List<Integer> list2) {
+    Iterator<Integer> i1 = list1.iterator();
+    Iterator<Integer> i2 = list2.iterator();
+    List<Integer> result = new ArrayList<Integer>();
+    
+    while(i1.hasNext() || i2.hasNext()) {
+        if (i1.hasNext()) {
+            result.add(i1.next());
+        }
+        
+        if (i2.hasNext()) {
+            result.add(i2.next());
+        }
+    }
+    
+    return result;
+}
+
+**ramakastriot Exercise 11.2
+public List<Integer> alternate(List<Integer> list1, List<Integer> list2) {
+    List<Integer> list = new LinkedList<Integer>();
+    int size1 = list1.size();
+    int size2 = list2.size();
+    int index1 = 0;
+    int index2 = 0;
+    boolean flag = true;
+
+    while(index1 < size1 || index2 < size2) {
+        if(index1 < size1 && flag) {
+            list.add(list1.get(index1));
+            index1++;
+        } else if(index2 < size2 && !flag) {
+            list.add(list2.get(index2));
+            index2++;
+        }
+        flag = !flag;
+    }
+ 
+    return list;
+}
+
+**ramakastriot Exercise 12.7
+public void writeChars(int n) {
+    if(n < 1)
+        throw new IllegalArgumentException();
+        
+    if(n == 1) {
+        System.out.print("*");
+        return;
+    }
+    
+    if(n == 2) {
+        System.out.print("**");
+        return;
+    }
+    
+    System.out.print("<");
+    writeChars(n-2);
+    System.out.print(">");
+}
+
+**creede15 Exercise 12.7
+public static void writeChars(int n) {
+    if (n < 1) {
+        throw new IllegalArgumentException();
+    } else if (n == 1) {
+        System.out.print("*");
+    } else if (n == 2) {
+        System.out.print("**");
+    } else {
+        System.out.print("<");
+        writeChars(n - 2);
+        System.out.print(">");
+    }
+}
+
+
 **creede15 Exercise 12:18 result.lastIndexOf
 public static void waysToClimb(int n) {
     waysToClimb(n, 0, "[");
