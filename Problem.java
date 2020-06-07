@@ -21,6 +21,7 @@ import java.time.*;
  * Version 2.0.1 - 5/31/20 cleanup - added Flag class, catch null pointers
  * Version 2.0.2 - 6/5/20 print cleanup
  * Version 2.0.3 - 6/6/20 removed filters for code size & uniqueness, debug hash variables
+ * Version 2.0.2.1 - 6/7/20 added problem name to support the auto-generation of cheaters.txt through the cheaters.java file
  * 
  * Problem is used in several situations
  *   When reading a list of assigned problems it fills the type/chapter/number fields
@@ -39,6 +40,7 @@ class Problem implements Comparable<Problem> {
     private String type; // Must be "Self-Check" or will be interpreted to be "Exercise"
     private int chapter; // Chapter in BJP 
     private int number; // Problem number in BJP chapter
+    private String name; // Problem name
     private boolean ifCompleted; // Successfully completed
     private LocalDateTime date; // timestamp when completed
     private Map<String, Integer> tries; // map of userName -> number of attempts on problem
@@ -62,8 +64,9 @@ class Problem implements Comparable<Problem> {
      * @param number
      * @param ifCompleted
      * @param date
+     * @param name 
      */
-    public Problem(String type, int chapter, int number, boolean ifCompleted, LocalDateTime date) {
+    public Problem(String type, int chapter, int number, boolean ifCompleted, LocalDateTime date, String name) {
         super();
         this.type = type;
         this.chapter = chapter;
@@ -74,6 +77,7 @@ class Problem implements Comparable<Problem> {
         this.codeHash = new HashMap<String, Integer>();
         this.times = new HashMap<String, Long>();
         this.redFlag = null;
+        this.name = name;
     }
 
     /**
@@ -85,7 +89,15 @@ class Problem implements Comparable<Problem> {
      * @param number
      */
     public Problem(String type, int chapter, int number) {
-        this(type, chapter, number, false, LocalDateTime.now());
+        this(type, chapter, number, false, LocalDateTime.now(), null);
+    }
+    
+    public Problem(String type, int chapter, int number, String name) {
+        this(type, chapter, number, false, LocalDateTime.now(), name);
+    }
+    
+    public Problem(String type, int chapter, int number, boolean ifCompleted, LocalDateTime date) {
+        this(type, chapter, number, ifCompleted, date, null);
     }
     
     public String getType() {
@@ -106,11 +118,15 @@ class Problem implements Comparable<Problem> {
     public void setNumber(int number) {
         this.number = number;
     }
-
+    public String getName() {
+        return this.name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
     public LocalDateTime getDate() {
         return this.date;
     }
-
     public void setDate(LocalDateTime date) {
         this.date = date;
     }
