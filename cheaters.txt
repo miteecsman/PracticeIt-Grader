@@ -122,7 +122,7 @@ public class Rectangle {
     }
 }
 
-**creede15 Exercise 9.1 super()
+**creede15 Exercise 9.1
 public class Marketer extends Employee {
     public Marketer () {
         super();
@@ -136,6 +136,126 @@ public class Marketer extends Employee {
         System.out.println("Act now, while supplies last!");
     }
 }
+
+**creede15 Exercise 9.2
+public class Janitor extends Employee {
+    public int getHours() {
+        return super.getHours() * 2;
+    }
+    
+    public double getSalary() {
+        return super.getSalary() - 10000;
+    }
+    
+    public int getVacationDays() {
+        return super.getVacationDays() / 2;
+    }
+    
+    public void clean() {
+        System.out.println("Workin' for the man.");
+    }
+}
+
+**creede15 Exercise 9.4
+public class MonsterTruck extends Truck {
+    public void m1() {
+        System.out.println("monster 1");
+    }
+    
+    public void m2() {
+        super.m1();
+        super.m2();
+    }
+    
+    public String toString() {
+        return "monster " + super.toString();
+    }
+}
+
+**creede Exercise 9.9
+public class MinMaxAccount extends BankingAccount {
+    private int min;
+    private int max;
+    
+    public MinMaxAccount(Startup s) {
+        super(s);
+        min = getBalance();
+        max = getBalance();
+    }
+    
+    public void credit(Credit c) {
+        super.credit(c);
+        update();
+    }
+    
+    public void debit(Debit d) {
+        super.debit(d);
+        update();
+    }
+    
+    public void update() {
+        int balance = getBalance();
+        if (balance < min) {
+            min = balance;
+        } else if (balance > max) {
+            max = balance;
+        }
+    }
+    
+    public int getMin() {
+        return min;
+    }
+    
+    public int getMax() {
+        return max;
+    }
+}
+
+**ramakastriot Exercise 9.9
+public class MinMaxAccount extends BankingAccount {
+    private int minBalance;
+    private int maxBalance;
+    
+    public MinMaxAccount(Startup s) {
+        super(s);
+        minBalance = s.startup_getBalance();
+        maxBalance = s.startup_getBalance();
+    }
+    
+    public void debit(Debit d) {
+        super.debit(d);
+        
+        int balance = getBalance();
+        
+        if(balance < minBalance)
+            minBalance = balance;
+        
+        if(balance > maxBalance)
+            maxBalance = balance;
+    }
+    
+    public void credit(Credit c) {
+        super.credit(c);
+        
+        int balance = getBalance();
+        
+        if(balance < minBalance)
+            minBalance = balance;
+        
+        if(balance > maxBalance)
+            maxBalance = balance;
+    }
+    
+    public int getMin() {
+        return minBalance;
+    }
+    
+    public int getMax() {
+        return maxBalance;
+    }
+}
+
+
 
 **ramakastriot Exercise 9.11
 public class FilteredAccount extends Account {
@@ -193,6 +313,58 @@ public class FilteredAccount extends Account {
     }  
 }
 
+**creede15 Exercise 10.03
+public static void removeEvenLength(ArrayList<String> array) {
+
+    for (int i = 0; i < array.size(); i++) {
+        String word = array.get(i);
+        if (word.length() % 2 == 0) {
+            array.remove(i);
+            i--;
+        }
+    }
+    
+}
+
+**ramakastriot Exercise 10.03 list.clear()
+public void removeEvenLength(ArrayList<String> list) {
+    ArrayList<String> temp = new ArrayList<String>();
+
+    for(int i = 0; i < list.size(); i++) {
+        if(list.get(i).length() % 2 == 1)
+            temp.add(list.get(i));
+    }
+
+    list.clear();
+    list.addAll(temp);
+}
+
+**ramakastriot Exercise 10.04
+public static void doubleList(ArrayList<String> array) {
+    int oldSize = array.size();
+    
+    for (int i = 0; i < oldSize; i++) {
+        String word = array.get(2 * i);
+        array.add(2 * i + 1, word);
+    }
+    
+}
+
+**ramakastriot Exercise 10.04
+public void doubleList(ArrayList<String> arr) {
+    ArrayList<String> temp = new ArrayList<String>();
+    
+    for(String str : arr) {
+        temp.add(str);
+        temp.add(str);
+    }
+    
+    arr.clear();
+    
+    for(String str : temp)
+        arr.add(str);
+}
+
 **ramakastriot Exercise 10.10 list.clear()
 public void removeInRange(ArrayList<Integer> list, int val, int start, 
     int end) {
@@ -224,6 +396,18 @@ public static void removeInRange(ArrayList<Integer> array, int value, int start,
             array.remove(i);
             i--;
             end--;
+        }
+    }
+    
+}
+
+**creede15 Exercise 10.12
+public static void markLength4(ArrayList<String> array) {
+
+    for (int i = 0; i < array.size(); i++) {
+        if (array.get(i).length() == 4) {
+            array.add(i, "****");
+            i++;
         }
     }
     
@@ -363,6 +547,187 @@ public List<Integer> alternate(List<Integer> list1, List<Integer> list2) {
     return list;
 }
 
+**creede15 Exercise 11.3 
+public static void removeInRange(List<Integer> list, int value, int start, int end) {
+    Iterator<Integer> i = list.iterator();
+    int index = 0;
+    
+    while (i.hasNext()) {
+    
+        if (index < end && index >= start) {
+            if (i.next() == value) {
+                i.remove();
+                index--;
+                end--;
+            }
+        } else {
+            i.next();
+        }
+        index++;
+    }
+}
+
+**ramakastriot Exercise 11.3 list.clear(
+public void removeInRange(List<Integer> list, int val, int start, int end) {
+    if(start > end)
+        return;
+
+    List<Integer> holder = new LinkedList<Integer>();
+
+    for(int i = 0; i < start; i++)
+        holder.add(list.get(i));
+
+    for(int i = start; i < end; i++) {
+        if(list.get(i) != val)
+            holder.add(list.get(i));
+    }
+
+    for(int i = end; i < list.size(); i++)
+        holder.add(list.get(i));
+
+    list.clear();
+    list.addAll(holder);
+}
+
+**creede15 Exercise 11.8
+public static int maxLength(Set<String> set) {
+    int max = 0;
+    Iterator<String> i = set.iterator();
+    
+    while (i.hasNext()) {
+        String word = i.next();
+        if (word.length() > max) {
+            max = word.length();
+        }
+    }
+    
+    return max;
+}
+
+**creede15 Exercise 11.10
+public static void removeEvenLength(Set<String> set) {
+    Iterator<String> i = set.iterator();
+    
+    while (i.hasNext()) {
+        String word = i.next();
+        if (word.length() % 2 == 0) {
+            i.remove();
+        }
+    }
+}
+
+**creede15 Exercise 11.13
+public static boolean isUnique(Map<String, String> map) {
+    Set<String> setKey = map.keySet();
+    Collection<String> collectionValue = map.values();
+    Set<String> setValue = new HashSet<String>(collectionValue);
+    return setKey.size() == setValue.size();
+}
+
+**ramakastriot Exercise 11.13
+public boolean isUnique(Map<String, String> map) {
+    HashSet<String> set = new HashSet<String>();
+
+    for(String key : map.keySet()) {
+        String value = map.get(key);
+
+        if(set.contains(value))
+            return false;
+
+        set.add(value);
+    }
+
+    return true;
+}
+
+**ramakastriot Exercise 11.15
+public int maxOccurrences(List<Integer> list) {
+    HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+    int modeVal = 0;
+
+    for(int n : list) {
+        if(map.containsKey(n)) {
+            map.put(n, map.get(n) + 1);
+        } else {
+            map.put(n, 1);
+        }
+
+        if(map.get(n) > modeVal)
+            modeVal = map.get(n);
+    }
+
+    return modeVal;
+}
+
+**creede15 Exercise 11.18
+public static Map<String, Integer> reverse(Map<Integer, String> map) {
+    Map<String, Integer> result = new HashMap<String, Integer>();
+    Set<Integer> setKey = map.keySet();
+    Iterator<Integer> i = setKey.iterator();
+    
+    while (i.hasNext()) {
+        int key = i.next();
+        result.put(map.get(key), key);
+    }
+    
+    return result;
+}
+
+**ramakastriot Exercise 11.18
+public Map<String, Integer> reverse(Map<Integer, String> map) {
+    HashMap<String, Integer> reversed = new HashMap<String, Integer>();
+
+    for(int key : map.keySet()) {
+        String value = map.get(key);
+
+        if(!reversed.containsKey(value)) {
+            reversed.put(value, key);
+        }
+    }
+
+    return reversed;
+}
+    
+**ramakastriot Exercise 12.6
+public void writeSquares(int n) {
+    if(n < 1)
+        throw new IllegalArgumentException();
+        
+    if(n == 1) {
+        System.out.print(1);
+        return;
+    }
+    
+    if(n % 2 == 0) {
+        writeSquares(n-1);
+        System.out.print(", " + n * n);
+    } else {
+        System.out.print(n * n + ", ");
+        writeSquares(n-1);
+    }
+}
+
+**creede15 Exercise 12.6
+public static void writeSquares(int n) {
+    if (n < 1) {
+        throw new IllegalArgumentException();
+    } else if (n == 1) {
+        System.out.print(1);
+    } else if (n % 2 != 0) {
+        System.out.print(n * n + ", ");
+        writeSquares(n - 2);
+        System.out.print(", " + (n - 1) * (n - 1));
+    } else {
+        System.out.print((n - 1) * (n - 1));
+        if (n != 2) {
+            System.out.print(", ");
+            writeSquares(n - 2);
+        }
+        System.out.print(", " + n * n);
+    }
+}
+
+
 **ramakastriot Exercise 12.7
 public void writeChars(int n) {
     if(n < 1)
@@ -398,11 +763,66 @@ public static void writeChars(int n) {
     }
 }
 
+**creede15 Exercise 12:8 
+public static int multiplyEvens(int n) {
+    if (n <= 0) {
+        throw new IllegalArgumentException();
+    } else if (n == 1) {
+        return 2;
+    } else {
+        return 2 * n * multiplyEvens(n - 1);
+    }
+}
+
+**ramakastriot Exercise 12.8
+public int multiplyEvens(int n) {
+    if(n <= 0)
+        throw new IllegalArgumentException();
+
+    if(n == 1)
+        return 2;
+
+    return 2 * n * multiplyEvens(n-1);
+}
+
+**creede15 Exercise 12.8
+public static int multiplyEvens(int n) {
+    if (n <= 0) {
+        throw new IllegalArgumentException();
+    } else if (n == 1) {
+        return 2;
+    } else {
+        return 2 * n * multiplyEvens(n - 1);
+    }
+}
+
+**ramakastriot Exercise 12.9
+public double sumTo(int n) {
+    if(n < 0)
+        throw new IllegalArgumentException();
+        
+    if(n == 0)
+        return 0.0;
+        
+    return sumTo(n-1) + 1.0 / n;
+}
+
+**creede15 Exercise 12:9
+public static double sumTo(int n) {
+    if (n < 0) {
+        throw new IllegalArgumentException();
+    } else if (n == 0) {
+        return 0.0;
+    } else {
+        return 1.0 / n + sumTo(n - 1);
+    }
+}
 
 **creede15 Exercise 12:18 result.lastIndexOf
 public static void waysToClimb(int n) {
     waysToClimb(n, 0, "[");
 }
+
 
 private static void waysToClimb(int n, int position, String result) {
     if (n == position) {
