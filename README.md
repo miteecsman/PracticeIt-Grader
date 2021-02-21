@@ -26,3 +26,5 @@ to build up the list of students, assigned problems, and finally the complete re
 
 [Youtube Video on How to use](https://youtu.be/lOSCqyhS1bc) 
   - this is a little out of date as it uses screen scraping instead of the CSV file
+
+This process requires having instructor account access, and unfortunately they no longer allow those to college instructors
